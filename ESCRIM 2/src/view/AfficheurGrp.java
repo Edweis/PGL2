@@ -16,16 +16,17 @@ import javax.swing.event.ListSelectionListener;
 
 import partieMission.GrpColis;
 
-public class AfficheurGrp<E extends Groupement> extends JPanel  implements ListSelectionListener{
+public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSelectionListener {
 
 	private static final long serialVersionUID = 1L;
-	private DefaultListModel<E> listeElement;  
+	private DefaultListModel<E> listeElement;
 	private JList<E> maJListe;
 	private JButton selectAll;
 	private JButton deselectAll;
 	private JButton inverstSelect;
 
-	
+	private ArrayList<JButton> btnActiveOnSelect;
+
 	private JLabel text;
 	private JLabel zoneDetail;
 	private int width = 500;
@@ -44,23 +45,25 @@ public class AfficheurGrp<E extends Groupement> extends JPanel  implements ListS
 	 * Initilise les variables
 	 */
 	private void init() {
+		btnActiveOnSelect = new ArrayList<JButton>();
+
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setPreferredSize(new Dimension(width, height));
-		
-		//Ajout du text
+
+		// Ajout du text
 		text = new JLabel();
 		text.setHorizontalAlignment(SwingConstants.CENTER);
 		text.setPreferredSize(new Dimension(width, 20));
 		this.add(text);
-		
-		//Ajout des boutons
+
+		// Ajout des boutons
 		selectAll = new JButton("selectionner tout");
 		deselectAll = new JButton("déselectionner tout");
 		inverstSelect = new JButton("inverser la selection");
 		this.add(selectAll);
 		this.add(deselectAll);
 		this.add(inverstSelect);
-		
+
 	}
 
 	/**
@@ -69,24 +72,22 @@ public class AfficheurGrp<E extends Groupement> extends JPanel  implements ListS
 	 * @param colis
 	 */
 	public void MajGrpColis(ArrayList<E> desElements) {
-		
-		if(maJListe != null){
+
+		if (maJListe != null) {
 			this.remove(maJListe);
 		}
-		
+
 		listeElement = new DefaultListModel<E>();
-		
-		for(E e : desElements){
+
+		for (E e : desElements) {
 			listeElement.addElement(e);
 		}
-		
-		
-		
+
 		maJListe = new JList<E>(listeElement);
 		maJListe.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		maJListe.setPreferredSize(new Dimension(width, height));
 		maJListe.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		
+
 		this.add(maJListe);
 	}
 
@@ -97,11 +98,11 @@ public class AfficheurGrp<E extends Groupement> extends JPanel  implements ListS
 	 */
 	public ArrayList<E> Exporter() {
 		ArrayList<E> res = new ArrayList<E>();
-		
-		for(E e : maJListe.getSelectedValuesList()){
+
+		for (E e : maJListe.getSelectedValuesList()) {
 			res.add(e);
 		}
-		
+
 		return res;
 	}
 
@@ -120,18 +121,16 @@ public class AfficheurGrp<E extends Groupement> extends JPanel  implements ListS
 	 * @param zoneDetail
 	 */
 	public void ajouterZoneDetail(JLabel zoneDetail) {
-		if(zoneDetail != null){
+		if (zoneDetail != null) {
 			this.remove(zoneDetail);
 		}
-		
+
 		this.zoneDetail = zoneDetail;
 		this.add(zoneDetail);
-		
-		maJListe.addListSelectionListener(this);
-		
-		
-	}
 
+		maJListe.addListSelectionListener(this);
+
+	}
 
 	/**
 	 * modifie les paramètre de formatage des chaque ligne Si l'on met 0, la
@@ -158,6 +157,22 @@ public class AfficheurGrp<E extends Groupement> extends JPanel  implements ListS
 		}
 	}
 
+	/**
+	 * Ajoute des boutons qui sont enable lorsqu'il y a quelque chose de
+	 * selectionné. ils sont déselectionné sinon.
+	 * 
+	 * @param btn
+	 */
+	public void activeOnSelect(JButton btn) {
+		if (maJListe.isSelectionEmpty()) {
+			btn.setEnabled(false);
+		} else {
+			btn.setEnabled(true);
+		}
+
+		btnActiveOnSelect.add(btn);
+	}
+
 	public void setWidth(int width) {
 		this.width = width;
 		this.setPreferredSize(new Dimension(width, height));
@@ -168,9 +183,24 @@ public class AfficheurGrp<E extends Groupement> extends JPanel  implements ListS
 		this.setPreferredSize(new Dimension(width, height));
 	}
 
-	
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		zoneDetail.setText(maJListe.getSelectedValue().details());
+
+		if (zoneDetail != null) {
+			zoneDetail.setText(maJListe.getSelectedValue().plusDetails());
+		}
+
+		
+		
+		
+		if (maJListe.isSelectionEmpty()) {
+			for (JButton btn : btnActiveOnSelect) {
+				btn.setEnabled(false);
+			}
+		} else {
+			for (JButton btn : btnActiveOnSelect) {
+				btn.setEnabled(true);
+			}
+		}
 	}
 }
