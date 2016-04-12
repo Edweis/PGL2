@@ -54,4 +54,11 @@ public class Article {
 		Bdd_utilisateur.deconnecter();
 	}
 	
+	public void supprimerStock(String nom2,int quantite2) throws SQLException{
+		Bdd_utilisateur.connecter("root","");
+		ResultSet id_art = Bdd_utilisateur.lecture("SELECT 'id_article' FROM 'stock' WHERE 'nom' == nom2");
+		Bdd_utilisateur.ecriture("UPDATE 'stock' SET  'quantite'= 'quantite'-quantite2 WHERE id_article =id_art");
+		Bdd_utilisateur.deconnecter();
+	}
+	
 }
