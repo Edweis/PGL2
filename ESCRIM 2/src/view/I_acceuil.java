@@ -53,7 +53,7 @@ public class I_acceuil {
 		btnGestionAvion.setBounds(362, 405, 160, 32);
 		frame.getContentPane().add(btnGestionAvion);
 		
-		utilisateur.getNom();
+		
 		JLabel lblHello = new JLabel("Hello");
 		lblHello.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		lblHello.setBounds(293, 30, 115, 50);

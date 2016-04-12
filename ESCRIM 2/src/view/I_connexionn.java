@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 import utilisateur.Admin;
 import utilisateur.Bdd_utilisateur;
+import utilisateur.Utilisateur;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -102,7 +103,9 @@ public class I_connexionn {
 				b.run();
 			}else if(vrai_mdp != null && vrai_mdp.equals(mdp_ecris)){
 					System.out.println("vous pouvez vous connecter");
-				
+					Utilisateur utilisateur= new Utilisateur("jean","pierre","coucou",true,false,"Pr.");
+					I_acceuil i_accuil=new I_acceuil(utilisateur);
+					
 				}else{
 					System.out.println("enfoiré");
 				}

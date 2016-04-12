@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
@@ -15,6 +16,7 @@ import utilisateur.Bdd_utilisateur;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 
 public class I_administrateur {
 
@@ -31,6 +33,7 @@ public class I_administrateur {
 	private Admin admin;
 	private JTextField txtNom_2;
 	private JTextField txtPrenom_2;
+	private JList list;
 	/**
 	 * Launch the application.
 	 */
@@ -177,12 +180,25 @@ public class I_administrateur {
 		JButton btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				admin.supprimer(txtNom_2.getText(),txtPrenom_2.getText());
+				try {
+					admin.supprimer(txtNom_2.getText(),txtPrenom_2.getText());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
 		btnSupprimer.setBounds(198, 128, 89, 23);
 		frame.getContentPane().add(btnSupprimer);
+		
+		
+		
+		list = new JList();
+		list.setBounds(60, 222, 97, 5);
+		frame.getContentPane().add(list);
+		
+		
 		
 		
 	}
