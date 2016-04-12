@@ -12,10 +12,11 @@ import javax.swing.JLabel;
 public class I_acceuil {
 
 	private JFrame frame;
-
+	Utilisateur utilisateur;
 
 	public I_acceuil(Utilisateur utilisateur) {
 		I_acceuil window = new I_acceuil(utilisateur);
+		this.utilisateur =utilisateur;
 		window.frame.setVisible(true);
 		initialize();
 	}
@@ -58,5 +59,7 @@ public class I_acceuil {
 		lblHello.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		lblHello.setBounds(293, 30, 115, 50);
 		frame.getContentPane().add(lblHello);
+		
+		utilisateur.getNom();
 	}
 }
