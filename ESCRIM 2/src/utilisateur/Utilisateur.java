@@ -3,6 +3,14 @@ package utilisateur;
 public class Utilisateur {
 
 	String prenom;
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
 	String nom;
 	String mdp;
 	Boolean droit_modifier;
