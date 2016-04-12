@@ -21,10 +21,12 @@ public class Main {
 	}
 
 	public static void exempleAfficheurGrp() {
-		JTabbedPane tabbedPane = new JTabbedPane();
-
 		JFrame fenetre = new JFrame("Salut !");
 		fenetre.setLayout(new GridLayout(2, 0));
+		
+		JTabbedPane tabbedPane = new JTabbedPane();
+		
+		//---------------------Onglet1
 		
 		JPanel onglet1 = new JPanel();
 		AfficheurGrp afficheur = new AfficheurGrp("Mon nouvel afficheur, il est beau ?");
@@ -58,6 +60,8 @@ public class Main {
 		tabbedPane.addTab("onglet1", onglet1);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		
+		//---------------------Onglet2
+
 		JPanel onglet2 = new JPanel();
 		JLabel test = new JLabel("Test de Biatch");
 		onglet2.add(test);
