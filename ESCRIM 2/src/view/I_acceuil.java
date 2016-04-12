@@ -14,10 +14,17 @@ public class I_acceuil {
 	private JFrame frame;
 	Utilisateur utilisateur;
 
+	public void run() {
+		try {
+			I_acceuil window = new I_acceuil(utilisateur);
+			window.frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public I_acceuil(Utilisateur utilisateur) {
-		I_acceuil window = new I_acceuil(utilisateur);
+		
 		this.utilisateur =utilisateur;
-		window.frame.setVisible(true);
 		initialize();
 	}
 
@@ -25,6 +32,7 @@ public class I_acceuil {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 941, 563);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
