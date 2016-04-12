@@ -2,12 +2,14 @@ package application;
 
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import metier.Article;
 import metier.Colis;
 import metier.Dimension;
 import partieMission.GrpColis;
@@ -18,6 +20,7 @@ public class Main {
 	public static void main(String[] args) {
 		exempleAfficheurGrp();
 
+		
 	}
 
 	public static void exempleAfficheurGrp() {
@@ -29,7 +32,7 @@ public class Main {
 		//---------------------Onglet1
 		
 		JPanel onglet1 = new JPanel();
-		AfficheurGrp afficheur = new AfficheurGrp("Mon nouvel afficheur, il est beau ?");
+		AfficheurGrp<Colis> afficheur = new AfficheurGrp<Colis>("Mon nouvel afficheur, il est beau ?");
 
 		// creer mon groupe de colis
 
@@ -46,7 +49,7 @@ public class Main {
 		grp.add(c2);
 		grp.add(c3);
 
-		afficheur.MajGrpColis(grp);
+		afficheur.MajGrpColis(grp.getColis());
 		onglet1.add(afficheur);
 
 		afficheur.setAllParamFormat(new int[] { 0, 60, 0, 0, 60 });
@@ -76,5 +79,19 @@ public class Main {
 		fenetre.add(tabbedPane);
 		fenetre.pack();
 		fenetre.setVisible(true);
+	}
+
+	public static void exempleAfficheurGrp2(){
+		Article a1 = new Article("salut", "jaques");
+		Article a2 = new Article("df", "jaquqsdqses");
+		Article a3 = new Article("sadfsdflut", "jaqucdcdes");
+		
+		ArrayList<Article> mesArticles = new ArrayList<Article>();
+			mesArticles.add(a1);
+			mesArticles.add(a2);
+			mesArticles.add(a3);
+			
+		AfficheurGrp<Article> afficheur = new AfficheurGrp<Article>();
+			afficheur.MajGrpColis(mesArticles);
 	}
 }

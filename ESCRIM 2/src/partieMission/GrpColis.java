@@ -38,4 +38,8 @@ public class GrpColis implements Iterable<Colis>{
 	public int size(){
 		return ensColis.size();
 	}
+
+	public ArrayList<Colis> getColis(){
+		return ensColis;
+	}
 }

@@ -4,8 +4,9 @@ import java.sql.SQLException;
 import java.util.Stack;
 
 import utilisateur.*;
+import view.Groupement;
 
-public class Article {
+public class Article implements Groupement{
 	private String nom;
 	private Stack<Caracteristique> stocks;
 	private String type;
@@ -59,6 +60,16 @@ public class Article {
 		ResultSet id_art = Bdd_utilisateur.lecture("SELECT 'id_article' FROM 'stock' WHERE 'nom' == nom2");
 		Bdd_utilisateur.ecriture("UPDATE 'stock' SET  'quantite'= 'quantite'-quantite2 WHERE id_article =id_art");
 		Bdd_utilisateur.deconnecter();
+	}
+	
+	@Override
+	public String details() {
+		
+		return null;
+	}
+	
+	public String toString(){
+		return nom + "sdfsdfggf";
 	}
 	
 }

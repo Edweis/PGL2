@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -12,14 +14,13 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import metier.Colis;
 import partieMission.GrpColis;
 
-public class AfficheurGrp extends JPanel  implements ListSelectionListener{
+public class AfficheurGrp<E extends Groupement> extends JPanel  implements ListSelectionListener{
 
 	private static final long serialVersionUID = 1L;
-	private Colis [] listeColis;  
-	private JList<Colis> maListe;
+	private DefaultListModel<E> listeElement;  
+	private JList<E> maJListe;
 	private JButton selectAll;
 	private JButton deselectAll;
 	private JButton inverstSelect;
@@ -67,23 +68,26 @@ public class AfficheurGrp extends JPanel  implements ListSelectionListener{
 	 * 
 	 * @param colis
 	 */
-	public void MajGrpColis(GrpColis colis) {
+	public void MajGrpColis(ArrayList<E> desElements) {
 		
-		if(maListe != null){
-			this.remove(maListe);
+		if(maJListe != null){
+			this.remove(maJListe);
 		}
 		
-		listeColis = new Colis[colis.size()];
-		for (int i = 0 ; i<colis.size(); i++) {
-			listeColis[i] = colis.get(i);
+		listeElement = new DefaultListModel<E>();
+		
+		for(E e : desElements){
+			listeElement.addElement(e);
 		}
 		
-		maListe = new JList<Colis>(listeColis);
-		maListe.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		maListe.setPreferredSize(new Dimension(width, height));
-		maListe.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		
-		this.add(maListe);
+		
+		maJListe = new JList<E>(listeElement);
+		maJListe.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		maJListe.setPreferredSize(new Dimension(width, height));
+		maJListe.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		
+		this.add(maJListe);
 	}
 
 	/**
@@ -91,11 +95,11 @@ public class AfficheurGrp extends JPanel  implements ListSelectionListener{
 	 * 
 	 * @return les colis cochés
 	 */
-	public GrpColis Exporter() {
-		GrpColis res = new GrpColis();
+	public ArrayList<E> Exporter() {
+		ArrayList<E> res = new ArrayList<E>();
 		
-		for(Colis c : maListe.getSelectedValuesList()){
-			res.add(c);
+		for(E e : maJListe.getSelectedValuesList()){
+			res.add(e);
 		}
 		
 		return res;
@@ -123,7 +127,7 @@ public class AfficheurGrp extends JPanel  implements ListSelectionListener{
 		this.zoneDetail = zoneDetail;
 		this.add(zoneDetail);
 		
-		maListe.addListSelectionListener(this);
+		maJListe.addListSelectionListener(this);
 		
 		
 	}
@@ -167,6 +171,6 @@ public class AfficheurGrp extends JPanel  implements ListSelectionListener{
 	
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		zoneDetail.setText(maListe.getSelectedValue().details());
+		zoneDetail.setText(maJListe.getSelectedValue().details());
 	}
 }
