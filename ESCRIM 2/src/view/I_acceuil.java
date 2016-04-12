@@ -9,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import Calculatrice.Ecouteurs;
+import Controleur.Controleur_Acceuil;
+
 public class I_acceuil {
 
 	private JFrame frame;
@@ -42,13 +45,13 @@ public class I_acceuil {
 		btnGestionMission.setBounds(362, 124, 160, 50);
 		frame.getContentPane().add(btnGestionMission);
 		
-		JButton btnNewButton = new JButton("GESTION CONFIGURATION");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnNGestionConfiguration = new JButton("GESTION CONFIGURATION");
+		btnNGestionConfiguration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(362, 198, 160, 50);
-		frame.getContentPane().add(btnNewButton);
+		btnNGestionConfiguration.setBounds(362, 198, 160, 50);
+		frame.getContentPane().add(btnNGestionConfiguration);
 		
 		JButton btnGestionColis = new JButton("GESTION COLIS");
 		btnGestionColis.setBounds(362, 259, 160, 50);
@@ -68,6 +71,17 @@ public class I_acceuil {
 		lblHello.setBounds(293, 30, 115, 50);
 		frame.getContentPane().add(lblHello);
 		
-		utilisateur.getNom();
+		String uti = utilisateur.getNom();
+		JLabel lbl = new JLabel(uti);
+		lbl.setFont(new Font("Tahoma", Font.PLAIN, 32));
+		lbl.setBounds(373, 30, 115, 50);
+		frame.getContentPane().add(lbl);
+		
+		Controleur_Acceuil  e = new Controleur_Acceuil ();
+		btnGestionMission.addActionListener(e);
+		btnNGestionConfiguration.addActionListener(e);
+		btnGestionColis.addActionListener(e);
+		btnGestionArticle.addActionListener(e);
+		btnGestionAvion.addActionListener(e);
 	}
 }
