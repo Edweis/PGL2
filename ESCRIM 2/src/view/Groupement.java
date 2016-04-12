@@ -12,7 +12,7 @@ public interface Groupement {
 	 * Permet d'afficher les valeurs a renseigner dans une ligne d'un AfficheurGrp
 	 * @return
 	 */
-	public String toString();
-	public String details();
+	public String getInfos();
+	public String plusDetails();
 }
 
