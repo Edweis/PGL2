@@ -12,4 +12,7 @@ public class Admin {
 		String requete= "update utilisateur set mdp='"+mdp+"', droit_modifier="+droit_modifier+", droit_lecture="+droit_lecture+",grade='"+grade+"' where nom='"+nom+"' AND "+"prenom='"+prenom+"'";
 		bdd.ecriture(requete);
 	}
+	public void supprimer(String nom,String prenom){
+		
+	}
 }
