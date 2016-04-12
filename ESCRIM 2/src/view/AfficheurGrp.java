@@ -1,28 +1,34 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import metier.Colis;
 import partieMission.GrpColis;
 
-public class AfficheurGrp extends JPanel {
+public class AfficheurGrp extends JPanel  implements ListSelectionListener{
 
 	private static final long serialVersionUID = 1L;
-	private ArrayList<CBColis> mesCB;
-	private GrpColis dernierColis;
+	private Colis [] listeColis;  
+	private JList<Colis> maListe;
+	private JButton selectAll;
+	private JButton deselectAll;
+	private JButton inverstSelect;
+
+	
 	private JLabel text;
 	private JLabel zoneDetail;
-	private int width = 800;
-	private int height = 200;
+	private int width = 500;
+	private int height = 600;
 
 	public AfficheurGrp() {
 		init();
@@ -37,11 +43,23 @@ public class AfficheurGrp extends JPanel {
 	 * Initilise les variables
 	 */
 	private void init() {
-		mesCB = new ArrayList<CBColis>();
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setPreferredSize(new Dimension(width, height));
+		
+		//Ajout du text
 		text = new JLabel();
 		text.setHorizontalAlignment(SwingConstants.CENTER);
-
-		this.setPreferredSize(new Dimension(width, height));
+		text.setPreferredSize(new Dimension(width, 20));
+		this.add(text);
+		
+		//Ajout des boutons
+		selectAll = new JButton("selectionner tout");
+		deselectAll = new JButton("déselectionner tout");
+		inverstSelect = new JButton("inverser la selection");
+		this.add(selectAll);
+		this.add(deselectAll);
+		this.add(inverstSelect);
+		
 	}
 
 	/**
@@ -50,32 +68,22 @@ public class AfficheurGrp extends JPanel {
 	 * @param colis
 	 */
 	public void MajGrpColis(GrpColis colis) {
-		dernierColis = colis;
-		// Ajout du des ComboBoxs
-		for (Colis c : colis) {
-			mesCB.add(new CBColis(c, width));
+		
+		if(maListe != null){
+			this.remove(maListe);
 		}
-
-		// Affichage des CheckBox
-		if (!mesCB.isEmpty()) {
-
-			int nbColonnes = mesCB.get(0).getColis().getInfos().length;
-			int nbLigne = mesCB.size();
-			this.setLayout(new GridLayout(nbLigne + 1, nbColonnes));
-
-			// ajoute le texte en haut
-			this.add(text);
-
-			// puis les check box !
-			for (CBColis cb : mesCB) {
-				this.add(cb);
-			}
+		
+		listeColis = new Colis[colis.size()];
+		for (int i = 0 ; i<colis.size(); i++) {
+			listeColis[i] = colis.get(i);
 		}
-
-		// Associe à la zone de lecture
-		if (zoneDetail != null) {
-			associerZoneDetail();
-		}
+		
+		maListe = new JList<Colis>(listeColis);
+		maListe.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		maListe.setPreferredSize(new Dimension(width, height));
+		maListe.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		
+		this.add(maListe);
 	}
 
 	/**
@@ -85,11 +93,11 @@ public class AfficheurGrp extends JPanel {
 	 */
 	public GrpColis Exporter() {
 		GrpColis res = new GrpColis();
-		for (CBColis cb : mesCB) {
-			if (cb.isChecked()) {
-				res.add(cb.getColis());
-			}
+		
+		for(Colis c : maListe.getSelectedValuesList()){
+			res.add(c);
 		}
+		
 		return res;
 	}
 
@@ -108,30 +116,31 @@ public class AfficheurGrp extends JPanel {
 	 * @param zoneDetail
 	 */
 	public void ajouterZoneDetail(JLabel zoneDetail) {
-		this.zoneDetail = zoneDetail;
-		associerZoneDetail();
-	}
-
-	/**
-	 * Ajoute le lien entre les lignes et la zone de détail
-	 */
-	private void associerZoneDetail() {
-		for (CBColis cb : mesCB) {
-			cb.setZoneDetail(zoneDetail);
+		if(zoneDetail != null){
+			this.remove(zoneDetail);
 		}
+		
+		this.zoneDetail = zoneDetail;
+		this.add(zoneDetail);
+		
+		maListe.addListSelectionListener(this);
+		
+		
 	}
 
+
 	/**
-	 * modifie les paramètre de formatage des chaque ligne
-	 * Si l'on met 0, la taille de la colonne est ajust automatiquement
+	 * modifie les paramètre de formatage des chaque ligne Si l'on met 0, la
+	 * taille de la colonne est ajust automatiquement
 	 * 
 	 * @param param
 	 *            est un tableau d'ntier représentant le nombre de caractère à
 	 *            afficher par colonne de chaque ligne
 	 */
 	public void setAllParamFormat(int[] param) {
-		
-		//on calcul la largeur par defaut (quand il y a des 0 dans le parametre)
+
+		// on calcul la largeur par defaut (quand il y a des 0 dans le
+		// parametre)
 		int defaut = 0;
 		for (int i = 0; i < param.length; i++) {
 			defaut += param[i];
@@ -143,15 +152,6 @@ public class AfficheurGrp extends JPanel {
 				param[i] = defaut;
 			}
 		}
-		
-		
-		//on le dit aux lignes
-		for (CBColis c : mesCB) {
-			c.setParamFormat(param);
-		}
-		
-		//on update !
-		MajGrpColis(dernierColis);
 	}
 
 	public void setWidth(int width) {
@@ -162,5 +162,11 @@ public class AfficheurGrp extends JPanel {
 	public void setHeight(int height) {
 		this.height = height;
 		this.setPreferredSize(new Dimension(width, height));
+	}
+
+	
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		zoneDetail.setText(maListe.getSelectedValue().details());
 	}
 }

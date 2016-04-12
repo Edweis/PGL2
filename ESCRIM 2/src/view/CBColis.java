@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,14 +51,16 @@ public class CBColis extends JPanel {
 		this.add(askInfos);
 
 		String infos = "";
-		JLabel t;
+		JLabel l;
 		for (int i = 0; i < colis.getInfos().length; i++) {
-			t = new JLabel(colis.getInfos()[i]);
-			t.setHorizontalAlignment(SwingConstants.CENTER);
-			t.setPreferredSize(new Dimension(20, paramFormat[i]));
+			l = new JLabel(colis.getInfos()[i] + "#");
+			//l.setHorizontalAlignment(SwingConstants.CENTER);
+			//l.setPreferredSize(new Dimension(10,50));
+			l.setMinimumSize(new Dimension(paramFormat[i],50));
+			l.setBackground(Color.BLACK);
 			
 			
-			this.add(t);
+			this.add(l);
 		}
 
 		label.setText(infos);

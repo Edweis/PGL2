@@ -34,4 +34,8 @@ public class GrpColis implements Iterable<Colis>{
 	public Iterator<Colis> iterator() {
 		return ensColis.iterator();
 	}
+
+	public int size(){
+		return ensColis.size();
+	}
 }

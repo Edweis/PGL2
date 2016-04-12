@@ -95,6 +95,7 @@ public class Colis implements Groupement {
 	
 	//Implemented methods
 	
+	
 	public String details() {
 		String res = "<html>";
 		
@@ -108,9 +109,15 @@ public class Colis implements Groupement {
 		return res;
 	}
 
-	public String[] getInfos() {
-		String[] res = { Affectataire, Integer.toString(numeroColis), Designation, precision, dim.toString() };
+	public String toString() {
+		//String[] res = { Affectataire, Integer.toString(numeroColis), Designation, precision, dim.toString() };
+		String res = Affectataire+" - " +
+				Integer.toString(numeroColis) +" - " +
+				Designation+" - " +
+				precision+" - " +
+				dim.toString(); 
 		return res;
 	}
+
 	
 }
