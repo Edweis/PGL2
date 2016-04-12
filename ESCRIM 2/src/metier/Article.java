@@ -69,7 +69,7 @@ public class Article implements Groupement{
 	}
 	
 	public String toString(){
-		return nom + "sdfsdfggf";
+		return nom ;
 	}
 	
 }

@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JList;
 import javax.swing.JButton;
@@ -50,24 +51,24 @@ public class I_Article {
 		lblMissionPrecedente.setBounds(44, 21, 377, 102);
 		frame.getContentPane().add(lblMissionPrecedente);
 		
-		JList list = new JList();
+		
 		Bdd_utilisateur.connecter("root","");
 		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_article) FROM article");
 		int val =  ((Number) dernierID.getObject(1)).intValue();
 				
-		Article[] art = new Article[val];
+		ArrayList<Article> art = new ArrayList<>();
 		for (int i=1;i<val;i++){
 			String requete="SELECT * FROM article WHERE id_article=="+i;
 			ResultSet Art = Bdd_utilisateur.lecture(requete);
 			String nomArt = Art.getString("nom");
 			String typeArt = Art.getString("type");
 			Article unArticle = new Article(nomArt,typeArt);
-			art[i]= unArticle;			
+			art.set(i,unArticle);			
 		}
 					
-		list.setBounds(44, 113, 364, 380);
-		list.setLayoutOrientation(JList.VERTICAL);
-		frame.getContentPane().add(list);
+		AfficheurGrp<Article> afficheur = new AfficheurGrp<Article>();
+		afficheur.MajGrpColis(art);
+		frame.getContentPane().add(afficheur);
 		
 		
 		

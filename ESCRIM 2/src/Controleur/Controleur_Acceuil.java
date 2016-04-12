@@ -2,8 +2,11 @@ package Controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
+
+import view.I_Article;
 
 public class Controleur_Acceuil implements ActionListener {
 
@@ -26,7 +29,13 @@ public class Controleur_Acceuil implements ActionListener {
 			
 			break;				
 		case "btnGestionArticle":
-			
+			try {
+				I_Article ouvrir = new I_Article();
+				ouvrir.run();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			break;
 		case "btnGestionAvion":
 			
