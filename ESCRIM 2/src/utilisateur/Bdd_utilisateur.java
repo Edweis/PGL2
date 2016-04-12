@@ -4,10 +4,10 @@ import java.sql.*;
 
 public class Bdd_utilisateur {
 
-	String pilote = "com.mysql.jdbc.Driver";
-	Connection connexion;
+	static String pilote = "com.mysql.jdbc.Driver";
+	static Connection connexion;
 	
-	public void connecter (String login,String motdepasse)throws SQLException{
+	public static void connecter (String login,String motdepasse)throws SQLException{
 		
 		try {
 			Class.forName(pilote);
@@ -19,16 +19,16 @@ public class Bdd_utilisateur {
 		}	 
 		
 	}
-	  public void deconnecter() throws SQLException{
+	  public static void deconnecter() throws SQLException{
 	        connexion.close();
 	        
 	    }
-	  public ResultSet lecture(String requete) throws SQLException{
+	  public static ResultSet lecture(String requete) throws SQLException{
 	        Statement stmt=connexion.createStatement();
 	       ResultSet resultat=stmt.executeQuery(requete);
 	        return resultat;
 	    }
-	    public void ecriture(String requete) throws SQLException{
+	    public static void ecriture(String requete) throws SQLException{
 	        Statement stmt= connexion.createStatement();
 	        int resultat = stmt.executeUpdate(requete);
 	    }
