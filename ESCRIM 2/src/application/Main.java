@@ -47,7 +47,7 @@ public class Main {
 		afficheur.MajGrpColis(grp);
 		onglet1.add(afficheur);
 
-		afficheur.setAllParamFormat(new int[] { 0, 10, 0, 0, 40 });
+		afficheur.setAllParamFormat(new int[] { 0, 60, 0, 0, 60 });
 
 		// Zone de lecture
 		JLabel zone = new JLabel("fghj");
@@ -55,6 +55,11 @@ public class Main {
 
 		// Associe l'afficheur avec la zone
 		afficheur.ajouterZoneDetail(zone);
+		
+		
+		
+		
+		
 		tabbedPane.addTab("onglet1", onglet1);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		
