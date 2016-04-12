@@ -177,9 +177,9 @@ public class I_administrateur {
 		JButton btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				admin.supprimer(txtNom_2.getText(),)
+				admin.supprimer(txtNom_2.getText(),
 			}
-		});
+		};
 		btnSupprimer.setBounds(198, 128, 89, 23);
 		frame.getContentPane().add(btnSupprimer);
 		
