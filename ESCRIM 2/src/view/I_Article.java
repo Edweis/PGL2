@@ -9,8 +9,13 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JList;
+
+import Controleur.Controleur_Acceuil;
+import Controleur.Controleur_Article;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -18,11 +23,11 @@ import java.awt.event.ActionEvent;
 public class I_Article {
 
 	private JFrame frame;
-
+	Utilisateur utilisateur;
 	
 	public void run() {
 		try {
-			I_Article window = new I_Article();
+			I_Article window = new I_Article(utilisateur);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -30,8 +35,8 @@ public class I_Article {
 	}
 
 	
-	public I_Article() throws SQLException {
-
+	public I_Article(Utilisateur utilisateur) throws SQLException {
+		this.utilisateur= utilisateur;
 		initialize();
 	}
 
@@ -45,29 +50,29 @@ public class I_Article {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblMissionPrecedente = new JLabel("ARTICLE EXISTANT");
-		lblMissionPrecedente.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblMissionPrecedente.setBounds(44, 21, 377, 102);
-		frame.getContentPane().add(lblMissionPrecedente);
+		JLabel lblArticleExistant = new JLabel("ARTICLE EXISTANT");
+		lblArticleExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblArticleExistant.setBounds(44, 21, 377, 102);
+		frame.getContentPane().add(lblArticleExistant);
 		
-		JList list = new JList();
+		
 		Bdd_utilisateur.connecter("root","");
 		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_article) FROM article");
 		int val =  ((Number) dernierID.getObject(1)).intValue();
 				
-		Article[] art = new Article[val];
+		ArrayList<Article> art = new ArrayList<>();
 		for (int i=1;i<val;i++){
 			String requete="SELECT * FROM article WHERE id_article=="+i;
 			ResultSet Art = Bdd_utilisateur.lecture(requete);
 			String nomArt = Art.getString("nom");
 			String typeArt = Art.getString("type");
 			Article unArticle = new Article(nomArt,typeArt);
-			art[i]= unArticle;			
+			art.set(i,unArticle);			
 		}
 					
-		list.setBounds(44, 113, 364, 380);
-		list.setLayoutOrientation(JList.VERTICAL);
-		frame.getContentPane().add(list);
+		AfficheurGrp<Article> afficheur = new AfficheurGrp<Article>();
+		afficheur.MajGrpColis(art);
+		frame.getContentPane().add(afficheur);
 		
 		
 		
@@ -99,5 +104,13 @@ public class I_Article {
 		JButton btnGererStock = new JButton("GERER STOCK");
 		btnGererStock.setBounds(602, 374, 229, 40);
 		frame.getContentPane().add(btnGererStock);
+		
+		Controleur_Article  e1 = new Controleur_Article (utilisateur);
+		btnVoirCaracteristique.addActionListener(e1);
+		btnCreerNouvelle.addActionListener(e1);
+		btnRetour.addActionListener(e1);
+		btnModifier.addActionListener(e1);
+		btnSupprimer.addActionListener(e1);
+		btnGererStock.addActionListener(e1);
 	}
 }
