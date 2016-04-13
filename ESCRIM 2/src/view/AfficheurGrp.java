@@ -26,7 +26,6 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	private JButton selectAll;
 	private JButton deselectAll;
 	private JButton inverstSelect;
-	private ActionListener ecouteurBtn;
 
 	private ArrayList<JButton> btnActiveOnSelect;
 	private int typeDeSelection;
@@ -212,14 +211,17 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("dfghjkl");
 		
 		JButton btn = (JButton) e.getSource();
-		switch (btn.getName()) {
+		
+		switch (btn.getText()) {
 		case "selectionner tout":
+			
+			int [] toSelect = new int[listeElement.size()];
 			for (int i = 0; i < listeElement.size(); i++) {
-				maJListe.setSelectedIndex(i);
+				toSelect[i] = i;
 			}
+			maJListe.setSelectedIndices(toSelect);
 
 			break;
 		case "déselectionner tout":
