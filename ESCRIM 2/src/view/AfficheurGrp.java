@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -14,18 +16,20 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import partieMission.GrpColis;
-
-public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSelectionListener {
+public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSelectionListener, ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private DefaultListModel<E> listeElement;
 	private JList<E> maJListe;
+
+	// Boutons
 	private JButton selectAll;
 	private JButton deselectAll;
 	private JButton inverstSelect;
+	private ActionListener ecouteurBtn;
 
 	private ArrayList<JButton> btnActiveOnSelect;
+	private int typeDeSelection;
 
 	private JLabel text;
 	private JLabel zoneDetail;
@@ -49,6 +53,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setPreferredSize(new Dimension(width, height));
+		typeDeSelection = ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
 
 		// Ajout du text
 		text = new JLabel();
@@ -60,9 +65,13 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 		selectAll = new JButton("selectionner tout");
 		deselectAll = new JButton("déselectionner tout");
 		inverstSelect = new JButton("inverser la selection");
+			selectAll.addActionListener(this);
+			deselectAll.addActionListener(this);
+			inverstSelect.addActionListener(this);
+		
 		this.add(selectAll);
 		this.add(deselectAll);
-		this.add(inverstSelect);
+		// this.add(inverstSelect);
 
 	}
 
@@ -84,7 +93,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 		}
 
 		maJListe = new JList<E>(listeElement);
-		maJListe.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		maJListe.setSelectionMode(typeDeSelection);
 		maJListe.setPreferredSize(new Dimension(width, height));
 		maJListe.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 
@@ -96,7 +105,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	 * 
 	 * @return les colis cochés
 	 */
-	public ArrayList<E> Exporter() {
+	public ArrayList<E> ExporterSelection() {
 		ArrayList<E> res = new ArrayList<E>();
 
 		for (E e : maJListe.getSelectedValuesList()) {
@@ -190,9 +199,6 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 			zoneDetail.setText(maJListe.getSelectedValue().plusDetails());
 		}
 
-		
-		
-		
 		if (maJListe.isSelectionEmpty()) {
 			for (JButton btn : btnActiveOnSelect) {
 				btn.setEnabled(false);
@@ -202,5 +208,25 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 				btn.setEnabled(true);
 			}
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("dfghjkl");
+		
+		JButton btn = (JButton) e.getSource();
+		switch (btn.getName()) {
+		case "selectionner tout":
+			for (int i = 0; i < listeElement.size(); i++) {
+				maJListe.setSelectedIndex(i);
+			}
+
+			break;
+		case "déselectionner tout":
+			maJListe.clearSelection();
+			break;
+		case "inverser la selection":
+		}
+
 	}
 }
