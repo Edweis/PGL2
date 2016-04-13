@@ -73,13 +73,13 @@ public class I_Article {
 		AfficheurGrp<Article> afficheur = new AfficheurGrp<Article>();
 		afficheur.MajGrpColis(art);
 		frame.getContentPane().add(afficheur);
-		
-		
-		
+
 		
 		JButton btnVoirCaracteristique = new JButton("VOIR CARACTERISTIQUE");
 		btnVoirCaracteristique.setBounds(602, 101, 229, 40);
 		frame.getContentPane().add(btnVoirCaracteristique);
+		
+		afficheur.activeOnSelect(btnVoirCaracteristique);
 		
 		JButton btnCreerNouvelle = new JButton("CREER NOUVEAU");
 		btnCreerNouvelle.setBounds(602, 173, 229, 40);
@@ -90,22 +90,22 @@ public class I_Article {
 		frame.getContentPane().add(btnRetour);
 		
 		JButton btnModifier = new JButton("MODIFIER");
-		btnModifier.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnModifier.setBounds(602, 242, 229, 33);
 		frame.getContentPane().add(btnModifier);
+		
+		afficheur.activeOnSelect(btnModifier);
 		
 		JButton btnSupprimer = new JButton("SUPPRIMER");
 		btnSupprimer.setBounds(602, 311, 229, 40);
 		frame.getContentPane().add(btnSupprimer);
 		
+		afficheur.activeOnSelect(btnSupprimer);
+		
 		JButton btnGererStock = new JButton("GERER STOCK");
 		btnGererStock.setBounds(602, 374, 229, 40);
 		frame.getContentPane().add(btnGererStock);
 		
-		Controleur_Article  e1 = new Controleur_Article (utilisateur);
+		Controleur_Article  e1 = new Controleur_Article (utilisateur, afficheur);
 		btnVoirCaracteristique.addActionListener(e1);
 		btnCreerNouvelle.addActionListener(e1);
 		btnRetour.addActionListener(e1);

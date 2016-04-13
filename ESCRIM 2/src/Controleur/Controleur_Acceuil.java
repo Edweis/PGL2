@@ -8,6 +8,7 @@ import javax.swing.JButton;
 
 import utilisateur.Utilisateur;
 import view.I_Article;
+import view.I_Colis;
 
 public class Controleur_Acceuil implements ActionListener {
 
@@ -33,12 +34,13 @@ public class Controleur_Acceuil implements ActionListener {
 
 			break;
 		case "GESTION COLIS":
-
+			I_Colis ouvrir = new I_Colis(utilisateur);
+			ouvrir.run();
 			break;
 		case "GESTION ARTICLE":
 			try {
-				I_Article ouvrir = new I_Article(utilisateur);
-				ouvrir.run();
+				I_Article ouvrir3 = new I_Article(utilisateur);
+				ouvrir3.run();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
