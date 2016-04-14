@@ -10,10 +10,13 @@ public class Article implements Groupement{
 	private String nom;
 	private Stack<Caracteristique> stocks;
 	private String type;
+	public float poids;
+	
 
-	public Article(String nom, String type) {
+	public Article(String nom, String type, float poids) {
 		this.nom = nom;
 		this.type = type;
+		this.poids = poids;
 	}
 	public int getStockTotal() {
 		int total =0;
@@ -60,6 +63,23 @@ public class Article implements Groupement{
 		ResultSet id_art = Bdd_utilisateur.lecture("SELECT 'id_article' FROM 'stock' WHERE 'nom' == nom2");
 		Bdd_utilisateur.ecriture("UPDATE 'stock' SET  'quantite'= 'quantite'-quantite2 WHERE id_article =id_art");
 		Bdd_utilisateur.deconnecter();
+	}
+	
+	public void modifierArticle(Utilisateur utilisateur, String nom,String type,float poids) throws SQLException{
+		String anciennom = this.nom;
+		this.nom = nom;
+		this.type = type;
+		this.poids = poids;
+		String requete = "UPDATE article SET nom = 'nom' type='type' poids ='poids' WHERE nom = 'anciennom'";
+		Bdd_utilisateur.connecter("root","");
+		Bdd_utilisateur.ecriture(requete);
+		Bdd_utilisateur.deconnecter();
+	}
+	public float getPoids() {
+		return poids;
+	}
+	public void setPoids(float poids) {
+		this.poids = poids;
 	}
 	
 	@Override

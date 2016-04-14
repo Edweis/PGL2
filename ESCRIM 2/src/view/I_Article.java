@@ -24,7 +24,6 @@ public class I_Article {
 
 	private JFrame frame;
 	Utilisateur utilisateur;
-	
 	public void run() {
 		try {
 			I_Article window = new I_Article(utilisateur);
@@ -66,7 +65,8 @@ public class I_Article {
 			ResultSet Art = Bdd_utilisateur.lecture(requete);
 			String nomArt = Art.getString("nom");
 			String typeArt = Art.getString("type");
-			Article unArticle = new Article(nomArt,typeArt);
+			float poidsArt = Art.getFloat("poids");
+			Article unArticle = new Article(nomArt,typeArt,poidsArt);
 			art.set(i,unArticle);			
 		}
 					
