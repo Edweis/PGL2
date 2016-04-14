@@ -4,6 +4,46 @@ import view.Groupement;
 
 public class Avion implements Groupement{
 	private String nom;
+	public String getNom() {
+		return nom;
+	}
+
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+
+	public long getVolume() {
+		return volume;
+	}
+
+
+	public void setVolume(long volume) {
+		this.volume = volume;
+	}
+
+
+	public String getCaracteristiques() {
+		return caracteristiques;
+	}
+
+
+	public void setCaracteristiques(String caracteristiques) {
+		this.caracteristiques = caracteristiques;
+	}
+
+
+	public String getImmatriculation() {
+		return immatriculation;
+	}
+
+
+	public void setImmatriculation(String immatriculation) {
+		this.immatriculation = immatriculation;
+	}
+
+
 	private long volume;
 	private String caracteristiques;
 	private String immatriculation;

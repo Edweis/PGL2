@@ -1,0 +1,68 @@
+package Controleur;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+
+import metier.Article;
+import metier.Colis;
+import partieMission.Avion;
+import partieMission.Mission;
+import partieMission.configs.Configuration;
+import utilisateur.Bdd_utilisateur;
+import utilisateur.Utilisateur;
+import view.AfficheurGrp;
+import view.I_acceuil;
+
+public class Controleur_Mission implements ActionListener {
+	Utilisateur utilisateur;
+	AfficheurGrp afficheur;
+	public Controleur_Mission(Utilisateur utilisateur, AfficheurGrp afficheur) {
+		this.utilisateur = utilisateur;
+		this.afficheur = afficheur;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e5) {
+		// TODO Auto-generated method stub
+		String str = "0";
+		JButton btn =(JButton) e5.getSource();
+		str = btn.getText();
+		switch (str) {
+
+		case "VOIR CARACTERISTIQUE":
+		
+			break;
+		case "CREER NOUVEAU":
+			
+			break;
+		case "RETOUR":
+			I_acceuil ouvrir = new I_acceuil(utilisateur);
+			ouvrir.run();
+			break;	
+
+		case "MODIFIER":
+
+			break;
+		case "SUPPRIMER":
+			try {
+				Bdd_utilisateur.connecter("root", "");
+				ArrayList<Mission> mission = (ArrayList<Mission>) afficheur.ExporterSelection().get(0);
+				String suppr = mission.get(0).getNom();
+				String requete = "DELETE"+ suppr +"FROM mission";
+				Bdd_utilisateur.ecriture(requete);
+				Bdd_utilisateur.deconnecter();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		
+
+	}
+
+	}
+}
