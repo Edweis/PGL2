@@ -64,13 +64,13 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 		selectAll = new JButton("selectionner tout");
 		deselectAll = new JButton("déselectionner tout");
 		inverstSelect = new JButton("inverser la selection");
-			selectAll.addActionListener(this);
-			deselectAll.addActionListener(this);
-			inverstSelect.addActionListener(this);
-		
+		selectAll.addActionListener(this);
+			//deselectAll.addActionListener(this);
+			//inverstSelect.addActionListener(this);
+
 		this.add(selectAll);
-		this.add(deselectAll);
-		// this.add(inverstSelect);
+			//this.add(deselectAll);
+			//this.add(inverstSelect);
 
 	}
 
@@ -211,24 +211,34 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		JButton btn = (JButton) e.getSource();
-		
+
 		switch (btn.getText()) {
 		case "selectionner tout":
-			
-			int [] toSelect = new int[listeElement.size()];
+
+			int[] toSelect = new int[listeElement.size()];
 			for (int i = 0; i < listeElement.size(); i++) {
 				toSelect[i] = i;
 			}
 			maJListe.setSelectedIndices(toSelect);
 
 			break;
-		case "déselectionner tout":
-			maJListe.clearSelection();
-			break;
-		case "inverser la selection":
 		}
 
 	}
-}
+
+	/**
+	 * Envoyer true permet d'actionner la selection multiple, c'est une selection unique
+	 * @param selection
+	 */
+	public void setMultipleSelection(boolean selection){
+		if(selection){
+			typeDeSelection = ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
+
+		}else{
+			typeDeSelection = ListSelectionModel.SINGLE_SELECTION;
+
+		}
+	}
+	}
