@@ -2,6 +2,10 @@ package view;
 import utilisateur.*;
 import java.awt.EventQueue;
 import metier.Article;
+import metier.Colis;
+import metier.Dimension;
+import partieMission.Avion;
+
 import javax.swing.JFrame;
 
 import utilisateur.Utilisateur;
@@ -15,19 +19,20 @@ import javax.swing.JList;
 
 import Controleur.Controleur_Acceuil;
 import Controleur.Controleur_Article;
+import Controleur.Controleur_Colis;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class I_Article {
+public class I_Avion {
 
 	private JFrame frame;
 	Utilisateur utilisateur;
 	
 	public void run() {
 		try {
-			I_Article window = new I_Article(utilisateur);
+			I_Avion window = new I_Avion(utilisateur);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,7 +40,7 @@ public class I_Article {
 	}
 
 	
-	public I_Article(Utilisateur utilisateur) throws SQLException {
+	public I_Avion(Utilisateur utilisateur) throws SQLException {
 		this.utilisateur= utilisateur;
 		initialize();
 	}
@@ -50,28 +55,30 @@ public class I_Article {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblArticleExistant = new JLabel("ARTICLES EXISTANTS");
-		lblArticleExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblArticleExistant.setBounds(44, 21, 377, 102);
-		frame.getContentPane().add(lblArticleExistant);
+		JLabel lblAvionExistant = new JLabel("AVIONS EXISTANTS");
+		lblAvionExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblAvionExistant.setBounds(44, 21, 377, 102);
+		frame.getContentPane().add(lblAvionExistant);
 		
 		
 		Bdd_utilisateur.connecter("root","");
-		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_article) FROM article");
+		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_avion) FROM avion");
 		int val =  ((Number) dernierID.getObject(1)).intValue();
 				
-		ArrayList<Article> art = new ArrayList<>();
+		ArrayList<Avion> avi = new ArrayList<>();
 		for (int i=1;i<val;i++){
-			String requete="SELECT * FROM article WHERE id_article=="+i;
-			ResultSet Art = Bdd_utilisateur.lecture(requete);
-			String nomArt = Art.getString("nom");
-			String typeArt = Art.getString("type");
-			Article unArticle = new Article(nomArt,typeArt);
-			art.set(i,unArticle);			
+			String requete="SELECT * FROM avion WHERE id_avion=="+i;
+			ResultSet Avi = Bdd_utilisateur.lecture(requete);
+			String nomAv = Avi.getString("nom");
+			Long volumeAv = Avi.getLong("volume");
+			String caracv = Avi.getString("caracteristiques");
+			String immaAv = Avi.getString("immatriculation");
+			Avion unAvion = new Avion(nomAv,volumeAv,caracv,immaAv);
+			avi.set(i,unAvion);			
 		}
 					
-		AfficheurGrp<Article> afficheur = new AfficheurGrp<Article>();
-		afficheur.MajGrpColis(art);
+		AfficheurGrp<Avion> afficheur = new AfficheurGrp<Avion>();
+		afficheur.MajGrpColis(avi);
 		frame.getContentPane().add(afficheur);
 
 		
@@ -101,16 +108,12 @@ public class I_Article {
 		
 		afficheur.activeOnSelect(btnSupprimer);
 		
-		JButton btnGererStock = new JButton("GERER STOCK");
-		btnGererStock.setBounds(602, 374, 229, 40);
-		frame.getContentPane().add(btnGererStock);
-		
-		Controleur_Article  e1 = new Controleur_Article (utilisateur, afficheur);
-		btnVoirCaracteristique.addActionListener(e1);
-		btnCreerNouvelle.addActionListener(e1);
-		btnRetour.addActionListener(e1);
-		btnModifier.addActionListener(e1);
-		btnSupprimer.addActionListener(e1);
-		btnGererStock.addActionListener(e1);
+		Controleur_Colis  e3 = new Controleur_Colis (utilisateur, afficheur);
+		btnVoirCaracteristique.addActionListener(e3);
+		btnCreerNouvelle.addActionListener(e3);
+		btnRetour.addActionListener(e3);
+		btnModifier.addActionListener(e3);
+		btnSupprimer.addActionListener(e3);
 	}
 }
+

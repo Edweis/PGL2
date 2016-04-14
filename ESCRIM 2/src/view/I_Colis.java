@@ -2,6 +2,9 @@ package view;
 import utilisateur.*;
 import java.awt.EventQueue;
 import metier.Article;
+import metier.Colis;
+import metier.Dimension;
+
 import javax.swing.JFrame;
 
 import utilisateur.Utilisateur;
@@ -15,19 +18,20 @@ import javax.swing.JList;
 
 import Controleur.Controleur_Acceuil;
 import Controleur.Controleur_Article;
+import Controleur.Controleur_Colis;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class I_Article {
+public class I_Colis {
 
 	private JFrame frame;
 	Utilisateur utilisateur;
 	
 	public void run() {
 		try {
-			I_Article window = new I_Article(utilisateur);
+			I_Colis window = new I_Colis(utilisateur);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,7 +39,7 @@ public class I_Article {
 	}
 
 	
-	public I_Article(Utilisateur utilisateur) throws SQLException {
+	public I_Colis(Utilisateur utilisateur) throws SQLException {
 		this.utilisateur= utilisateur;
 		initialize();
 	}
@@ -50,28 +54,28 @@ public class I_Article {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblArticleExistant = new JLabel("ARTICLES EXISTANTS");
-		lblArticleExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblArticleExistant.setBounds(44, 21, 377, 102);
-		frame.getContentPane().add(lblArticleExistant);
+		JLabel lblColisExistant = new JLabel("COLIS EXISTANTS");
+		lblColisExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblColisExistant.setBounds(44, 21, 377, 102);
+		frame.getContentPane().add(lblColisExistant);
 		
 		
 		Bdd_utilisateur.connecter("root","");
-		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_article) FROM article");
+		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_colis) FROM colis");
 		int val =  ((Number) dernierID.getObject(1)).intValue();
 				
-		ArrayList<Article> art = new ArrayList<>();
+		ArrayList<Colis> col = new ArrayList<>();
 		for (int i=1;i<val;i++){
-			String requete="SELECT * FROM article WHERE id_article=="+i;
-			ResultSet Art = Bdd_utilisateur.lecture(requete);
-			String nomArt = Art.getString("nom");
-			String typeArt = Art.getString("type");
-			Article unArticle = new Article(nomArt,typeArt);
-			art.set(i,unArticle);			
+			String requete="SELECT * FROM colis WHERE id_colis=="+i;
+			ResultSet Col = Bdd_utilisateur.lecture(requete);
+			Dimension dimColis = (Dimension) Col.getObject("dim");
+			int numColis = Col.getInt("numerosColis");
+			Colis unColis = new Colis(numColis,dimColis);
+			col.set(i,unColis);			
 		}
 					
-		AfficheurGrp<Article> afficheur = new AfficheurGrp<Article>();
-		afficheur.MajGrpColis(art);
+		AfficheurGrp<Colis> afficheur = new AfficheurGrp<Colis>();
+		afficheur.MajGrpColis(col);
 		frame.getContentPane().add(afficheur);
 
 		
@@ -105,12 +109,12 @@ public class I_Article {
 		btnGererStock.setBounds(602, 374, 229, 40);
 		frame.getContentPane().add(btnGererStock);
 		
-		Controleur_Article  e1 = new Controleur_Article (utilisateur, afficheur);
-		btnVoirCaracteristique.addActionListener(e1);
-		btnCreerNouvelle.addActionListener(e1);
-		btnRetour.addActionListener(e1);
-		btnModifier.addActionListener(e1);
-		btnSupprimer.addActionListener(e1);
-		btnGererStock.addActionListener(e1);
+		Controleur_Colis  e2 = new Controleur_Colis (utilisateur, afficheur);
+		btnVoirCaracteristique.addActionListener(e2);
+		btnCreerNouvelle.addActionListener(e2);
+		btnRetour.addActionListener(e2);
+		btnModifier.addActionListener(e2);
+		btnSupprimer.addActionListener(e2);
+		btnGererStock.addActionListener(e2);
 	}
 }

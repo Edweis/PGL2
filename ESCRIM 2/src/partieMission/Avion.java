@@ -1,8 +1,8 @@
 package partieMission;
 
+import view.Groupement;
 
-
-public class Avion {
+public class Avion implements Groupement{
 	private String nom;
 	private long volume;
 	private String caracteristiques;
@@ -14,6 +14,20 @@ public class Avion {
 		this.volume = volume;
 		this.caracteristiques = caracteristiques;
 		this.immatriculation = immatriculation;
+	}
+
+
+	@Override
+	public String getInfos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String plusDetails() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
