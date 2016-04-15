@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import metier.Colis;
+import utilisateur.Donnee;
 
-public class GrpColis implements Iterable<Colis>{
+public class GrpColis implements Donnee, Iterable<Colis>{
 	ArrayList<Colis> ensColis;
+	
+	private Object[] param;
 	
 	public GrpColis(){
 		ensColis = new ArrayList<Colis>();
+		param = new Object[]{};
 	}
 	
 	
@@ -41,5 +45,10 @@ public class GrpColis implements Iterable<Colis>{
 
 	public ArrayList<Colis> getColis(){
 		return ensColis;
+	}
+	
+	@Override
+	public Object[] getParameters() {
+		return param;
 	}
 }

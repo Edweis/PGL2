@@ -17,7 +17,7 @@ import metier.Article;
 import metier.Colis;
 import metier.Dimension;
 import partieMission.GrpColis;
-import utilisateur.Bdd;
+import utilisateur.LanceRequete;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
 
@@ -31,7 +31,7 @@ public class Main {
 	}
 
 	public static void main(String... args) throws Throwable {
-		Bdd<Utilisateur> bddUser = new Bdd<Utilisateur>(Utilisateur.class);
+		LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class);
 		bddUser.add(new Utilisateur("a","b","c",true,false,"d"));
 	}
 
@@ -50,11 +50,11 @@ public class Main {
 
 		GrpColis grp = new GrpColis();
 
-		Colis c1 = new Colis(10, new Dimension(11, 22, 33));
+		Colis c1 = new Colis(10, new Dimension(11, 22, 33), null);
 		c1.setInfos("George", "Paris", "bleue");
-		Colis c2 = new Colis(20, new Dimension(11, 22, 33));
+		Colis c2 = new Colis(20, new Dimension(11, 22, 33), null);
 		c2.setInfos("René", "NYC", "bleue");
-		Colis c3 = new Colis(30, new Dimension(11, 22, 33));
+		Colis c3 = new Colis(30, new Dimension(11, 22, 33), null);
 		c3.setInfos("Bob", "OKil", "bleue");
 
 		grp.add(c1);
@@ -90,9 +90,9 @@ public class Main {
 	}
 
 	public static void exempleAfficheurGrp2() {
-		Article a1 = new Article("salut", "jaques");
-		Article a2 = new Article("df", "jaquqsdqses");
-		Article a3 = new Article("sadfsdflut", "jaqucdcdes");
+		Article a1 = new Article(null, "salut", "jaques");
+		Article a2 = new Article(null, "df", "jaquqsdqses");
+		Article a3 = new Article(null, "sadfsdflut", "jaqucdcdes");
 
 		ArrayList<Article> mesArticles = new ArrayList<Article>();
 		mesArticles.add(a1);

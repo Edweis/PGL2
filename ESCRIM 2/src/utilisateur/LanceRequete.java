@@ -15,7 +15,7 @@ import java.util.Map;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
-public class Bdd<E extends Donnee> {
+public class LanceRequete<E extends Donnee> {
 
 	private String url = "jdbc:mysql://localhost/escrim";
 	private String user = "root";
@@ -33,13 +33,17 @@ public class Bdd<E extends Donnee> {
 	 * 
 	 * @param cls
 	 */
-	public Bdd(Class<E> cls) {
+	public LanceRequete(Class<E> cls) {
 
 		Map<String, String> assoc = new HashMap<>();
 
 		assoc.put("Utilisateur", "utilisateur");
-		assoc.put("Utilisateur", "utilisateur");
-		assoc.put("Utilisateur", "utilisateur");
+		assoc.put("Article", "article");
+		assoc.put("Colis", "colis");
+		assoc.put("Avion", "avion");
+		assoc.put("GrpColis", "grpcolis");
+		assoc.put("GrpAvion", "grpavion");
+		assoc.put("Dimension", "dimension");
 		// ...
 
 		if (assoc.containsKey(cls.getName())) {
@@ -175,7 +179,7 @@ public class Bdd<E extends Donnee> {
 			if (data.getColumnName(colonne).substring(0, 2) == "id") {
 
 				//let say E is the Type
-				Bdd<E> sousBase = new Bdd<E>(classe);
+				LanceRequete<E> sousBase = new LanceRequete<E>(classe);
 				return sousBase.selectFromId(rs.getInt(colonne));
 			
 			}
@@ -187,8 +191,8 @@ public class Bdd<E extends Donnee> {
 
 	}
 
-	private  <T extends Donnee> Bdd<T> classFacotory(Class<T> type) {
-	    return new Bdd<T>(type);
+	private  <T extends Donnee> LanceRequete<T> classFacotory(Class<T> type) {
+	    return new LanceRequete<T>(type);
 	}
 	
 

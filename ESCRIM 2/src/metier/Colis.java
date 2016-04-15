@@ -1,12 +1,14 @@
 package metier;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
+import utilisateur.Donnee;
 import view.Groupement;
 
-public class Colis implements Groupement {
+public class Colis implements Groupement, Donnee {
 	private Dimension dim;
-	private Stack<Article> articles;
+	private ArrayList<Article> articles;
 	private int numeroColis;
 	public float poids;
 	public String observations;
@@ -20,17 +22,16 @@ public class Colis implements Groupement {
 	public String Designation; // Creer une classe ?
 	public String precision;
 	public String volume;
+	
+	private  Object [] param;
 
-	public Colis(int numerosColis, Dimension dim) {
-		this.numeroColis = numerosColis;
-		this.dim = dim;
-		this.articles = new Stack<Article>();
-	}
 
-	public Colis(int numerosColis, Dimension dim, Stack<Article> articles) {
+	public Colis(int numerosColis, Dimension dim, ArrayList<Article> articles) {
 		this.numeroColis = numerosColis;
 		this.dim = dim;
 		this.articles = articles;
+		
+		param = new Object[]{};
 	}
 
 	public Dimension getDim() {
@@ -41,11 +42,11 @@ public class Colis implements Groupement {
 		this.dim = dim;
 	}
 
-	public Stack<Article> getArticles() {
+	public ArrayList<Article> getArticles() {
 		return articles;
 	}
 
-	public void setArticles(Stack<Article> articles) {
+	public void setArticles(ArrayList<Article> articles) {
 		this.articles = articles;
 	}
 
@@ -117,6 +118,11 @@ public class Colis implements Groupement {
 				precision+" - " +
 				dim.toString(); 
 		return res;
+	}
+
+	@Override
+	public Object[] getParameters() {
+return param;
 	}
 
 
