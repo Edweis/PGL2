@@ -4,12 +4,6 @@ import java.awt.EventQueue;
 import metier.Article;
 import metier.Colis;
 import metier.Dimension;
-import partieMission.Avion;
-import partieMission.CaracMission;
-import partieMission.GrpAvions;
-import partieMission.GrpColis;
-import partieMission.Mission;
-import partieMission.configs.Configuration;
 
 import javax.swing.JFrame;
 
@@ -25,21 +19,19 @@ import javax.swing.JList;
 import Controleur.Controleur_Acceuil;
 import Controleur.Controleur_Article;
 import Controleur.Controleur_Colis;
-import Controleur.Controleur_Configuration;
-import Controleur.Controleur_Mission;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class I_Mission {
+public class I_Colis {
 
 	private JFrame frame;
 	Utilisateur utilisateur;
 	
 	public void run() {
 		try {
-			I_Mission window = new I_Mission(utilisateur);
+			I_Colis window = new I_Colis(utilisateur);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,7 +39,7 @@ public class I_Mission {
 	}
 
 	
-	public I_Mission(Utilisateur utilisateur) throws SQLException {
+	public I_Colis(Utilisateur utilisateur) throws SQLException {
 		this.utilisateur= utilisateur;
 		initialize();
 	}
@@ -62,30 +54,28 @@ public class I_Mission {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblMissionExistant = new JLabel("MISSIONS EXISTANTES");
-		lblMissionExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblMissionExistant.setBounds(44, 21, 377, 102);
-		frame.getContentPane().add(lblMissionExistant);
+		JLabel lblColisExistant = new JLabel("COLIS EXISTANTS");
+		lblColisExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblColisExistant.setBounds(44, 21, 377, 102);
+		frame.getContentPane().add(lblColisExistant);
 		
 		
 		Bdd_utilisateur.connecter("root","");
-		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_mission) FROM mission");
+		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_colis) FROM colis");
 		int val =  ((Number) dernierID.getObject(1)).intValue();
 				
-		ArrayList<Mission> mis = new ArrayList<>();
+		ArrayList<Colis> col = new ArrayList<>();
 		for (int i=1;i<val;i++){
-			String requete="SELECT * FROM mission WHERE id_mission=="+i;
-			ResultSet Mis = Bdd_utilisateur.lecture(requete);
-			String nomMis = Mis.getString("nom");
-			CaracMission caracMis = (CaracMission) Mis.getObject("caracteristiques");
-			GrpAvions ensAvionsMis = (GrpAvions) Mis.getObject("ensAvions");
-			GrpColis ensColisMis = (GrpColis) Mis.getObject("ensColis");;;
-			Mission uneMis = new Mission(nomMis,caracMis,ensAvionsMis,ensColisMis);
-			mis.set(i,uneMis);			
+			String requete="SELECT * FROM colis WHERE id_colis=="+i;
+			ResultSet Col = Bdd_utilisateur.lecture(requete);
+			Dimension dimColis = (Dimension) Col.getObject("dim");
+			int numColis = Col.getInt("numerosColis");
+			Colis unColis = new Colis(numColis,dimColis);
+			col.set(i,unColis);			
 		}
 					
-		AfficheurGrp<Mission> afficheur = new AfficheurGrp<Mission>();
-		afficheur.MajGrpColis(mis);
+		AfficheurGrp<Colis> afficheur = new AfficheurGrp<Colis>();
+		afficheur.MajGrpColis(col);
 		frame.getContentPane().add(afficheur);
 
 		
@@ -115,11 +105,16 @@ public class I_Mission {
 		
 		afficheur.activeOnSelect(btnSupprimer);
 		
-		Controleur_Mission  e5 = new Controleur_Mission (utilisateur, afficheur);
-		btnVoirCaracteristique.addActionListener(e5);
-		btnCreerNouvelle.addActionListener(e5);
-		btnRetour.addActionListener(e5);
-		btnModifier.addActionListener(e5);
-		btnSupprimer.addActionListener(e5);
+		JButton btnGererStock = new JButton("GERER STOCK");
+		btnGererStock.setBounds(602, 374, 229, 40);
+		frame.getContentPane().add(btnGererStock);
+		
+		Controleur_Colis  e2 = new Controleur_Colis (utilisateur, afficheur);
+		btnVoirCaracteristique.addActionListener(e2);
+		btnCreerNouvelle.addActionListener(e2);
+		btnRetour.addActionListener(e2);
+		btnModifier.addActionListener(e2);
+		btnSupprimer.addActionListener(e2);
+		btnGererStock.addActionListener(e2);
 	}
 }

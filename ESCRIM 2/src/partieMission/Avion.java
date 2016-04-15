@@ -24,4 +24,7 @@ public class Avion implements Donnee {
 		return param;
 	}
 
+	public void setImmatriculation(String immatriculation) {
+		this.immatriculation = immatriculation;
+	}
 }

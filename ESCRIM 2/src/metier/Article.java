@@ -11,13 +11,16 @@ import view.Groupement;
 public class Article implements Groupement, Donnee {
 	private String nom;
 	private String type;
+	private float poids;
 	private ArrayList<Caracteristique> stock;
 
 	private final Object[] param;
 
-	public Article(ArrayList<Caracteristique> stock, String nom, String type) {
+	public Article(ArrayList<Caracteristique> stock, String nom, String type, float poids) {
+	
 		this.nom = nom;
 		this.type = type;
+		this.poids = poids;
 
 		param = new Object[] { stock, nom, type };
 	}
@@ -85,6 +88,23 @@ public class Article implements Groupement, Donnee {
 		return nom;
 	}
 
+	public void modifierArticle(Utilisateur utilisateur, String nom,String type,float poids) throws SQLException{
+		String anciennom = this.nom;
+		this.nom = nom;
+		this.type = type;
+		this.poids = poids;
+		String requete = "UPDATE article SET nom = 'nom' type='type' poids ='poids' WHERE nom = 'anciennom'";
+		Bdd_utilisateur.connecter("root","");
+		Bdd_utilisateur.ecriture(requete);
+		Bdd_utilisateur.deconnecter();
+	}
+	public float getPoids() {
+		return poids;
+	}
+	public void setPoids(float poids) {
+		this.poids = poids;
+	}
+	
 	@Override
 	public String plusDetails() {
 		// TODO Auto-generated method stub
