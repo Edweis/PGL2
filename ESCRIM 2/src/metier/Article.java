@@ -21,10 +21,18 @@ public class Article implements Groupement, Donnee {
 		this.nom = nom;
 		this.type = type;
 		this.poids = poids;
-
-		param = new Object[] { stock, nom, type };
+		this.stock = stock;
+		this.param = new Object[] { stock, nom, type };
 	}
-
+	public Article(String nom, String type, float poids) {
+		
+		this.nom = nom;
+		this.type = type;
+		this.poids = poids;
+		this.stock = new ArrayList<Caracteristique>();
+		this.param = new Object[] { stock, nom, type };
+	}
+	
 	public int getStockTotal() {
 		int total = 0;
 		for (Caracteristique stock : stock) {
