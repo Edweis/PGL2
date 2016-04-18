@@ -17,6 +17,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+
 public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSelectionListener, ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -72,8 +73,14 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 		// inverstSelect.addActionListener(this);
 
 		this.add(selectAll);
-		
+		// this.add(deselectAll);
+		// this.add(inverstSelect);
+
 		maJTable = new JTable();
+			//this.add(deselectAll);
+			//this.add(inverstSelect);
+		
+
 	}
 
 	/**
@@ -246,7 +253,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	public void valueChanged(ListSelectionEvent e) {
 		if (zoneDetail != null) {
 			if (maJTable.getSelectedRow() > -1) {
-				zoneDetail.setText(elements.get(maJTable.getSelectedRow()).plusDetails());
+				zoneDetail.setText(elements.get(maJTable.getSelectedColumn()).plusDetails());
 			}
 
 		}

@@ -11,13 +11,22 @@ import javax.swing.JTabbedPane;
 
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
+<<<<<<< HEAD
+=======
+/*import view.AfficheurGrp;*/
+>>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 import view.I_acceuil;
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 
 public class Main {
 
 	public static void main(String[] args) {
 		exempleAfficheurGrp();
 	}
+<<<<<<< HEAD
 
 	public static void exempleAfficheurGrp() {
 		JFrame fenetre = new JFrame("Salut !");
@@ -75,6 +84,6 @@ public class Main {
 		fenetre.setVisible(true);
 	}
 
+=======
+>>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 }
-
-

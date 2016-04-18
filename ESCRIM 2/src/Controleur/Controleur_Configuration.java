@@ -43,7 +43,6 @@ public class Controleur_Configuration implements ActionListener {
 			break;
 		case "RETOUR":
 			I_acceuil ouvrir = new I_acceuil(utilisateur);
-			vue.closeWindow();
 			break;	
 
 		case "MODIFIER":

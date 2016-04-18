@@ -42,7 +42,6 @@ public class Controleur_Avion implements ActionListener {
 			break;
 		case "RETOUR":
 			I_acceuil ouvrir = new I_acceuil(utilisateur);
-			vue.closeWindow();
 			break;	
 
 		case "MODIFIER":

@@ -28,13 +28,11 @@ import java.awt.event.ActionEvent;
 
 public class I_Avion {
 
-	private JFrame frame;
 	Utilisateur utilisateur;
 	
 	public void run() {
 		try {
 			I_Avion window = new I_Avion(utilisateur);
-			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,15 +49,11 @@ public class I_Avion {
 	 * @throws SQLException 
 	 */
 	private void initialize() throws SQLException {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 952, 556);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
+		Vue.getInstance().vider();
 		JLabel lblAvionExistant = new JLabel("AVIONS EXISTANTS");
 		lblAvionExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblAvionExistant.setBounds(44, 21, 377, 102);
-		frame.getContentPane().add(lblAvionExistant);
+		Vue.getInstance().getContentPane().add(lblAvionExistant);
 		
 		
 		/*Bdd_utilisateur.connecter("root","");
@@ -80,32 +74,32 @@ public class I_Avion {
 					
 		AfficheurGrp<Avion> afficheur = new AfficheurGrp<Avion>();
 		//afficheur.MajGrpColis(avi);
-		frame.getContentPane().add(afficheur);
+		Vue.getInstance().getContentPane().add(afficheur);
 
 		
 		JButton btnVoirCaracteristique = new JButton("VOIR CARACTERISTIQUE");
-		btnVoirCaracteristique.setBounds(602, 101, 229, 40);
-		frame.getContentPane().add(btnVoirCaracteristique);
+		btnVoirCaracteristique.setBounds(602, 100, 250,50);
+		Vue.getInstance().getContentPane().add(btnVoirCaracteristique);
 		
 		afficheur.activeOnSelect(btnVoirCaracteristique);
 		
 		JButton btnCreerNouvelle = new JButton("CREER NOUVEAU");
-		btnCreerNouvelle.setBounds(602, 173, 229, 40);
-		frame.getContentPane().add(btnCreerNouvelle);
+		btnCreerNouvelle.setBounds(602, 170,  250,50);
+		Vue.getInstance().getContentPane().add(btnCreerNouvelle);
 		
 		JButton btnRetour = new JButton("RETOUR");
-		btnRetour.setBounds(803, 470, 89, 23);
-		frame.getContentPane().add(btnRetour);
+		btnRetour.setBounds(602, 380,  250,50);
+		Vue.getInstance().getContentPane().add(btnRetour);
 		
 		JButton btnModifier = new JButton("MODIFIER");
-		btnModifier.setBounds(602, 242, 229, 33);
-		frame.getContentPane().add(btnModifier);
+		btnModifier.setBounds(602, 240, 250,50);
+		Vue.getInstance().getContentPane().add(btnModifier);
 		
 		afficheur.activeOnSelect(btnModifier);
 		
 		JButton btnSupprimer = new JButton("SUPPRIMER");
-		btnSupprimer.setBounds(602, 311, 229, 40);
-		frame.getContentPane().add(btnSupprimer);
+		btnSupprimer.setBounds(602, 310,  250,50);
+		Vue.getInstance().getContentPane().add(btnSupprimer);
 		
 		afficheur.activeOnSelect(btnSupprimer);
 		
@@ -115,12 +109,8 @@ public class I_Avion {
 		btnRetour.addActionListener(e3);
 		btnModifier.addActionListener(e3);
 		btnSupprimer.addActionListener(e3);
-		frame.pack();
-		frame.setVisible(true);
-	}
-	
-	public void closeWindow(){
-		frame.setVisible(false);
+		Vue.getInstance().finitions();
+
 	}
 }
 

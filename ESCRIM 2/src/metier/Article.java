@@ -8,6 +8,10 @@ import view.Groupement;
 
 public class Article implements Groupement, Donnee {
 	private String nom;
+	public String getNom() {
+		return nom;
+	}
+
 	private String type;
 	private float poids;
 
