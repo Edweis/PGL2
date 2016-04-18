@@ -107,7 +107,7 @@ public class LanceRequete<E extends Donnee> {
 	public E selectFromId(int id) throws Throwable {
 		return selectWhere("id = " + id).get(0);
 	}
-	
+
 	public void add(E element) throws Throwable {
 		// préparation de la requete
 
@@ -197,7 +197,7 @@ public class LanceRequete<E extends Donnee> {
 					sousBase = new LanceRequete<GrpColis>(GrpColis.class);
 					break;
 				case "GrpAvion":
-					sousBase = new LanceRequete<GrpAvion>(GrpAvion.class);
+					sousBase = new LanceRequete<GrpAvions>(GrpAvions.class);
 					break;
 				case "Configuration":
 					sousBase = new LanceRequete<Configuration>(Configuration.class);
@@ -206,8 +206,10 @@ public class LanceRequete<E extends Donnee> {
 					sousBase = new LanceRequete<Mission>(Mission.class);
 					break;
 				
+				default:
+					System.out.print("La classe " + nom + "n'est pas implémentée dans LanceRequete, appelle François"));
+					break;
 				}
-				
 				
 				
 				return sousBase.selectFromId(rs.getInt(colonne));
@@ -221,9 +223,8 @@ public class LanceRequete<E extends Donnee> {
 
 	}
 
-	private  <T extends Donnee> LanceRequete<T> classFacotory(Class<T> type) {
-	    return new LanceRequete<T>(type);
+	private <T extends Donnee> LanceRequete<T> classFacotory(Class<T> type) {
+		return new LanceRequete<T>(type);
 	}
-	
 
 }

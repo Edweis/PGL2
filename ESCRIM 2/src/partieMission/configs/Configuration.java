@@ -1,31 +1,40 @@
 package partieMission.configs;
 
+import utilisateur.Donnee;
 import view.Groupement;
 
-public class Configuration implements Groupement {
+public class Configuration implements Groupement, Donnee {
 	
-	String nom;
+	
+	
+	private String nom;
+	private Object [] param;
+	
+	
+	public Configuration(String nom){
+		this.nom = nom;
+		
+		param = new Object[]{nom}; 
+		
+	}
+	
 	public String getNom() {
 		return nom;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public Configuration(String nom){
-		this.nom = nom;
-	}
 
 	public String getInfos() {
-		// TODO Auto-generated method stub
-		return null;
+		return nom;
 	}
 
 	@Override
 	public String plusDetails() {
-		// TODO Auto-generated method stub
-		return null;
+		return nom;
 	}
+
+	@Override
+	public Object[] getParameters() {
+return param;
+		}
 
 }
