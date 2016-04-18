@@ -1,18 +1,22 @@
 package view;
 
 import java.awt.EventQueue;
-
+import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
+
 
 import utilisateur.Admin;
 import utilisateur.Bdd_utilisateur;
 import utilisateur.Utilisateur;
 
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
@@ -22,6 +26,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.Font;
 
 public class I_connexionn {
 
@@ -59,22 +64,41 @@ public class I_connexionn {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//Declaration de la frame
 		frame = new JFrame();
 		frame.getContentPane().setLayout(null);
 		
+		//Declaration des champs de textes
 		textField = new JTextField();
-		textField.setBounds(137, 54, 86, 20);
+		textField.setBounds(204, 143, 86, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(137, 122, 86, 20);
+		textField_1 = new JPasswordField();
+		textField_1.setBounds(204, 205, 86, 20);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
+		
 		JLabel lblMotDePasse = new JLabel("Mot de passe");
-		lblMotDePasse.setBounds(40, 125, 70, 14);
+		lblMotDePasse.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMotDePasse.setBounds(99, 208, 95, 14);
 		frame.getContentPane().add(lblMotDePasse);
+		lblNom = new JLabel("Nom");
+		lblNom.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNom.setBounds(99, 141, 46, 20);
+		frame.getContentPane().add(lblNom);
+		
+		lblPrnom = new JLabel("Pr\u00E9nom");
+		lblPrnom.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPrnom.setBounds(100, 172, 70, 20);
+		frame.getContentPane().add(lblPrnom);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(204, 174, 86, 20);
+		frame.getContentPane().add(textField_2);
+		textField_2.setColumns(10);
+
 		
 		JButton btnSeConnecter = new JButton("Se connecter");
 		btnSeConnecter.addActionListener(new ActionListener() {
@@ -117,23 +141,16 @@ public class I_connexionn {
 			
 			}
 		});
-		btnSeConnecter.setBounds(123, 153, 103, 23);
+		btnSeConnecter.setBounds(187, 235, 120, 23);
 		frame.getContentPane().add(btnSeConnecter);
 		
-		lblNom = new JLabel("Nom");
-		lblNom.setBounds(40, 54, 46, 14);
-		frame.getContentPane().add(lblNom);
+		JPanel essai= new JPanel();
+		essai.setBounds(0, 72, 95, -72);
+		frame.getContentPane().add(essai);	
+		JLabel image = new JLabel( new ImageIcon( "/Users/Fino/git/PGL2/ESCRIM 2/src/Image/logo_escrime.png"));
+		frame.getContentPane().add(image);
+		image.setBounds(146, 11, 202, 136);
 		
-		lblPrnom = new JLabel("Pr\u00E9nom");
-		lblPrnom.setBounds(40, 78, 46, 14);
-		frame.getContentPane().add(lblPrnom);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(137, 85, 86, 20);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
-		
-		frame.setSize(400, 250);
 		
 	}
 }
