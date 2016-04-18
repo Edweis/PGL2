@@ -1,15 +1,20 @@
 package partieMission;
 
 import java.util.ArrayList;
-
 import java.util.Iterator;
 
-public class GrpAvions implements Iterable<Avion> {
+import utilisateur.Donnee;
+
+public class GrpAvions implements Iterable<Avion>, Donnee {
 	private ArrayList<Avion> ensAvion;
 	private Chargement chargement;
+	
+	private Object[] param;
 
 	public GrpAvions() {
 		ensAvion = new ArrayList<Avion>();
+
+		param = new Object[]{};
 	}
 
 	/**
@@ -42,6 +47,11 @@ public class GrpAvions implements Iterable<Avion> {
 
 	public Iterator<Avion> iterator() {
 		return ensAvion.iterator();
+	}
+
+	@Override
+	public Object[] getParameters() {
+		return param;
 	}
 
 }

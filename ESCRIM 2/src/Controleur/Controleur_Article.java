@@ -48,7 +48,7 @@ public class Controleur_Article implements ActionListener {
 			
 			break;	
 		case "MODIFIER":
-			I_PopupModifArticle ouvrir2;
+			I_PopupModifArticle ouvrir2 = null;
 			try {
 				ouvrir2 = new I_PopupModifArticle(utilisateur,selection);
 			} catch (SQLException e2) {

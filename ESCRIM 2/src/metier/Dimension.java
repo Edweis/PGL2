@@ -1,14 +1,19 @@
 package metier;
 
-public class Dimension {
+import utilisateur.Donnee;
+
+public class Dimension implements Donnee {
 	private float hauteur;
 	private float largeur;
 	private float profondeur;
-	
-	public Dimension(float hauteur,float largeur,float profondeur){
+
+	private Object[] param;
+
+	public Dimension(float hauteur, float largeur, float profondeur) {
 		this.hauteur = hauteur;
 		this.largeur = largeur;
 		this.profondeur = profondeur;
+		param = new Object[] { hauteur, largeur, profondeur };
 	}
 
 	public float getHauteur() {
@@ -34,16 +39,23 @@ public class Dimension {
 	public void setProfondeur(float profondeur) {
 		this.profondeur = profondeur;
 	}
-	public float getVolume(){
+
+	public float getVolume() {
 		return hauteur * profondeur * largeur;
 	}
-	public void setDimension(float hauteur,float largeur,float profondeur){
+
+	public void setDimension(float hauteur, float largeur, float profondeur) {
 		this.hauteur = hauteur;
 		this.largeur = largeur;
 		this.profondeur = profondeur;
 	}
 
-	public String toString(){
-		return hauteur +"x" + largeur + "x" + profondeur;
+	public String toString() {
+		return hauteur + "x" + largeur + "x" + profondeur;
+	}
+
+	@Override
+	public Object[] getParameters() {
+		return param;
 	}
 }
