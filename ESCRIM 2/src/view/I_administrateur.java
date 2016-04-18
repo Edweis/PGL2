@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -13,10 +14,12 @@ import javax.swing.JTextField;
 
 import utilisateur.Admin;
 import utilisateur.Bdd_utilisateur;
+import utilisateur.Utilisateur;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 
 public class I_administrateur {
 
@@ -34,6 +37,7 @@ public class I_administrateur {
 	private JTextField txtNom_2;
 	private JTextField txtPrenom_2;
 	private JList list;
+	private AfficheurGrp<Utilisateur> panel;
 	/**
 	 * Launch the application.
 	 */
@@ -60,8 +64,9 @@ public class I_administrateur {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws SQLException 
 	 */
-	private void initialize() {
+	private void initialize() throws SQLException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 783, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -197,6 +202,22 @@ public class I_administrateur {
 		list = new JList();
 		list.setBounds(60, 222, 97, 5);
 		frame.getContentPane().add(list);
+		
+		panel = new AfficheurGrp<Utilisateur>();
+		
+		
+		ArrayList<Utilisateur> mesUser = new ArrayList<Utilisateur>();
+		ResultSet resultat=Bdd_utilisateur.lecture("Select * from Utilisateur");
+		while(resultat.next()){
+		mesUser.add(new Utilisateur(resultat.getString(2), resultat.getString(3), resultat.getString(4), resultat.getBoolean(5), resultat.getBoolean(6), resultat.getString(7)));
+		}
+		
+		panel.MajGrpColis(mesUser);
+		
+		
+		
+		panel.setBounds(139, 11, 364, 112);
+		frame.getContentPane().add(panel);
 		
 		
 		
