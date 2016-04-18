@@ -22,16 +22,15 @@ public class Colis implements Groupement, Donnee {
 	public String Designation; // Creer une classe ?
 	public String precision;
 	public String volume;
-	
-	private  Object [] param;
 
+	private Object[] param;
 
 	public Colis(int numerosColis, Dimension dim, ArrayList<Article> articles) {
 		this.numeroColis = numerosColis;
 		this.dim = dim;
 		this.articles = articles;
-		
-		param = new Object[]{};
+
+		param = new Object[] {};
 	}
 
 	public Dimension getDim() {
@@ -78,54 +77,40 @@ public class Colis implements Groupement, Donnee {
 		this.secteur = secteur;
 	}
 
-	
-	
-	
-	
-	//A SUPPRIMER DANS LES FUTUR ! c'est juste pour jouer
-	
-	public void setInfos(String Affectaire, String Designation, String precision){
+	// A SUPPRIMER DANS LES FUTUR ! c'est juste pour jouer
+
+	public void setInfos(String Affectaire, String Designation, String precision) {
 		this.Affectataire = Affectaire;
 		this.Designation = Designation;
 		this.precision = precision;
 	}
 
-	
-	
-	
-	
-	//Implemented methods
-	
-	
+	// Implemented methods
+
 	public String plusDetails() {
 		String res = "<html>";
-		
-		res = res + 
-				"blabalbalablalbal <br>" + 
-				"blabalbalbal <br>" + 
-				"blabalbalablapùmlbal <br>";
-		
+
+		res = res + "blabalbalablalbal <br>" + "blabalbalbal <br>" + "blabalbalablapùmlbal <br>";
+
 		res = res + "</html>";
-		
+
 		return res;
 	}
 
-	public String getInfos() {
-		//String[] res = { Affectataire, Integer.toString(numeroColis), Designation, precision, dim.toString() };
-		String res = Affectataire+" - " +
-				Integer.toString(numeroColis) +" - " +
-				Designation+" - " +
-				precision+" - " +
-				dim.toString(); 
+	public String toString() {
+		// String[] res = { Affectataire, Integer.toString(numeroColis),
+		// Designation, precision, dim.toString() };
+		String res = Affectataire + " - " +
+				Integer.toString(numeroColis) + " - " +
+				Designation + " - " +
+				precision+ " - " + 
+				dim.toString();
 		return res;
 	}
 
 	@Override
 	public Object[] getParameters() {
-return param;
+		return param;
 	}
 
-
-	
-	
 }

@@ -31,8 +31,9 @@ public class Main {
 	}
 
 	public static void main(String... args) throws Throwable {
-		LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class);
-		bddUser.add(new Utilisateur("a","b","c",true,false,"d"));
+		//LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class);
+		//bddUser.add(new Utilisateur("a","b","c",true,false,"d"));
+		exempleAfficheurGrp();
 	}
 
 	public static void exempleAfficheurGrp() {
