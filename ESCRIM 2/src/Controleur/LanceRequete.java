@@ -1,9 +1,8 @@
-package utilisateur;
+package Controleur;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Type;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -13,7 +12,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.sun.xml.internal.ws.util.StringUtils;
+import metier.*;
+import partieMission.*;
+import partieMission.configs.Configuration;
+import utilisateur.Donnee;
+import utilisateur.Utilisateur;
 
 public class LanceRequete<E extends Donnee> {
 
@@ -177,9 +180,36 @@ public class LanceRequete<E extends Donnee> {
 			connexion();
 			ResultSetMetaData data = (ResultSetMetaData) connexion.getMetaData();
 			if (data.getColumnName(colonne).substring(0, 2) == "id") {
-
-				//let say E is the Type
-				LanceRequete<E> sousBase = new LanceRequete<E>(classe);
+				
+				LanceRequete<?> sousBase;
+				switch(nom){
+				
+				case "Utilisateur":
+					sousBase = new LanceRequete<Utilisateur>(Utilisateur.class);
+					break;
+				case "Article":
+					sousBase = new LanceRequete<Article>(Article.class);
+					break;
+				case "Colis":
+					sousBase = new LanceRequete<Colis>(Colis.class);
+					break;
+				case "GrpColis":
+					sousBase = new LanceRequete<GrpColis>(GrpColis.class);
+					break;
+				case "GrpAvion":
+					sousBase = new LanceRequete<GrpAvion>(GrpAvion.class);
+					break;
+				case "Configuration":
+					sousBase = new LanceRequete<Configuration>(Configuration.class);
+					break;
+				case "Mission":
+					sousBase = new LanceRequete<Mission>(Mission.class);
+					break;
+				
+				}
+				
+				
+				
 				return sousBase.selectFromId(rs.getInt(colonne));
 			
 			}
