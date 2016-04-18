@@ -75,33 +75,33 @@ public class I_Article {
 
 		
 		JButton btnVoirCaracteristique = new JButton("VOIR CARACTERISTIQUE");
-		btnVoirCaracteristique.setBounds(602, 101, 229, 40);
+		btnVoirCaracteristique.setBounds(602, 100, 250, 50);
 		frame.getContentPane().add(btnVoirCaracteristique);
 		
 		afficheur.activeOnSelect(btnVoirCaracteristique);
 		
 		JButton btnCreerNouvelle = new JButton("CREER NOUVEAU");
-		btnCreerNouvelle.setBounds(602, 173, 229, 40);
+		btnCreerNouvelle.setBounds(602, 170, 250, 50);
 		frame.getContentPane().add(btnCreerNouvelle);
 		
 		JButton btnRetour = new JButton("RETOUR");
-		btnRetour.setBounds(803, 470, 89, 23);
+		btnRetour.setBounds(602, 380, 250, 50);
 		frame.getContentPane().add(btnRetour);
 		
 		JButton btnModifier = new JButton("MODIFIER");
-		btnModifier.setBounds(602, 242, 229, 33);
+		btnModifier.setBounds(602, 240, 250, 50);
 		frame.getContentPane().add(btnModifier);
 		
 		afficheur.activeOnSelect(btnModifier);
 		
 		JButton btnSupprimer = new JButton("SUPPRIMER");
-		btnSupprimer.setBounds(602, 311, 229, 40);
+		btnSupprimer.setBounds(602, 310, 250, 50);
 		frame.getContentPane().add(btnSupprimer);
 		
 		afficheur.activeOnSelect(btnSupprimer);
 		
 		JButton btnGererStock = new JButton("GERER STOCK");
-		btnGererStock.setBounds(602, 374, 229, 40);
+		btnGererStock.setBounds(602, 380, 250, 50);
 		frame.getContentPane().add(btnGererStock);
 		
 		Controleur_Article  e1 = new Controleur_Article (utilisateur, afficheur,this);
@@ -113,6 +113,7 @@ public class I_Article {
 		btnGererStock.addActionListener(e1);
 		
 		frame.pack();
+		frame.setSize(1000,700);
 		frame.setVisible(true);
 	}
 	

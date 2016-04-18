@@ -7,6 +7,10 @@ import view.Groupement;
 
 public class Mission implements Groupement, Donnee {
 	private String nom;
+	public String getNom() {
+		return nom;
+	}
+
 	private GrpAvions ensAvions;
 	private GrpColis ensColis;
 	private Date dateDebut;

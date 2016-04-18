@@ -1,5 +1,7 @@
 package view;
 import utilisateur.*;
+
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -20,6 +22,7 @@ public class I_acceuil {
 		try {
 			I_acceuil window = new I_acceuil(utilisateur);
 			window.frame.setVisible(true);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -41,7 +44,7 @@ public class I_acceuil {
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnGestionMission = new JButton("GESTION MISSION");
-		btnGestionMission.setBounds(362, 124, 160, 50);
+		btnGestionMission.setBounds(360, 120, 250, 50);
 		frame.getContentPane().add(btnGestionMission);
 		
 		JButton btnNGestionConfiguration = new JButton("GESTION CONFIGURATION");
@@ -49,31 +52,31 @@ public class I_acceuil {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNGestionConfiguration.setBounds(362, 198, 160, 50);
+		btnNGestionConfiguration.setBounds(360, 200, 250, 50);
 		frame.getContentPane().add(btnNGestionConfiguration);
 		
 		JButton btnGestionColis = new JButton("GESTION COLIS");
-		btnGestionColis.setBounds(362, 259, 160, 50);
+		btnGestionColis.setBounds(360, 280, 250, 50);
 		frame.getContentPane().add(btnGestionColis);
 		
 		JButton btnGestionArticle = new JButton("GESTION ARTICLE");
-		btnGestionArticle.setBounds(362, 334, 160, 44);
+		btnGestionArticle.setBounds(360, 360, 250, 50);
 		frame.getContentPane().add(btnGestionArticle);
 		
 		JButton btnGestionAvion = new JButton("GESTION AVION");
-		btnGestionAvion.setBounds(362, 405, 160, 32);
+		btnGestionAvion.setBounds(360, 440, 250, 50);
 		frame.getContentPane().add(btnGestionAvion);
 		
 		
 		JLabel lblHello = new JLabel("Hello");
 		lblHello.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		lblHello.setBounds(293, 30, 115, 50);
+		lblHello.setBounds(380, 30, 115, 50);
 		frame.getContentPane().add(lblHello);
 		
 		String uti = utilisateur.getNom();
 		JLabel lbl = new JLabel(uti);
 		lbl.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		lbl.setBounds(373, 30, 115, 50);
+		lbl.setBounds(465, 30, 115, 50);
 		frame.getContentPane().add(lbl);
 		
 		Controleur_Acceuil  e = new Controleur_Acceuil (utilisateur,this);
@@ -84,6 +87,7 @@ public class I_acceuil {
 		btnGestionAvion.addActionListener(e);
 		
 		frame.pack();
+		frame.setSize(1000,700);
 		frame.setVisible(true);
 	}
 	
