@@ -42,6 +42,7 @@ public class I_connexionn {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			
 			public void run() {
 				try {
 					I_connexionn window = new I_connexionn();
@@ -105,9 +106,9 @@ public class I_connexionn {
 			public void actionPerformed(ActionEvent e) {
 			String prenom=textField_2.getText();
 			String nom= textField.getText();
-			Bdd_utilisateur a = new Bdd_utilisateur();
+			
 			try {
-				a.connecter("root", "");
+				Bdd_utilisateur.connecter("root", "");
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -115,7 +116,7 @@ public class I_connexionn {
 			String requete="SELECT * from utilisateur where nom='"+nom+"'AND prenom='"+prenom+"'";
 			String vrai_mdp=null;
 			try {
-				ResultSet resultat= a.lecture(requete);
+				ResultSet resultat= Bdd_utilisateur.lecture(requete);
 				
 				while(resultat.next()){
 					 vrai_mdp =resultat.getString("mdp");
@@ -123,13 +124,13 @@ public class I_connexionn {
 				String mdp_ecris= textField_1.getText();
 			if(textField_2.getText().equals("admin") && textField.getText().equals("admin") && textField_1.getText().equals("admin")) {
 				Admin admin= new Admin();
-				I_administrateur b=new I_administrateur(a,admin);
+				I_administrateur b=new I_administrateur(admin);
 				b.run();
-			}else if(vrai_mdp != null && vrai_mdp.equals(mdp_ecris)){
+			}else if(vrai_mdp.equals(mdp_ecris)){
 					System.out.println("vous pouvez vous connecter");
 					Utilisateur utilisateur= new Utilisateur("jean","pierre","coucou",true,false,"Pr.");
 					I_acceuil iaccuil=new I_acceuil(utilisateur);
-					iaccuil.run();
+					//iaccuil.run();
 				}else{
 					System.out.println("enfoiré");
 				}
@@ -143,13 +144,14 @@ public class I_connexionn {
 		});
 		btnSeConnecter.setBounds(187, 235, 120, 23);
 		frame.getContentPane().add(btnSeConnecter);
-		
-		JPanel essai= new JPanel();
-		essai.setBounds(0, 72, 95, -72);
-		frame.getContentPane().add(essai);	
 		JLabel image = new JLabel( new ImageIcon( "/Users/Fino/git/PGL2/ESCRIM 2/src/Image/logo_escrime.png"));
 		frame.getContentPane().add(image);
-		image.setBounds(146, 11, 202, 136);
+		image.setBounds(150, 11, 202, 136);
+		
+		JLabel lblNewLabel = new JLabel(new ImageIcon( "/Users/Fino/git/PGL2/ESCRIM 2/src/Image/arriere_plan.jpg"));
+		lblNewLabel.setBounds(0, 0, 491, 269);
+		frame.getContentPane().add(lblNewLabel);
+		
 		
 		
 	}

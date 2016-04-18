@@ -16,14 +16,7 @@ public class I_acceuil {
 	private JFrame frame;
 	Utilisateur utilisateur;
 
-	public void run() {
-		try {
-			I_acceuil window = new I_acceuil(utilisateur);
-			window.frame.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 	public I_acceuil(Utilisateur utilisateur) {
 		
 		this.utilisateur =utilisateur;

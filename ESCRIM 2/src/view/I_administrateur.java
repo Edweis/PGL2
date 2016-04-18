@@ -40,7 +40,7 @@ public class I_administrateur {
 	
 			public void run() {
 				try {
-					I_administrateur window = new I_administrateur(bdd,admin);
+					I_administrateur window = new I_administrateur(admin);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,8 +52,8 @@ public class I_administrateur {
 	/**
 	 * Create the application.
 	 */
-	public I_administrateur(Bdd_utilisateur bdd,Admin admin) {
-		this.bdd=bdd;
+	public I_administrateur(Admin admin) {
+		
 		this.admin=admin;
 		initialize();
 	}

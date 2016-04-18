@@ -3,6 +3,7 @@ package metier;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import partieMission.GrpStock;
 import utilisateur.Donnee;
 import view.Groupement;
 
@@ -17,11 +18,12 @@ public class Colis implements Groupement, Donnee {
 	private String affectataire;
 	private String designation;
 	private String precision;
+	private GrpStock grpstock;
 
 	private Object[] param;
 
 	public Colis(int numeroColis, Dimension dim, ArrayList<Article> articles, float poids, String observations,
-			String secteur, String affectataire, String designation, String precision) {
+			String secteur, String affectataire, String designation, String precision, GrpStock grpstock) {
 
 		this.numeroColis = numeroColis;
 		this.dim = dim;
@@ -32,7 +34,8 @@ public class Colis implements Groupement, Donnee {
 		this.affectataire = affectataire;
 		this.designation = designation;
 		this.precision = precision;
-
+		this.grpstock=grpstock;
+		
 		param = new Object[] { numeroColis, dim, articles, poids, observations, secteur, affectataire, designation,
 				precision };
 	}
