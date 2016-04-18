@@ -33,13 +33,11 @@ import java.awt.event.ActionEvent;
 
 public class I_Mission {
 
-	private JFrame frame;
 	Utilisateur utilisateur;
 	
 	public void run() {
 		try {
 			I_Mission window = new I_Mission(utilisateur);
-			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,15 +53,11 @@ public class I_Mission {
 	 * @throws SQLException 
 	 */
 	private void initialize() throws SQLException {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 952, 556);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
+		Vue.getInstance().vider();
 		JLabel lblMissionExistant = new JLabel("MISSIONS EXISTANTES");
 		lblMissionExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblMissionExistant.setBounds(44, 21, 377, 102);
-		frame.getContentPane().add(lblMissionExistant);
+		Vue.getInstance().getContentPane().add(lblMissionExistant);
 		
 		
 		/*Bdd_utilisateur.connecter("root","");
@@ -84,32 +78,32 @@ public class I_Mission {
 					
 		AfficheurGrp<Mission> afficheur = new AfficheurGrp<Mission>();
 		//afficheur.MajGrpColis(mis);
-		frame.getContentPane().add(afficheur);
+		Vue.getInstance().getContentPane().add(afficheur);
 
 		
 		JButton btnVoirCaracteristique = new JButton("VOIR CARACTERISTIQUE");
 		btnVoirCaracteristique.setBounds(602, 100, 250, 50);
-		frame.getContentPane().add(btnVoirCaracteristique);
+		Vue.getInstance().getContentPane().add(btnVoirCaracteristique);
 		
 		afficheur.activeOnSelect(btnVoirCaracteristique);
 		
 		JButton btnCreerNouvelle = new JButton("CREER NOUVEAU");
 		btnCreerNouvelle.setBounds(602, 170, 250, 50);
-		frame.getContentPane().add(btnCreerNouvelle);
+		Vue.getInstance().getContentPane().add(btnCreerNouvelle);
 		
 		JButton btnRetour = new JButton("RETOUR");
 		btnRetour.setBounds(602, 380, 250, 50);
-		frame.getContentPane().add(btnRetour);
+		Vue.getInstance().getContentPane().add(btnRetour);
 		
 		JButton btnModifier = new JButton("MODIFIER");
 		btnModifier.setBounds(602, 240, 250, 50);
-		frame.getContentPane().add(btnModifier);
+		Vue.getInstance().getContentPane().add(btnModifier);
 		
 		afficheur.activeOnSelect(btnModifier);
 		
 		JButton btnSupprimer = new JButton("SUPPRIMER");
 		btnSupprimer.setBounds(602, 310, 250, 50);
-		frame.getContentPane().add(btnSupprimer);
+		Vue.getInstance().getContentPane().add(btnSupprimer);
 		
 		afficheur.activeOnSelect(btnSupprimer);
 		
@@ -120,13 +114,6 @@ public class I_Mission {
 		btnModifier.addActionListener(e5);
 		btnSupprimer.addActionListener(e5);
 		
-		frame.pack();
-		frame.setSize(1000,700);
-		frame.setVisible(true);
-	}
-	
-	
-	public void closeWindow(){
-		frame.setVisible(false);
+		Vue.getInstance().finitions();
 	}
 }

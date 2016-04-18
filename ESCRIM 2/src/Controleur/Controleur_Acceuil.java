@@ -39,7 +39,6 @@ public class Controleur_Acceuil implements ActionListener {
 				// TODO Auto-generated catch block
 				e3.printStackTrace();
 			}
-			vue.closeWindow();
 			break;
 		case "GESTION CONFIGURATION":
 			try {
@@ -48,12 +47,10 @@ public class Controleur_Acceuil implements ActionListener {
 				// TODO Auto-generated catch block
 				e3.printStackTrace();
 			}
-			vue.closeWindow();
 			break;
 		case "GESTION COLIS":
 			try {
 			I_Colis	ouvrir = new I_Colis(utilisateur);
-			vue.closeWindow();
 			} catch (SQLException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
@@ -64,7 +61,6 @@ public class Controleur_Acceuil implements ActionListener {
 
 			try {
 				I_Article ouvrir3 = new I_Article(utilisateur);
-				vue.closeWindow();
 			} catch (Throwable e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -78,7 +74,6 @@ public class Controleur_Acceuil implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			vue.closeWindow();
 			break;
 
 		}
