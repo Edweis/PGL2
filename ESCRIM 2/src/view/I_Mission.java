@@ -44,10 +44,9 @@ public class I_Mission {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	
+	}	
 	public I_Mission(Utilisateur utilisateur) throws SQLException {
+		
 		this.utilisateur= utilisateur;
 		initialize();
 	}
@@ -68,7 +67,7 @@ public class I_Mission {
 		frame.getContentPane().add(lblMissionExistant);
 		
 		
-		Bdd_utilisateur.connecter("root","");
+		/*Bdd_utilisateur.connecter("root","");
 		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_mission) FROM mission");
 		int val =  ((Number) dernierID.getObject(1)).intValue();
 				
@@ -82,10 +81,10 @@ public class I_Mission {
 			GrpColis ensColisMis = (GrpColis) Mis.getObject("ensColis");;;
 			Mission uneMis = new Mission(nomMis,caracMis,ensAvionsMis,ensColisMis);
 			mis.set(i,uneMis);			
-		}
+		}*/
 					
 		AfficheurGrp<Mission> afficheur = new AfficheurGrp<Mission>();
-		afficheur.MajGrpColis(mis);
+		//afficheur.MajGrpColis(mis);
 		frame.getContentPane().add(afficheur);
 
 		
@@ -115,11 +114,19 @@ public class I_Mission {
 		
 		afficheur.activeOnSelect(btnSupprimer);
 		
-		Controleur_Mission  e5 = new Controleur_Mission (utilisateur, afficheur);
+		Controleur_Mission  e5 = new Controleur_Mission (utilisateur, afficheur,this);
 		btnVoirCaracteristique.addActionListener(e5);
 		btnCreerNouvelle.addActionListener(e5);
 		btnRetour.addActionListener(e5);
 		btnModifier.addActionListener(e5);
 		btnSupprimer.addActionListener(e5);
+		
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
+	
+	public void closeWindow(){
+		frame.setVisible(false);
 	}
 }

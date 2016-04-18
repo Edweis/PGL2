@@ -13,14 +13,17 @@ import partieMission.Avion;
 import utilisateur.Bdd_utilisateur;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
+import view.I_Avion;
 import view.I_acceuil;
 
 public class Controleur_Avion implements ActionListener {
 	Utilisateur utilisateur;
 	AfficheurGrp afficheur;
-	public Controleur_Avion(Utilisateur utilisateur, AfficheurGrp afficheur) {
+	I_Avion vue;
+	public Controleur_Avion(Utilisateur utilisateur, AfficheurGrp afficheur, I_Avion vue) {
 		this.utilisateur = utilisateur;
 		this.afficheur = afficheur;
+		this.vue = vue;
 	}
 
 	@Override
@@ -39,7 +42,7 @@ public class Controleur_Avion implements ActionListener {
 			break;
 		case "RETOUR":
 			I_acceuil ouvrir = new I_acceuil(utilisateur);
-			ouvrir.run();
+			vue.closeWindow();
 			break;	
 
 		case "MODIFIER":

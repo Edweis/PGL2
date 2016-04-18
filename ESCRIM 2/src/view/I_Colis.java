@@ -48,7 +48,7 @@ public class I_Colis {
 	 * @throws SQLException 
 	 */
 	private void initialize() throws SQLException {
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setBounds(100, 100, 952, 556);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);

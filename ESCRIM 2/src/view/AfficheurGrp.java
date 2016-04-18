@@ -9,18 +9,20 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSelectionListener, ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private DefaultListModel<E> listeElement;
-	private JList<E> maJListe;
+	// private JList<E> maJListe;
+	private JTable maJTable;
 
 	// Boutons
 	private JButton selectAll;
@@ -34,6 +36,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	private JLabel zoneDetail;
 	private int width = 500;
 	private int height = 600;
+	private ArrayList<E> elements;
 
 	public AfficheurGrp() {
 		init();
@@ -65,14 +68,21 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 		deselectAll = new JButton("déselectionner tout");
 		inverstSelect = new JButton("inverser la selection");
 		selectAll.addActionListener(this);
-			//deselectAll.addActionListener(this);
-			//inverstSelect.addActionListener(this);
+		// deselectAll.addActionListener(this);
+		// inverstSelect.addActionListener(this);
 
 		this.add(selectAll);
+<<<<<<< HEAD
+		// this.add(deselectAll);
+		// this.add(inverstSelect);
+
+		maJTable = new JTable();
+=======
 			//this.add(deselectAll);
 			//this.add(inverstSelect);
 		
 		maJListe = new JList<E>();
+>>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 
 	}
 
@@ -82,9 +92,10 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	 * @param colis
 	 */
 	public void MajGrpColis(ArrayList<E> desElements) {
+		elements = desElements;
 
-		if (maJListe != null) {
-			this.remove(maJListe);
+		if (maJTable != null) {
+			this.remove(maJTable);
 		}
 
 		listeElement = new DefaultListModel<E>();
@@ -93,12 +104,27 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 			listeElement.addElement(e);
 		}
 
-		maJListe = new JList<E>(listeElement);
-		maJListe.setSelectionMode(typeDeSelection);
-		maJListe.setPreferredSize(new Dimension(width, height));
-		maJListe.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		// Création des données
+		int nbCol = desElements.get(0).getNomColonnes().length;
+		int nbLig = desElements.size();
+		String[][] values = new String[nbLig][nbCol];
+		for (int i = 0; i < nbLig; i++) {
+			values[i] = desElements.get(i).getValues();
+		}
 
-		this.add(maJListe);
+		maJTable = new JTable(values, desElements.get(0).getNomColonnes()){
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int col)
+		    {
+		        return false;
+		    }
+		};
+
+		maJTable.setSelectionMode(typeDeSelection);
+		maJTable.setPreferredSize(new Dimension(width, height));
+
+		this.add(maJTable);
 	}
 
 	/**
@@ -109,8 +135,8 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	public ArrayList<E> ExporterSelection() {
 		ArrayList<E> res = new ArrayList<E>();
 
-		for (E e : maJListe.getSelectedValuesList()) {
-			res.add(e);
+		for (int i : maJTable.getSelectedColumns()) {
+			res.add(elements.get(i));
 		}
 
 		return res;
@@ -138,12 +164,11 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 		this.zoneDetail = zoneDetail;
 		this.add(zoneDetail);
 
-		maJListe.addListSelectionListener(this);
-
+		maJTable.getSelectionModel().addListSelectionListener(this);
 	}
 
 	/**
-	 * modifie les paramètre de formatage des chaque ligne Si l'on met 0, la
+	 * Modifie les paramètre de formatage des chaque ligne Si l'on met 0, la
 	 * taille de la colonne est ajust automatiquement
 	 * 
 	 * @param param
@@ -174,7 +199,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	 * @param btn
 	 */
 	public void activeOnSelect(JButton btn) {
-		if (maJListe.isSelectionEmpty()) {
+		if (maJTable.getSelectedColumns().length == 0) {
 			btn.setEnabled(false);
 		} else {
 			btn.setEnabled(true);
@@ -194,24 +219,6 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	}
 
 	@Override
-	public void valueChanged(ListSelectionEvent e) {
-
-		if (zoneDetail != null) {
-			zoneDetail.setText(maJListe.getSelectedValue().plusDetails());
-		}
-
-		if (maJListe.isSelectionEmpty()) {
-			for (JButton btn : btnActiveOnSelect) {
-				btn.setEnabled(false);
-			}
-		} else {
-			for (JButton btn : btnActiveOnSelect) {
-				btn.setEnabled(true);
-			}
-		}
-	}
-
-	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		JButton btn = (JButton) e.getSource();
@@ -223,7 +230,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 			for (int i = 0; i < listeElement.size(); i++) {
 				toSelect[i] = i;
 			}
-			maJListe.setSelectedIndices(toSelect);
+			maJTable.selectAll();
 
 			break;
 		}
@@ -231,16 +238,27 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	}
 
 	/**
-	 * Envoyer true permet d'actionner la selection multiple, c'est une selection unique
+	 * Envoyer true permet d'actionner la selection multiple, c'est une
+	 * selection unique
+	 * 
 	 * @param selection
 	 */
-	public void setMultipleSelection(boolean selection){
-		if(selection){
+	public void setMultipleSelection(boolean selection) {
+		if (selection) {
 			typeDeSelection = ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
-
-		}else{
+		} else {
 			typeDeSelection = ListSelectionModel.SINGLE_SELECTION;
 
 		}
 	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		if (zoneDetail != null) {
+			if (maJTable.getSelectedRow() > -1) {
+				zoneDetail.setText(elements.get(maJTable.getSelectedColumn()).plusDetails());
+			}
+
+		}
 	}
+}

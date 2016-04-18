@@ -13,5 +13,7 @@ public interface Groupement {
 	 * @return
 	 */
 	public String plusDetails();
+	public String [] getNomColonnes();
+	public String [] getValues();
 }
 

@@ -10,6 +10,10 @@ import view.Groupement;
 public class Colis implements Groupement, Donnee {
 
 	private int numeroColis;
+	public int getNumeroColis() {
+		return numeroColis;
+	}
+
 	private Dimension dim;
 	private ArrayList<Article> articles;
 	private float poids;
@@ -52,23 +56,39 @@ public class Colis implements Groupement, Donnee {
 
 	public String plusDetails() {
 		String res = "<html>";
-
 		res = res + "blabalbalablalbal <br>" + "blabalbalbal <br>" + "blabalbalablapùmlbal <br>";
 		res = res + "</html>";
 		return res;
 	}
 
-	public String toString() {
-		// String[] res = { Affectataire, Integer.toString(numeroColis),
-		// Designation, precision, dim.toString() };
-		String res = affectataire + " - " + Integer.toString(numeroColis) + " - " + designation + " - " + precision
-				+ " - " + dim.toString();
+	@Override
+	public String [] getValues() {
+		String [] res = new String[]{
+			Integer.toString(numeroColis),
+			secteur, 
+			observations,
+			affectataire, 
+			designation,
+			Float.toString(poids)
+		};
 		return res;
 	}
 
 	@Override
 	public Object[] getParameters() {
 		return param;
+	}
+
+	@Override
+	public String[] getNomColonnes() {
+		return new String[]{
+		"#",
+		"Secteur",
+		"Observations",
+		"Affectataire",
+		"Designation",
+		"Poids"
+		};
 	}
 
 }

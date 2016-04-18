@@ -15,14 +15,17 @@ import partieMission.configs.Configuration;
 import utilisateur.Bdd_utilisateur;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
+import view.I_Mission;
 import view.I_acceuil;
 
 public class Controleur_Mission implements ActionListener {
 	Utilisateur utilisateur;
 	AfficheurGrp afficheur;
-	public Controleur_Mission(Utilisateur utilisateur, AfficheurGrp afficheur) {
+	I_Mission vue;
+	public Controleur_Mission(Utilisateur utilisateur, AfficheurGrp afficheur, I_Mission vue) {
 		this.utilisateur = utilisateur;
 		this.afficheur = afficheur;
+		this.vue = vue;
 	}
 
 	@Override
@@ -41,7 +44,7 @@ public class Controleur_Mission implements ActionListener {
 			break;
 		case "RETOUR":
 			I_acceuil ouvrir = new I_acceuil(utilisateur);
-			ouvrir.run();
+			vue.closeWindow();
 			break;	
 
 		case "MODIFIER":

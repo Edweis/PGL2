@@ -1,6 +1,8 @@
 package utilisateur;
 
-public class Utilisateur implements Donnee {
+import view.Groupement;
+
+public class Utilisateur implements Groupement, Donnee {
 
 	String prenom;
 	String nom;
@@ -34,4 +36,19 @@ public class Utilisateur implements Donnee {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+	@Override
+	public String plusDetails() {
+		return nom + " qs fsd f sdfqsdf f sf\n qsdf qsdfbsjf \n \n qfqsdfqsbdf ";
+	}
+
+	@Override
+	public String[] getNomColonnes() {
+		return new String[]{"Nom", "Prénom", "Droit de lecture", "Bite"};
+	}
+
+	@Override
+	public String[] getValues() {
+		return new String[]{nom, prenom, Boolean.toString(droit_lecture), "Lol"};
+}
 }
