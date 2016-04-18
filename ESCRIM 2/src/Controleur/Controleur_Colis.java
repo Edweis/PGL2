@@ -54,7 +54,7 @@ public class Controleur_Colis implements ActionListener {
 			try {
 				Bdd_utilisateur.connecter("root", "");
 				ArrayList<Colis> colis = (ArrayList<Colis>) afficheur.ExporterSelection().get(0);				
-				int suppr = colis.get(0).getNumerosColis();
+				int suppr = colis.get(0).getNumeroColis();
 				String requete = "DELETE"+ suppr +"FROM colis";
 				Bdd_utilisateur.ecriture(requete);
 				Bdd_utilisateur.deconnecter();
