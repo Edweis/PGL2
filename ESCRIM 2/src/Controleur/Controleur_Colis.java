@@ -12,14 +12,18 @@ import metier.Colis;
 import utilisateur.Bdd_utilisateur;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
+import view.I_Article;
+import view.I_Colis;
 import view.I_acceuil;
 
 public class Controleur_Colis implements ActionListener {
 	Utilisateur utilisateur;
 	AfficheurGrp afficheur;
-	public Controleur_Colis(Utilisateur utilisateur, AfficheurGrp afficheur) {
+	I_Colis vue;
+	public Controleur_Colis(Utilisateur utilisateur, AfficheurGrp afficheur, I_Colis vue) {
 		this.utilisateur = utilisateur;
 		this.afficheur = afficheur;
+		this.vue = vue;
 	}
 
 	@Override
@@ -38,7 +42,7 @@ public class Controleur_Colis implements ActionListener {
 			break;
 		case "RETOUR":
 			I_acceuil ouvrir = new I_acceuil(utilisateur);
-			ouvrir.run();
+			vue.closeWindow();
 			break;	
 		case "GERER STOCK":
 			
@@ -49,7 +53,7 @@ public class Controleur_Colis implements ActionListener {
 		case "SUPPRIMER":
 			try {
 				Bdd_utilisateur.connecter("root", "");
-				ArrayList<Colis> colis = (ArrayList<Colis>) afficheur.ExporterSelection().get(0);
+				ArrayList<Colis> colis = (ArrayList<Colis>) afficheur.ExporterSelection().get(0);				
 				int suppr = colis.get(0).getNumerosColis();
 				String requete = "DELETE"+ suppr +"FROM colis";
 				Bdd_utilisateur.ecriture(requete);

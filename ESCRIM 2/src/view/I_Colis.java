@@ -27,8 +27,7 @@ import java.awt.event.ActionEvent;
 public class I_Colis {
 
 	private JFrame frame;
-	Utilisateur utilisateur;
-	
+	Utilisateur utilisateur;	
 	public void run() {
 		try {
 			I_Colis window = new I_Colis(utilisateur);
@@ -49,10 +48,12 @@ public class I_Colis {
 	 * @throws SQLException 
 	 */
 	private void initialize() throws SQLException {
-		frame = new JFrame();
+		JFrame frame = new JFrame();
 		frame.setBounds(100, 100, 952, 556);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+//		LanceRequete<Article> bdd = new LanceRequete<Article>(Article.class);
 		
 		JLabel lblColisExistant = new JLabel("COLIS EXISTANTS");
 		lblColisExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
@@ -60,7 +61,7 @@ public class I_Colis {
 		frame.getContentPane().add(lblColisExistant);
 		
 		
-		Bdd_utilisateur.connecter("root","");
+		/*Bdd_utilisateur.connecter("root","");
 		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_colis) FROM colis");
 		int val =  ((Number) dernierID.getObject(1)).intValue();
 				
@@ -72,10 +73,10 @@ public class I_Colis {
 			int numColis = Col.getInt("numerosColis");
 			Colis unColis = new Colis(numColis,dimColis);
 			col.set(i,unColis);			
-		}
+		}*/
 					
 		AfficheurGrp<Colis> afficheur = new AfficheurGrp<Colis>();
-		afficheur.MajGrpColis(col);
+//		afficheur.MajGrpColis(col);
 		frame.getContentPane().add(afficheur);
 
 		
@@ -109,12 +110,19 @@ public class I_Colis {
 		btnGererStock.setBounds(602, 374, 229, 40);
 		frame.getContentPane().add(btnGererStock);
 		
-		Controleur_Colis  e2 = new Controleur_Colis (utilisateur, afficheur);
+		Controleur_Colis  e2 = new Controleur_Colis (utilisateur, afficheur,this);
 		btnVoirCaracteristique.addActionListener(e2);
 		btnCreerNouvelle.addActionListener(e2);
 		btnRetour.addActionListener(e2);
 		btnModifier.addActionListener(e2);
 		btnSupprimer.addActionListener(e2);
 		btnGererStock.addActionListener(e2);
-	}
+	
+	frame.pack();
+	frame.setVisible(true);
+}
+
+	public void closeWindow(){
+	frame.setVisible(false);
+}
 }
