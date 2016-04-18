@@ -1,18 +1,20 @@
 package view;
 
 import java.awt.EventQueue;
-
+import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
+
 import utilisateur.Admin;
 import utilisateur.Bdd_utilisateur;
 import utilisateur.Utilisateur;
 
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
@@ -31,6 +33,9 @@ public class I_connexionn {
 	private JLabel lblNom;
 	private JLabel lblPrnom;
 	private JTextField textField_2;
+	private JPanel panel;
+	private JPanel panel_1;
+	private JPanel panel_2;
 
 	/**
 	 * Launch the application.
@@ -62,21 +67,37 @@ public class I_connexionn {
 		frame = new JFrame();
 		frame.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(137, 54, 86, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		panel_2 = new JPanel();
+		panel_2.setBounds(28, 13, 396, 238);
+		frame.getContentPane().add(panel_2);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(137, 122, 86, 20);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		textField_2 = new JTextField();
+		panel_2.add(textField_2);
+		textField_2.setColumns(10);
 		
 		JLabel lblMotDePasse = new JLabel("Mot de passe");
-		lblMotDePasse.setBounds(40, 125, 70, 14);
-		frame.getContentPane().add(lblMotDePasse);
+		panel_2.add(lblMotDePasse);
+		
+		lblPrnom = new JLabel("Pr\u00E9nom");
+		panel_2.add(lblPrnom);
 		
 		JButton btnSeConnecter = new JButton("Se connecter");
+		panel_2.add(btnSeConnecter);
+		
+		lblNom = new JLabel("Nom");
+		panel_2.add(lblNom);
+		
+		textField_1 = new JTextField();
+		panel_2.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField = new JTextField();
+		panel_2.add(textField);
+		textField.setColumns(10);
+		
+		JLabel image = new JLabel( new ImageIcon("/Devellopement/Workspace/demojdbc/src/Image/horloge1.png"));
+		panel_2.add(image);
+		
 		btnSeConnecter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			String prenom=textField_2.getText();
@@ -117,23 +138,8 @@ public class I_connexionn {
 			
 			}
 		});
-		btnSeConnecter.setBounds(123, 153, 103, 23);
-		frame.getContentPane().add(btnSeConnecter);
-		
-		lblNom = new JLabel("Nom");
-		lblNom.setBounds(40, 54, 46, 14);
-		frame.getContentPane().add(lblNom);
-		
-		lblPrnom = new JLabel("Pr\u00E9nom");
-		lblPrnom.setBounds(40, 78, 46, 14);
-		frame.getContentPane().add(lblPrnom);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(137, 85, 86, 20);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
-		
-		frame.setSize(400, 250);
+	
+	
 		
 	}
 }
