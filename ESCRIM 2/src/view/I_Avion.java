@@ -19,6 +19,7 @@ import javax.swing.JList;
 
 import Controleur.Controleur_Acceuil;
 import Controleur.Controleur_Article;
+import Controleur.Controleur_Avion;
 import Controleur.Controleur_Colis;
 
 import javax.swing.JButton;
@@ -61,7 +62,7 @@ public class I_Avion {
 		frame.getContentPane().add(lblAvionExistant);
 		
 		
-		Bdd_utilisateur.connecter("root","");
+		/*Bdd_utilisateur.connecter("root","");
 		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_avion) FROM avion");
 		int val =  ((Number) dernierID.getObject(1)).intValue();
 				
@@ -75,10 +76,10 @@ public class I_Avion {
 			String immaAv = Avi.getString("immatriculation");
 			Avion unAvion = new Avion(nomAv,volumeAv,caracv,immaAv);
 			avi.set(i,unAvion);			
-		}
+		}*/
 					
 		AfficheurGrp<Avion> afficheur = new AfficheurGrp<Avion>();
-		afficheur.MajGrpColis(avi);
+		//afficheur.MajGrpColis(avi);
 		frame.getContentPane().add(afficheur);
 
 		
@@ -108,12 +109,18 @@ public class I_Avion {
 		
 		afficheur.activeOnSelect(btnSupprimer);
 		
-		Controleur_Colis  e3 = new Controleur_Colis (utilisateur, afficheur);
+		Controleur_Avion  e3 = new Controleur_Avion (utilisateur, afficheur,this);
 		btnVoirCaracteristique.addActionListener(e3);
 		btnCreerNouvelle.addActionListener(e3);
 		btnRetour.addActionListener(e3);
 		btnModifier.addActionListener(e3);
 		btnSupprimer.addActionListener(e3);
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
+	public void closeWindow(){
+		frame.setVisible(false);
 	}
 }
 

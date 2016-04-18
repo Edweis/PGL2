@@ -76,11 +76,18 @@ public class I_acceuil {
 		lbl.setBounds(373, 30, 115, 50);
 		frame.getContentPane().add(lbl);
 		
-		Controleur_Acceuil  e = new Controleur_Acceuil (utilisateur);
+		Controleur_Acceuil  e = new Controleur_Acceuil (utilisateur,this);
 		btnGestionMission.addActionListener(e);
 		btnNGestionConfiguration.addActionListener(e);
 		btnGestionColis.addActionListener(e);
 		btnGestionArticle.addActionListener(e);
 		btnGestionAvion.addActionListener(e);
+		
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
+	public void closeWindow(){
+		frame.setVisible(false);
 	}
 }

@@ -72,10 +72,17 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 		// inverstSelect.addActionListener(this);
 
 		this.add(selectAll);
+<<<<<<< HEAD
 		// this.add(deselectAll);
 		// this.add(inverstSelect);
 
 		maJTable = new JTable();
+=======
+			//this.add(deselectAll);
+			//this.add(inverstSelect);
+		
+		maJListe = new JList<E>();
+>>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 
 	}
 

@@ -9,6 +9,10 @@ import view.Groupement;
 public class Colis implements Groupement, Donnee {
 
 	private int numeroColis;
+	public int getNumeroColis() {
+		return numeroColis;
+	}
+
 	private Dimension dim;
 	private ArrayList<Article> articles;
 	private float poids;

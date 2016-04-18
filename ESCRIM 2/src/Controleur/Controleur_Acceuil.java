@@ -8,14 +8,19 @@ import javax.swing.JButton;
 
 import utilisateur.Utilisateur;
 import view.I_Article;
+import view.I_Avion;
 import view.I_Colis;
+import view.I_Config;
+import view.I_Mission;
+import view.I_acceuil;
 
 public class Controleur_Acceuil implements ActionListener {
 
 	Utilisateur utilisateur;
-
-	public Controleur_Acceuil(Utilisateur utilisateur) {
+	I_acceuil vue;
+	public Controleur_Acceuil(Utilisateur utilisateur, I_acceuil vue) {
 		this.utilisateur = utilisateur;
+		this.vue = vue;
 	}
 
 	@Override
@@ -28,32 +33,52 @@ public class Controleur_Acceuil implements ActionListener {
 		switch (str) {
 
 		case "GESTION MISSION":
-
+			try {
+				I_Mission ouvrir2 = new I_Mission(utilisateur);
+			} catch (SQLException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			}
+			vue.closeWindow();
 			break;
 		case "GESTION CONFIGURATION":
-
+			try {
+				I_Config ouvrir4 = new I_Config(utilisateur);
+			} catch (SQLException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			}
+			vue.closeWindow();
 			break;
 		case "GESTION COLIS":
-			I_Colis ouvrir = null;
 			try {
-				ouvrir = new I_Colis(utilisateur);
+			I_Colis	ouvrir = new I_Colis(utilisateur);
+			vue.closeWindow();
 			} catch (SQLException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
-			ouvrir.run();
+			//ouvrir.run();
 			break;
 		case "GESTION ARTICLE":
+
 			try {
 				I_Article ouvrir3 = new I_Article(utilisateur);
-				ouvrir3.run();
+				vue.closeWindow();
+			} catch (Throwable e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			break;
+		case "GESTION AVION":
+			try {
+				I_Avion ouvrir5 = new I_Avion(utilisateur);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			break;
-		case "GESTION AVION":
-
+			vue.closeWindow();
 			break;
 
 		}
