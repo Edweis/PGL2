@@ -91,9 +91,9 @@ public class Main {
 	}
 
 	public static void exempleAfficheurGrp2() {
-		Article a1 = new Article(null, "salut", "jaques");
-		Article a2 = new Article(null, "df", "jaquqsdqses");
-		Article a3 = new Article(null, "sadfsdflut", "jaqucdcdes");
+		Article a1 = new Article("salut", "jaques",0);
+		Article a2 = new Article("df", "jaquqsdqses",0);
+		Article a3 = new Article("sadfsdflut", "jaqucdcdes",0);
 
 		ArrayList<Article> mesArticles = new ArrayList<Article>();
 		mesArticles.add(a1);

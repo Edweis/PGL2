@@ -32,7 +32,13 @@ public class Colis implements Groupement, Donnee {
 
 		param = new Object[] {};
 	}
-
+	public Colis(int numerosColis, Dimension dim) {
+		this.numeroColis = numerosColis;
+		this.dim = dim;
+		this.articles = new ArrayList<Article>();
+		
+		param = new Object[]{};
+	}
 	public Dimension getDim() {
 		return dim;
 	}

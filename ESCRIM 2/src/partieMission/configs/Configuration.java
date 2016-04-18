@@ -17,7 +17,6 @@ public class Configuration implements Groupement {
 		this.nom = nom;
 	}
 
-	@Override
 	public String getInfos() {
 		// TODO Auto-generated method stub
 		return null;

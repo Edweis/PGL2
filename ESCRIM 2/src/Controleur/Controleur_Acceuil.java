@@ -34,7 +34,13 @@ public class Controleur_Acceuil implements ActionListener {
 
 			break;
 		case "GESTION COLIS":
-			I_Colis ouvrir = new I_Colis(utilisateur);
+			I_Colis ouvrir = null;
+			try {
+				ouvrir = new I_Colis(utilisateur);
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 			ouvrir.run();
 			break;
 		case "GESTION ARTICLE":
