@@ -63,17 +63,17 @@ public class I_connexionn {
 		frame.getContentPane().setLayout(null);
 		
 		textField = new JTextField();
-		textField.setBounds(61, 75, 86, 20);
+		textField.setBounds(137, 54, 86, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(137, 106, 86, 20);
+		textField_1.setBounds(137, 122, 86, 20);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel lblMotDePasse = new JLabel("Mot de passe");
-		lblMotDePasse.setBounds(40, 109, 70, 14);
+		lblMotDePasse.setBounds(40, 125, 70, 14);
 		frame.getContentPane().add(lblMotDePasse);
 		
 		JButton btnSeConnecter = new JButton("Se connecter");
@@ -117,22 +117,23 @@ public class I_connexionn {
 			
 			}
 		});
-		btnSeConnecter.setBounds(102, 138, 103, 23);
+		btnSeConnecter.setBounds(123, 153, 103, 23);
 		frame.getContentPane().add(btnSeConnecter);
 		
 		lblNom = new JLabel("Nom");
-		lblNom.setBounds(30, 78, 46, 14);
+		lblNom.setBounds(40, 54, 46, 14);
 		frame.getContentPane().add(lblNom);
 		
 		lblPrnom = new JLabel("Pr\u00E9nom");
-		lblPrnom.setBounds(160, 78, 46, 14);
+		lblPrnom.setBounds(40, 78, 46, 14);
 		frame.getContentPane().add(lblPrnom);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(216, 75, 86, 20);
+		textField_2.setBounds(137, 85, 86, 20);
 		frame.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 		
+		frame.setSize(400, 250);
 		
 	}
 }
