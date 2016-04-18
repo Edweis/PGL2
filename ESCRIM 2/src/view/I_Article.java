@@ -3,8 +3,6 @@ import utilisateur.*;
 import java.awt.EventQueue;
 import metier.Article;
 import javax.swing.JFrame;
-
-import utilisateur.Utilisateur;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.sql.ResultSet;
@@ -24,7 +22,7 @@ public class I_Article {
 
 	private JFrame frame;
 	Utilisateur utilisateur;
-	public void run() {
+	public void run() throws Throwable {
 		try {
 			I_Article window = new I_Article(utilisateur);
 			window.frame.setVisible(true);
@@ -34,20 +32,22 @@ public class I_Article {
 	}
 
 	
-	public I_Article(Utilisateur utilisateur) throws SQLException {
+	public I_Article(Utilisateur utilisateur) throws Throwable {
 		this.utilisateur= utilisateur;
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
-	 * @throws SQLException 
+	 * @throws Throwable 
 	 */
-	private void initialize() throws SQLException {
+	private void initialize() throws Throwable {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 952, 556);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+//		LanceRequete<Article> bdd = new LanceRequete<Article>(Article.class);
 		
 		JLabel lblArticleExistant = new JLabel("ARTICLES EXISTANTS");
 		lblArticleExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
@@ -55,23 +55,22 @@ public class I_Article {
 		frame.getContentPane().add(lblArticleExistant);
 		
 		
-		Bdd_utilisateur.connecter("root","");
-		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_article) FROM article");
-		int val =  ((Number) dernierID.getObject(1)).intValue();
-				
-		ArrayList<Article> art = new ArrayList<>();
-		for (int i=1;i<val;i++){
-			String requete="SELECT * FROM article WHERE id_article=="+i;
-			ResultSet Art = Bdd_utilisateur.lecture(requete);
-			String nomArt = Art.getString("nom");
-			String typeArt = Art.getString("type");
-			float poidsArt = Art.getFloat("poids");
-			Article unArticle = new Article(nomArt,typeArt,poidsArt);
-			art.set(i,unArticle);			
-		}
+//		ArrayList<Article> articles = bdd.selectWhere("");
+//		int val =  ((Number) dernierID.getObject(1)).intValue();
+//				
+//		ArrayList<Article> art = new ArrayList<>();
+//		for (int i=1;i<val;i++){
+//			String requete="SELECT * FROM article WHERE id_article=="+i;
+//			ResultSet Art = Bdd_utilisateur.lecture(requete);
+//			String nomArt = Art.getString("nom");
+//			String typeArt = Art.getString("type");
+//			float poidsArt = Art.getFloat("poids");
+//			Article unArticle = new Article(nomArt,typeArt,poidsArt);
+//			art.set(i,unArticle);			
+//		}
 					
 		AfficheurGrp<Article> afficheur = new AfficheurGrp<Article>();
-		afficheur.MajGrpColis(art);
+//		afficheur.MajGrpColis(articles);
 		frame.getContentPane().add(afficheur);
 
 		
@@ -105,12 +104,19 @@ public class I_Article {
 		btnGererStock.setBounds(602, 374, 229, 40);
 		frame.getContentPane().add(btnGererStock);
 		
-		Controleur_Article  e1 = new Controleur_Article (utilisateur, afficheur);
+		Controleur_Article  e1 = new Controleur_Article (utilisateur, afficheur,this);
 		btnVoirCaracteristique.addActionListener(e1);
 		btnCreerNouvelle.addActionListener(e1);
 		btnRetour.addActionListener(e1);
 		btnModifier.addActionListener(e1);
 		btnSupprimer.addActionListener(e1);
 		btnGererStock.addActionListener(e1);
+		
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
+	public void closeWindow(){
+		frame.setVisible(false);
 	}
 }
