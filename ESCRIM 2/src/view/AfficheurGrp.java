@@ -17,6 +17,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+
 public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSelectionListener, ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -49,7 +50,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 
 	/**
 	 * Initilise les variables
-	 */
+//	 */ 
 	private void init() {
 		btnActiveOnSelect = new ArrayList<JButton>();
 

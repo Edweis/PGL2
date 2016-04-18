@@ -1,6 +1,7 @@
 package application;
 
 import java.awt.GridLayout;
+<<<<<<< HEAD
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -10,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 /*import java.awt.GridLayout;
+=======
+>>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -18,21 +21,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import metier.Article;
-import metier.Colis;
-import metier.Dimension;
-import partieMission.GrpColis;*/
+import Controleur.LanceRequete;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
+<<<<<<< HEAD
 /*import view.AfficheurGrp;*/
 import view.I_acceuil;
+=======
+>>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 
 public class Main {
 
-	public static void main(String[] args) {
-		Utilisateur pierre= new Utilisateur("pierre","pierre","nouveaubis",true,true,"grade");
-		I_acceuil ouvrir = new I_acceuil(pierre);
+	public static void main(String[] args) throws Throwable {
 		
+		exempleAfficheurGrp();
+		//exLanceRequete();
+	
 	}
 
 	public static void exempleAfficheurGrp() {
@@ -91,6 +95,17 @@ public class Main {
 		fenetre.setVisible(true);
 	}
 
+<<<<<<< HEAD
+=======
+	public static void exLanceRequete() throws Throwable{
+		
+		LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class);
+		
+		Utilisateur u1 = bddUser.selectFromId(1);
+		Utilisateur u2 = bddUser.selectFromId(2);
+		Utilisateur u3 = bddUser.selectFromId(3);
+		
+		
+	}
+>>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 }
-
-

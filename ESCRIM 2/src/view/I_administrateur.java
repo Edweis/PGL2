@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import utilisateur.Admin;
 import utilisateur.Bdd_utilisateur;
@@ -20,6 +21,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class I_administrateur {
 
@@ -36,8 +38,8 @@ public class I_administrateur {
 	private Admin admin;
 	private JTextField txtNom_2;
 	private JTextField txtPrenom_2;
-	private JList list;
 	private AfficheurGrp<Utilisateur> panel;
+	private JTable table;
 	/**
 	 * Launch the application.
 	 */
@@ -55,8 +57,9 @@ public class I_administrateur {
 
 	/**
 	 * Create the application.
+	 * @throws SQLException 
 	 */
-	public I_administrateur(Admin admin) {
+	public I_administrateur(Admin admin) throws SQLException {
 		
 		this.admin=admin;
 		initialize();
@@ -143,16 +146,9 @@ public class I_administrateur {
 		btnAjouterUtilisateur.setBounds(593, 159, 164, 23);
 		frame.getContentPane().add(btnAjouterUtilisateur);
 		
-		btnAjouterUtilisateur.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					admin.creer_utilisateur(10, txtNom.getText(), txtPrenom.getText(), txtMdp.getText(), chckbxDroitDeLire.isSelected(), chckbxDroitDeModifier.isSelected(), txtGrade.getText(), bdd);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		
+		
+		
 		
 		
 		
@@ -194,30 +190,48 @@ public class I_administrateur {
 			}
 		});
 		
-		btnSupprimer.setBounds(198, 128, 89, 23);
+		btnSupprimer.setBounds(657, 7, 89, 23);
 		frame.getContentPane().add(btnSupprimer);
 		
 		
 		
-		list = new JList();
-		list.setBounds(60, 222, 97, 5);
-		frame.getContentPane().add(list);
 		
-		panel = new AfficheurGrp<Utilisateur>();
+		//panel.setBounds(139, 11, 604, 112);
+		//frame.getContentPane().add(panel);
 		
 		
-		ArrayList<Utilisateur> mesUser = new ArrayList<Utilisateur>();
+		String title [] = {"Prenom", "nom","mot de passe","droit de lire","droit de modifier","grade"};
+		DefaultTableModel tableModel = new DefaultTableModel(title, 0);
+		table = new JTable(tableModel){
+			public boolean isCellEditable (int row,int col){
+				return false;
+			}
+		};
 		ResultSet resultat=Bdd_utilisateur.lecture("Select * from Utilisateur");
 		while(resultat.next()){
-		mesUser.add(new Utilisateur(resultat.getString(2), resultat.getString(3), resultat.getString(4), resultat.getBoolean(5), resultat.getBoolean(6), resultat.getString(7)));
+		Object [] obj ={resultat.getString(2), resultat.getString(3), resultat.getString(4), resultat.getBoolean(5), resultat.getBoolean(6), resultat.getString(7)};
+		tableModel.addRow(obj);
 		}
-		
-		panel.MajGrpColis(mesUser);
-		
-		
-		
-		panel.setBounds(139, 11, 364, 112);
-		frame.getContentPane().add(panel);
+		//JScrollPane scrollPane = new JScrollPane(table);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+		btnAjouterUtilisateur.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					admin.creer_utilisateur(10, txtNom.getText(), txtPrenom.getText(), txtMdp.getText(), chckbxDroitDeLire.isSelected(), chckbxDroitDeModifier.isSelected(), txtGrade.getText(), bdd);
+					ResultSet resultat=Bdd_utilisateur.lecture("Select * from Utilisateur");
+					while(resultat.next()){
+					Object [] obj ={resultat.getString(2), resultat.getString(3), resultat.getString(4), resultat.getBoolean(5), resultat.getBoolean(6), resultat.getString(7)};
+					tableModel.addRow(obj);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		table.setBounds(10, 11, 634, 112);
+		frame.getContentPane().add(table);
 		
 		
 		
