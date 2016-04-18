@@ -44,13 +44,14 @@ public class Controleur_Acceuil implements ActionListener {
 			ouvrir.run();
 			break;
 		case "GESTION ARTICLE":
+
 			try {
 				I_Article ouvrir3 = new I_Article(utilisateur);
-				ouvrir3.run();
-			} catch (SQLException e1) {
+			} catch (Throwable e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+
 			break;
 		case "GESTION AVION":
 

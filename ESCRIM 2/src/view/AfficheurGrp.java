@@ -71,6 +71,8 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 		this.add(selectAll);
 			//this.add(deselectAll);
 			//this.add(inverstSelect);
+		
+		maJListe = new JList<E>();
 
 	}
 

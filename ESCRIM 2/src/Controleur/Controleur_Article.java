@@ -20,10 +20,12 @@ public class Controleur_Article implements ActionListener {
 	Utilisateur utilisateur;
 	AfficheurGrp afficheur;
 	Article selection;
-	public Controleur_Article(Utilisateur utilisateur, AfficheurGrp afficheur) {
+	I_Article vue;
+	public Controleur_Article(Utilisateur utilisateur, AfficheurGrp afficheur, I_Article vue) {
 		this.utilisateur = utilisateur;
 		this.afficheur = afficheur;
-		selection = (Article) afficheur.ExporterSelection().get(0);
+		this.vue = vue;
+//		selection = (Article) afficheur.ExporterSelection().get(0);
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class Controleur_Article implements ActionListener {
 			break;
 		case "RETOUR":
 			I_acceuil ouvrir = new I_acceuil(utilisateur);
-			ouvrir.run();
+			vue.closeWindow();
 			break;	
 		case "GERER STOCK":
 			

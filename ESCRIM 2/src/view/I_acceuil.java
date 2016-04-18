@@ -35,7 +35,7 @@ public class I_acceuil {
 	 */
 	private void initialize() {
 		
-		frame = new JFrame();
+		JFrame frame = new JFrame();
 		frame.setBounds(100, 100, 941, 563);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -82,5 +82,8 @@ public class I_acceuil {
 		btnGestionColis.addActionListener(e);
 		btnGestionArticle.addActionListener(e);
 		btnGestionAvion.addActionListener(e);
+		
+		frame.pack();
+		frame.setVisible(true);
 	}
 }
