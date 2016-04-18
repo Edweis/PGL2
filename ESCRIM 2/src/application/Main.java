@@ -13,16 +13,20 @@ import metier.Article;
 import metier.Colis;
 import metier.Dimension;
 import partieMission.GrpColis;
+import utilisateur.Utilisateur;
 import view.AfficheurGrp;
+import view.I_acceuil;
 
 public class Main {
 
 	public static void main(String[] args) {
-		exempleAfficheurGrp();
+		Utilisateur pierre=null;
+		I_acceuil ouvrir = new I_acceuil(pierre);
+		ouvrir.run();
 		
 	}
 
-	public static void exempleAfficheurGrp() {
+	/*public static void exempleAfficheurGrp() {
 		JFrame fenetre = new JFrame("Salut !");
 		fenetre.setLayout(new GridLayout(2, 0));
 		
@@ -92,5 +96,5 @@ public class Main {
 			
 		AfficheurGrp<Article> afficheur = new AfficheurGrp<Article>();
 			afficheur.MajGrpColis(mesArticles);
-	}
+	}*/
 }
