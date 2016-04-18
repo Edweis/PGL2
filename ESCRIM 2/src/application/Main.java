@@ -1,6 +1,6 @@
 package application;
 
-/*import java.awt.GridLayout;
+import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -9,26 +9,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import metier.Article;
-import metier.Colis;
-import metier.Dimension;
-import partieMission.GrpColis;*/
 import utilisateur.Utilisateur;
-<<<<<<< HEAD
 import view.AfficheurGrp;
-=======
-/*import view.AfficheurGrp;*/
 import view.I_acceuil;
->>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 
 public class Main {
 
 	public static void main(String[] args) {
-		Utilisateur pierre= new Utilisateur("pierre","pierre","nouveaubis",true,true,"grade");
-		I_acceuil ouvrir = new I_acceuil(pierre);
-		
+		exempleAfficheurGrp();
 	}
-<<<<<<< HEAD
 
 	public static void exempleAfficheurGrp() {
 		JFrame fenetre = new JFrame("Salut !");
@@ -86,8 +75,6 @@ public class Main {
 		fenetre.setVisible(true);
 	}
 
-=======
->>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 }
 
 
