@@ -63,7 +63,7 @@ public class I_Config {
 		frame.getContentPane().add(lblConfigExistant);
 		
 		
-		Bdd_utilisateur.connecter("root","");
+		/*Bdd_utilisateur.connecter("root","");
 		ResultSet dernierID = Bdd_utilisateur.lecture("SELECT LAST(id_config) FROM configuration");
 		int val =  ((Number) dernierID.getObject(1)).intValue();
 				
@@ -74,10 +74,10 @@ public class I_Config {
 			String nomConf = Conf.getString("nom");
 			Configuration uneConf = new Configuration(nomConf);
 			conf.set(i,uneConf);			
-		}
+		}*/
 					
 		AfficheurGrp<Configuration> afficheur = new AfficheurGrp<Configuration>();
-		afficheur.MajGrpColis(conf);
+		//afficheur.MajGrpColis(conf);
 		frame.getContentPane().add(afficheur);
 
 		
@@ -107,12 +107,18 @@ public class I_Config {
 		
 		afficheur.activeOnSelect(btnSupprimer);
 		
-		Controleur_Configuration  e4 = new Controleur_Configuration (utilisateur, afficheur);
+		Controleur_Configuration  e4 = new Controleur_Configuration (utilisateur, afficheur,this);
 		btnVoirCaracteristique.addActionListener(e4);
 		btnCreerNouvelle.addActionListener(e4);
 		btnRetour.addActionListener(e4);
 		btnModifier.addActionListener(e4);
 		btnSupprimer.addActionListener(e4);
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
+	public void closeWindow(){
+		frame.setVisible(false);
 	}
 }
 

@@ -8,7 +8,9 @@ import javax.swing.JButton;
 
 import utilisateur.Utilisateur;
 import view.I_Article;
+import view.I_Avion;
 import view.I_Colis;
+import view.I_Config;
 import view.I_Mission;
 import view.I_acceuil;
 
@@ -40,7 +42,13 @@ public class Controleur_Acceuil implements ActionListener {
 			vue.closeWindow();
 			break;
 		case "GESTION CONFIGURATION":
-
+			try {
+				I_Config ouvrir4 = new I_Config(utilisateur);
+			} catch (SQLException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			}
+			vue.closeWindow();
 			break;
 		case "GESTION COLIS":
 			try {
@@ -64,7 +72,13 @@ public class Controleur_Acceuil implements ActionListener {
 
 			break;
 		case "GESTION AVION":
-
+			try {
+				I_Avion ouvrir5 = new I_Avion(utilisateur);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			vue.closeWindow();
 			break;
 
 		}
