@@ -1,7 +1,7 @@
 package application;
-
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -16,10 +16,14 @@ import view.AfficheurGrp;
 public class Main {
 
 	public static void main(String[] args) throws Throwable {
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		//exempleAfficheurGrp();
 		
-		exempleAfficheurGrp();
-		//exLanceRequete();
+		
+		
+		exLanceRequete();
 	
+		
 	}
 
 	public static void exempleAfficheurGrp() {
@@ -69,9 +73,7 @@ public class Main {
 		fenetre.add(tabbedPane);
 		
 		
-		
-		
-		
+
 		
 		
 		fenetre.pack();
@@ -80,12 +82,20 @@ public class Main {
 
 	public static void exLanceRequete() throws Throwable{
 		
-		LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class);
-		
+		LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class.getName());
 		Utilisateur u1 = bddUser.selectFromId(1);
 		Utilisateur u2 = bddUser.selectFromId(2);
 		Utilisateur u3 = bddUser.selectFromId(3);
 		
+		Utilisateur u4 = new Utilisateur(
+				"Porte", 
+				"Table", 
+				"poignée",
+				true, 
+				false,
+				"Barre de fer"
+			);
+		bddUser.add(u4);
 		
 	}
 }

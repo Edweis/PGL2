@@ -20,7 +20,7 @@ public class Colis implements Groupement, Donnee {
 	private String secteur;
 	private String affectataire;
 	private String designation;
-	private String precision;
+	private String details;
 
 	private Object[] param;
 
@@ -35,7 +35,7 @@ public class Colis implements Groupement, Donnee {
 		this.secteur = secteur;
 		this.affectataire = affectataire;
 		this.designation = designation;
-		this.precision = precision;
+		this.details = precision;
 
 		param = new Object[] { numeroColis, dim, articles, poids, observations, secteur, affectataire, designation,
 				precision };
@@ -46,7 +46,7 @@ public class Colis implements Groupement, Donnee {
 	public void setInfos(String affectaire, String designation, String precision) {
 		this.affectataire = affectaire;
 		this.designation = designation;
-		this.precision = precision;
+		this.details = precision;
 	}
 
 	// Implemented methods
