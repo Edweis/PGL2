@@ -1,5 +1,5 @@
 package Controleur;
-import utilisateur.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -15,15 +15,13 @@ import view.I_Article;
 import view.I_StockArticle;
 import view.I_acceuil;
 
-public class Controleur_Article implements ActionListener {
+public class Controleur_StockArticle implements ActionListener{
 
 	Utilisateur utilisateur;
-	Article selection;
-	I_Article vue;
-	public Controleur_Article(Utilisateur utilisateur, I_Article vue) {
+	I_StockArticle vue;
+	public Controleur_StockArticle(Utilisateur utilisateur, I_StockArticle vue) {
 		this.utilisateur = utilisateur;
 		this.vue = vue;
-//		selection = (Article) afficheur.ExporterSelection().get(0);
 	}
 
 	@Override
@@ -34,24 +32,18 @@ public class Controleur_Article implements ActionListener {
 		str = btn.getText();
 		switch (str) {
 
-		case "VOIR CARACTERISTIQUE":
-		
-			break;
 		case "CREER NOUVEAU":
 			vue.creerNouveau();
 			break;
 		case "RETOUR":
-			I_acceuil ouvrir = new I_acceuil(utilisateur);
-			break;	
-		case "GERER STOCK":
-			selection = vue.getAfficheur().ExporterSelection().get(0);
 			try {
-				new I_StockArticle(utilisateur, selection);
+				new I_Article(utilisateur);
 			} catch (Throwable e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
 			break;	
+
 		case "MODIFIER":
 			vue.modifier();
 			break;

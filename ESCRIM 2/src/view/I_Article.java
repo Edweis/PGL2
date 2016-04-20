@@ -15,8 +15,11 @@ import javax.swing.JTextField;
 
 import Controleur.Controleur_Acceuil;
 import Controleur.Controleur_Article;
+import Controleur.Controleur_ModifArticle;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -72,18 +75,12 @@ public class I_Article {
 		afficheur.setBounds(50,100,500,500);
 		Vue.getInstance().getContentPane().add(afficheur);
 
-		JButton btnVoirCaracteristique = new JButton("VOIR CARACTERISTIQUE");
-		btnVoirCaracteristique.setBounds(602, 100, 250, 50);
-		Vue.getInstance().getContentPane().add(btnVoirCaracteristique);
-
-		afficheur.activeOnSelect(btnVoirCaracteristique);
-
 		JButton btnCreerNouvelle = new JButton("CREER NOUVEAU");
 		btnCreerNouvelle.setBounds(602, 170, 250, 50);
 		Vue.getInstance().getContentPane().add(btnCreerNouvelle);
 
 		JButton btnRetour = new JButton("RETOUR");
-		btnRetour.setBounds(602, 380, 250, 50);
+		btnRetour.setBounds(602, 450, 250, 50);
 		Vue.getInstance().getContentPane().add(btnRetour);
 
 		JButton btnModifier = new JButton("MODIFIER");
@@ -101,8 +98,9 @@ public class I_Article {
 		JButton btnGererStock = new JButton("GERER STOCK");
 		btnGererStock.setBounds(602, 380, 250, 50);
 		Vue.getInstance().getContentPane().add(btnGererStock);
-
-		btnVoirCaracteristique.addActionListener(controleur);
+		
+		afficheur.activeOnSelect(btnGererStock);
+		
 		btnCreerNouvelle.addActionListener(controleur);
 		btnRetour.addActionListener(controleur);
 		btnModifier.addActionListener(controleur);
@@ -113,53 +111,80 @@ public class I_Article {
 	}
 
 	public void creerNouveau() {
-
-		frame = new JFrame();
-		frame.setLayout(null);
+		JLabel label = new JLabel("Créer Nouveau");
 		nom = new JTextField();
-		type = new JTextField();
 		poids = new JTextField();
-
-		JLabel nomlbl = new JLabel("Nom:");
-		nomlbl.setFont(new Font("Tahoma", Font.BOLD, 14));
-		JLabel typelbl = new JLabel("Type:");
-		typelbl.setFont(new Font("Tahoma", Font.BOLD, 14));
-		JLabel poidslbl = new JLabel("Poids:");
-		poidslbl.setFont(new Font("Tahoma", Font.BOLD, 14));
-
-		nom.setBounds(204, 143, 86, 20);
-		type.setBounds(204, 174, 86, 20);
-		poids.setBounds(204, 205, 86, 20);
-
-		nomlbl.setBounds(104, 143, 86, 20);
-		typelbl.setBounds(104, 174, 86, 20);
-		poidslbl.setBounds(104, 205, 86, 20);
-
-		JButton valider = new JButton("Valider");
-		valider.setBounds(230, 235, 120, 23);
-		JButton annuler = new JButton("Annuler");
-		annuler.setBounds(70, 235, 120, 23);
-
-		valider.addActionListener(controleur);
-		annuler.addActionListener(controleur);
-
+		edition(label);
+	}
+	
+	public void modifier() {
+		JLabel label = new JLabel("Modifier");
+		nom = new JTextField();
+		poids = new JTextField();
+		edition(label);
+	}
+	
+	public void edition(JLabel label){
+		frame = new JFrame();
+		frame.setBounds(100, 100, 970, 595);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(null);
+		
+		JLabel lblEcran = new JLabel();
+		lblEcran.setBounds(917, 104, -845, 410);
+		frame.getContentPane().add(lblEcran);
+		
+		label.setFont(new Font("Tahoma", Font.BOLD, 35));
+		label.setBounds(100, 11, 278, 69);
+		frame.getContentPane().add(label);
+		
+		JLabel lblNouveauNom = new JLabel("Nouveau nom");
+		lblNouveauNom.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNouveauNom.setBounds(82, 127, 115, 26);
+		frame.getContentPane().add(lblNouveauNom);
+		
+		JLabel lblNouveauType = new JLabel("Nouveau type");
+		lblNouveauType.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNouveauType.setBounds(82, 203, 115, 26);
+		frame.getContentPane().add(lblNouveauType);
+		
+		JLabel lblNouveauPoids = new JLabel("Nouveau poids");
+		lblNouveauPoids.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNouveauPoids.setBounds(82, 273, 108, 26);
+		frame.getContentPane().add(lblNouveauPoids);
+		
+		
+		nom.setBounds(234, 127, 120, 31);
 		frame.getContentPane().add(nom);
-		frame.getContentPane().add(nomlbl);
-		frame.getContentPane().add(type);
-		frame.getContentPane().add(typelbl);
-		frame.getContentPane().add(poids);
-		frame.getContentPane().add(poidslbl);
-		frame.getContentPane().add(valider);
-		frame.getContentPane().add(annuler);
-
 		nom.setColumns(10);
-		type.setColumns(10);
+		
+		
+		poids.setBounds(234, 273, 110, 31);
+		frame.getContentPane().add(poids);
 		poids.setColumns(10);
+		
+		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.setBounds(234, 203, 120, 26);	
+		comboBox.addItem("Medicament");
+		comboBox.addItem("Materiel");
+		frame.getContentPane().add(comboBox);
+		
+		JButton btnValider = new JButton("Valider");
+		btnValider.setBounds(70, 350, 127, 41);
+		frame.getContentPane().add(btnValider);
+		
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setBounds(230, 350, 127, 41);
+		frame.getContentPane().add(btnAnnuler);
+
+		btnValider.addActionListener(controleur);
+		btnAnnuler.addActionListener(controleur);
+		
 		frame.pack();
 		frame.setSize(500, 500);
 		frame.setVisible(true);
+
 	}
-	
 
 	public String getNom() {
 		return nom.getText();
@@ -172,8 +197,12 @@ public class I_Article {
 	public float getPoids() {
 		return Float.parseFloat(poids.getText());
 	}
+	
+	public AfficheurGrp<Article> getAfficheur(){
+		return afficheur;
+	}
 
-	public void fermerCreerNouveau() {
+	public void fermerFrame() {
 		this.frame.setVisible(false);
 		;
 	}

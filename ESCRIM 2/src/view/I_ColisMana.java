@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
+import javax.swing.JLabel;
 
 public class I_ColisMana {
 
@@ -57,7 +58,7 @@ public class I_ColisMana {
 				System.out.println("bonjour");
 			}
 		});
-		btnOK.setBounds(118, 11, 69, 23);
+		btnOK.setBounds(119, 24, 69, 23);
 		frame.getContentPane().add(btnOK);
 		
 		textField = new JTextField("Rechercher");
@@ -67,26 +68,45 @@ public class I_ColisMana {
 				textField.setText(null);
 			}
 		});
-		textField.setBounds(10, 12, 86, 20);
+		textField.setBounds(23, 25, 86, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(227, 12, 28, 20);
+		comboBox.setBounds(246, 25, 64, 20);
 		frame.getContentPane().add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(265, 12, 28, 20);
+		comboBox_1.setBounds(320, 25, 67, 20);
 		frame.getContentPane().add(comboBox_1);
 		
 		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(303, 12, 28, 20);
+		comboBox_2.setBounds(397, 25, 69, 20);
 		frame.getContentPane().add(comboBox_2);
 		
-		JTextPane txtpnSecteur = new JTextPane();
-		txtpnSecteur.setText("Secteur");
-		txtpnSecteur.setBounds(227, 43, 43, 20);
-		frame.getContentPane().add(txtpnSecteur);
+		JLabel lblSecteur = new JLabel("Secteur");
+		lblSecteur.setBounds(246, 11, 37, 14);
+		frame.getContentPane().add(lblSecteur);
+		
+		JLabel lblDsignation = new JLabel("Désignation");
+		lblDsignation.setBounds(320, 11, 66, 14);
+		frame.getContentPane().add(lblDsignation);
+		
+		JLabel label = new JLabel("Configuration");
+		label.setBounds(397, 11, 66, 14);
+		frame.getContentPane().add(label);
+		
+		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.setBounds(221, 56, 69, 23);
+		frame.getContentPane().add(btnAjouter);
+		
+		JButton btnNewButton = new JButton("Retirer");
+		btnNewButton.setBounds(221, 89, 69, 23);
+		frame.getContentPane().add(btnNewButton);
+		
+		JLabel lblColisSlectionns = new JLabel("Colis s\u00E9lectionn\u00E9s");
+		lblColisSlectionns.setBounds(300, 56, 87, 14);
+		frame.getContentPane().add(lblColisSlectionns);
 	}
 }
 

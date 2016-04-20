@@ -3,38 +3,60 @@ package partieMission.configs;
 import utilisateur.Donnee;
 import view.Groupement;
 
+import metier.Colis;
+import partieMission.GrpColis;
+
 public class Configuration implements Groupement, Donnee {
-	
-	
-	
+
 	private String nom;
-	private Object [] param;
-	
-	
-	public Configuration(String nom){
+	private String observation;
+	private GrpColis groupeColis;
+	private final Object[] param;
+
+	public Configuration(String nom, String observation, GrpColis groupeColis) {
 		this.nom = nom;
-		
-		param = new Object[]{nom}; 
-		
+		this.observation = observation;
+		this.groupeColis = groupeColis;
+		this.param = new Object[] {nom, observation, groupeColis};
 	}
-	
+
+	public void addColis(Configuration config, Colis c) {
+		config.groupeColis.add(c);
+	}
+
+	public void removeColis(Configuration config, Colis c) {
+		config.groupeColis.remove(c);
+	}
+
+	public void modifierObs(Configuration config, String s) {
+		config.observation = s;
+	}
+
 	public String getNom() {
 		return nom;
 	}
 
 
-	public String getInfos() {
-		return nom;
-	}
-
 	@Override
 	public String plusDetails() {
-		return nom;
+		return observation;
 	}
 
 	@Override
 	public Object[] getParameters() {
-return param;
-		}
+		return param;
+	}
+
+	@Override
+	public String[] getNomColonnes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] getValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
