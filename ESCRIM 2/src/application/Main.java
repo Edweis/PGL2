@@ -1,8 +1,12 @@
 package application;
+
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
-import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Constructor;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,26 +15,24 @@ import javax.swing.JTabbedPane;
 
 import Controleur.LanceRequete;
 import metier.Article;
+import partieMission.Stock;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
-import view.I_acceuil;
 
 public class Main {
 
 	public static void main(String[] args) throws Throwable {
-		//Utilisateur utilisateur = new Utilisateur("", "", "", true, true, "");
-		//I_acceuil test = new I_acceuil(utilisateur);
-		//exLanceRequete();
-		//exempleAfficheurGrp();
+		exLanceRequete();
 	}
+
 	public static void exempleAfficheurGrp() {
 		JFrame fenetre = new JFrame("Salut !");
 		fenetre.setLayout(new GridLayout(2, 0));
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane();
-		
-		//---------------------Onglet1
-		
+
+		// ---------------------Onglet1
+
 		JPanel onglet1 = new JPanel();
 		AfficheurGrp<Utilisateur> afficheur = new AfficheurGrp<Utilisateur>("Mon nouvel afficheur, il est beau ?");
 
@@ -38,16 +40,13 @@ public class Main {
 
 		Utilisateur c1 = new Utilisateur("JAck", "Sozzlof", "zerty", true, false, "None");
 		Utilisateur c2 = new Utilisateur("aack", "Sodf", "zerty", false, false, "None");
-		
+
 		ArrayList<Utilisateur> mesUser = new ArrayList<Utilisateur>();
 		mesUser.add(c1);
 		mesUser.add(c2);
-		
-		
-		
+
 		afficheur.MajGrpColis(mesUser);
 		onglet1.add(afficheur);
-
 
 		// Zone de lecture
 		JLabel zone = new JLabel("fghj");
@@ -55,54 +54,56 @@ public class Main {
 
 		// Associe l'afficheur avec la zone
 		afficheur.ajouterZoneDetail(zone);
-		
+
 		tabbedPane.addTab("onglet1", onglet1);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-		
-		//---------------------Onglet2
+
+		// ---------------------Onglet2
 
 		JPanel onglet2 = new JPanel();
 		JLabel test = new JLabel("Test de Biatch");
 		onglet2.add(test);
-		
+
 		tabbedPane.addTab("onglet2", onglet2);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_2);
 		fenetre.add(tabbedPane);
-		
-		
 
-		
-		
 		fenetre.pack();
 		fenetre.setVisible(true);
 	}
 
-	public static void exLanceRequete() throws Throwable{
-		
+	public static void exLanceRequete() throws Throwable {
+
+		/*
+		 * Utilisateur
+		 */
 		LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class.getName());
-			Utilisateur u1 = bddUser.selectFromId(1);
-			Utilisateur u2 = bddUser.selectFromId(2);
-			Utilisateur u3 = bddUser.selectFromId(3);
-			
-			Utilisateur u4 = new Utilisateur(
-					"Porte", 
-					"Table", 
-					"poignée",
-					true, 
-					false,
-					"Barre de fer"
-				);
-			
-			ArrayList<Utilisateur> al = bddUser.selectWhere("droit_lecture = 1");
-		
+		Utilisateur u1 = bddUser.selectFromId(1);
+		Utilisateur u2 = bddUser.selectFromId(2);
+		Utilisateur u3 = bddUser.selectFromId(3);
+
+		Utilisateur u4 = new Utilisateur("Porte", "Table", "poignée", true, false, "Barre de fer");
+
+		ArrayList<Utilisateur> al = bddUser.selectWhere("droit_lecture = 1");
+
+		/*
+		 * ARTICLE
+		 */
+
 		LanceRequete<Article> bddArticle = new LanceRequete<Article>(Article.class.getName());
-			Article a1 = bddArticle.selectFromId(1);
-			Article a2 = new Article(
-					"Pastis",
-					"Alcool",
-					1);
-			bddArticle.add(a2);
-			bddArticle.remove(a2);
-			
+		Article a1 = bddArticle.selectFromId(1);
+		Article a2 = new Article("Pastis", "Alcool", 1);
+		bddArticle.add(a2);
+		bddArticle.remove(a2);
+
+		/*
+		 * Stock
+		 */
+
+		LanceRequete<Stock> bddStock = new LanceRequete<Stock>(Stock.class.getName());
+		Stock s1 = bddStock.selectWhere("1").get(0);
+		
+		int a = 1;
 	}
+
 }

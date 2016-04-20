@@ -3,7 +3,6 @@ package Controleur;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Type;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -14,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import metier.*;
-import metier.Article;
 import partieMission.*;
 import partieMission.configs.Configuration;
 import utilisateur.Donnee;
@@ -53,6 +51,7 @@ public class LanceRequete<E extends Donnee> {
 		assoc.put("GrpColis", "grpcolis");
 		assoc.put("GrpAvion", "grpavion");
 		assoc.put("Dimension", "dimension");
+		assoc.put("Stock", "stock");
 		// ...
 
 		classParam = cls;
@@ -108,14 +107,16 @@ public class LanceRequete<E extends Donnee> {
 		requete = "SELECT * FROM `" + table + "` WHERE " + requete;
 		Statement stmt = connexion.createStatement();
 		ResultSet rs = stmt.executeQuery(requete);
-		rs.next();
-
+		boolean cont = rs.next();
+		
 		if (rs.getMetaData().getColumnCount() != nbParam + 1) {
 			System.out.println("Requete incorrecte");
 			return null;
 		}
-
-		do {
+		
+		
+		
+		while (cont){
 			param = new Object[nbParam];
 
 			for (int i = 0; i < nbParam; i++) {
@@ -132,7 +133,9 @@ public class LanceRequete<E extends Donnee> {
 			Constructor<E> cc = (Constructor<E>) c;
 			E monObjet = cc.newInstance(param);
 			res.add(monObjet);
-		} while (rs.next());
+			
+			cont = rs.next();
+		} 
 
 		deconnexion();
 		// ---------------Fin de connexion
@@ -141,8 +144,6 @@ public class LanceRequete<E extends Donnee> {
 	}
 
 	public E selectFromId(int id) throws Throwable {
-		
-
 		return selectWhere(nomColonnes[0] + " = " + id).get(0);
 	}
 
@@ -213,6 +214,8 @@ public class LanceRequete<E extends Donnee> {
 			return rs.getFloat(colonne);
 		case "Boolean":
 			return (rs.getInt(colonne) != 0);
+		case "Date":
+			return rs.getDate(colonne);
 		default:
 			/**
 			 * On regarde si ce n'est pas une classe, dans ce cas on regarde si
@@ -220,34 +223,31 @@ public class LanceRequete<E extends Donnee> {
 			 * cas on trouve cette objet avec une nouvelle Bdd
 			 */
 			connexion();
-			ResultSetMetaData data = (ResultSetMetaData) connexion.getMetaData();
-			if (data.getColumnName(colonne).substring(0, 2) == "id") {
+			if (nomColonnes[colonne-1].substring(0, 2).equals("id")) {
 
 				LanceRequete<?> sousBase;
 				
 				 switch (nom) {
-				
 				 case "Utilisateur":
-					 sousBase = new LanceRequete<Utilisateur>("Utilisateur");
+					 sousBase = new LanceRequete<Utilisateur>(Utilisateur.class.getName());
 					 break;
 				 case "Article":
-					 sousBase = new LanceRequete<Article>("Article");
+					 sousBase = new LanceRequete<Article>(Article.class.getName());
 					 break;
 				 case "Colis":
-					 sousBase = new LanceRequete<Colis>("Colis");
+					 sousBase = new LanceRequete<Colis>(Colis.class.getName());
 					 break;
 				 case "GrpColis":
-					 sousBase = new LanceRequete<GrpColis>("GrpColis");
+					 sousBase = new LanceRequete<GrpColis>(GrpColis.class.getName());
 					 break;
 				 case "GrpAvion":
-					 sousBase = new LanceRequete<GrpAvions>("GrpAvions");
+					 sousBase = new LanceRequete<GrpAvions>(GrpAvions.class.getName());
 					 break;
 				 case "Configuration":
-					 sousBase = new
-					 LanceRequete<Configuration>("Configuration");
+					 sousBase = new LanceRequete<Configuration>(Configuration.class.getName());
 					 break;
 				 case "Mission":
-					 sousBase = new LanceRequete<Mission>("Mission");
+					 sousBase = new LanceRequete<Mission>(Mission.class.getName());
 					 break;
 				
 				 default:
@@ -256,7 +256,10 @@ public class LanceRequete<E extends Donnee> {
 					 break;
 				 }
 
-				 return sousBase.selectFromId(rs.getInt(colonne));
+				 deconnexion();
+				 return sousBase.selectFromId(
+						 rs.getInt(colonne)
+						 );
 
 				
 			

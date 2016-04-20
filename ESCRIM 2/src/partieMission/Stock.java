@@ -1,12 +1,25 @@
 package partieMission;
 
-import sun.util.calendar.BaseCalendar.Date;
+import metier.Article;
+import java.util.Date;
+import utilisateur.Donnee;
 
-public class Stock {
+public class Stock implements Donnee{
 
-	int quantite_dispo;
-	Date date;
-	Article article;
+	private int quantite_dispo;
+	private Date date;
+	private 	Article article;
+	private Object[] param;
+	
+	
+	public Stock(Date date,int quantite_dispo, Article article){
+		this.quantite_dispo=quantite_dispo;
+		this.date=date;
+		this.article=article;	
+		
+		param = new Object[]{date, quantite_dispo, article};
+	}
+	
 	
 	public int getQuantite() {
 		return quantite_dispo;
@@ -24,9 +37,11 @@ public class Stock {
 		this.date = date;
 	}
 
-	public Stock(Article article,int quantite_dispo,Date date){
-		this.quantite_dispo=quantite_dispo;
-		this.date=date;
-		this.article=article;	
+	
+
+	@Override
+	public Object[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
