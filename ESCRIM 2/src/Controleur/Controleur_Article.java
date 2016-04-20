@@ -12,7 +12,6 @@ import utilisateur.Bdd_utilisateur;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
 import view.I_Article;
-import view.I_PopupModifArticle;
 import view.I_StockArticle;
 import view.I_acceuil;
 

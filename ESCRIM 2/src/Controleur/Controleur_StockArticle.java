@@ -18,14 +18,11 @@ import view.I_acceuil;
 public class Controleur_StockArticle implements ActionListener{
 
 	Utilisateur utilisateur;
-	AfficheurGrp afficheur;
 	Article selection;
 	I_StockArticle vue;
 	public Controleur_StockArticle(Utilisateur utilisateur, I_StockArticle vue) {
 		this.utilisateur = utilisateur;
-		this.afficheur = afficheur;
 		this.vue = vue;
-//		selection = (Article) afficheur.ExporterSelection().get(0);
 	}
 
 	@Override
@@ -40,24 +37,29 @@ public class Controleur_StockArticle implements ActionListener{
 			vue.creerNouveau();
 			break;
 		case "RETOUR":
-			I_acceuil ouvrir = new I_acceuil(utilisateur);
+			try {
+				new I_Article(utilisateur);
+			} catch (Throwable e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 			break;	
 
 		case "MODIFIER":
 			vue.modifier();
 			break;
 		case "SUPPRIMER":
-			try {
-				Bdd_utilisateur.connecter("root", "");
-				ArrayList<Article> art = (ArrayList<Article>) afficheur.ExporterSelection().get(0);
-				String suppr = art.get(0).getNom();
-				String requete = "DELETE suppr fROM article";
-				Bdd_utilisateur.ecriture(requete);
-				Bdd_utilisateur.deconnecter();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				Bdd_utilisateur.connecter("root", "");
+//				ArrayList<Article> art = (ArrayList<Article>) afficheur.ExporterSelection().get(0);
+//				String suppr = art.get(0).getNom();
+//				String requete = "DELETE suppr fROM article";
+//				Bdd_utilisateur.ecriture(requete);
+//				Bdd_utilisateur.deconnecter();
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			break;
 		case "Valider":
 			
