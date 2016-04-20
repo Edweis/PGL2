@@ -52,6 +52,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	 * Initilise les variables
 //	 */ 
 	private void init() {
+
 		btnActiveOnSelect = new ArrayList<JButton>();
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -122,6 +123,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 		maJTable.setPreferredSize(new Dimension(width, height));
 
 		this.add(maJTable);
+		maJTable.getSelectionModel().addListSelectionListener(this);
 	}
 
 	/**
@@ -161,7 +163,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 		this.zoneDetail = zoneDetail;
 		this.add(zoneDetail);
 
-		maJTable.getSelectionModel().addListSelectionListener(this);
+		
 	}
 
 	/**
@@ -253,9 +255,19 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	public void valueChanged(ListSelectionEvent e) {
 		if (zoneDetail != null) {
 			if (maJTable.getSelectedRow() > -1) {
-				zoneDetail.setText(elements.get(maJTable.getSelectedColumn()).plusDetails());
+				zoneDetail.setText(elements.get(maJTable.getSelectedRow()).plusDetails());
 			}
 
+		}
+		
+		if(maJTable.getSelectedRow()>-1){
+			for(JButton btn : btnActiveOnSelect){
+				btn.setEnabled(true);	
+			}
+		}else{
+			for(JButton btn : btnActiveOnSelect){
+				btn.setEnabled(false);	
+			}
 		}
 	}
 }

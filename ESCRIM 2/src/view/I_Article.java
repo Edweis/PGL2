@@ -72,12 +72,6 @@ public class I_Article {
 		afficheur.setBounds(50,100,500,500);
 		Vue.getInstance().getContentPane().add(afficheur);
 
-		JButton btnVoirCaracteristique = new JButton("VOIR CARACTERISTIQUE");
-		btnVoirCaracteristique.setBounds(602, 100, 250, 50);
-		Vue.getInstance().getContentPane().add(btnVoirCaracteristique);
-
-		afficheur.activeOnSelect(btnVoirCaracteristique);
-
 		JButton btnCreerNouvelle = new JButton("CREER NOUVEAU");
 		btnCreerNouvelle.setBounds(602, 170, 250, 50);
 		Vue.getInstance().getContentPane().add(btnCreerNouvelle);
@@ -101,12 +95,11 @@ public class I_Article {
 		JButton btnGererStock = new JButton("GERER STOCK");
 		btnGererStock.setBounds(602, 380, 250, 50);
 		Vue.getInstance().getContentPane().add(btnGererStock);
-
-		btnVoirCaracteristique.addActionListener(controleur);
+		
 		btnCreerNouvelle.addActionListener(controleur);
 		btnRetour.addActionListener(controleur);
-		btnModifier.addActionListener(controleur);
-		btnSupprimer.addActionListener(controleur);
+		btnModifier.addActionListener(afficheur);
+		btnSupprimer.addActionListener(afficheur);
 		btnGererStock.addActionListener(controleur);
 
 		Vue.getInstance().finitions();
