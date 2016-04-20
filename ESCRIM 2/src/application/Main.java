@@ -1,5 +1,17 @@
 package application;
 import java.awt.GridLayout;
+<<<<<<< HEAD
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+/*import java.awt.GridLayout;
+=======
+>>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 import java.awt.event.KeyEvent;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
@@ -12,6 +24,11 @@ import javax.swing.JTabbedPane;
 import Controleur.LanceRequete;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
+<<<<<<< HEAD
+/*import view.AfficheurGrp;*/
+import view.I_acceuil;
+=======
+>>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 
 public class Main {
 
@@ -80,6 +97,8 @@ public class Main {
 		fenetre.setVisible(true);
 	}
 
+<<<<<<< HEAD
+=======
 	public static void exLanceRequete() throws Throwable{
 		
 		LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class.getName());
@@ -98,4 +117,5 @@ public class Main {
 		bddUser.add(u4);
 		
 	}
+>>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 }

@@ -50,7 +50,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 
 	/**
 	 * Initilise les variables
-	 */
+//	 */ 
 	private void init() {
 		btnActiveOnSelect = new ArrayList<JButton>();
 

@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import metier.*;
+import metier.Article;
 import partieMission.*;
 import partieMission.configs.Configuration;
 import utilisateur.Donnee;
@@ -216,40 +217,74 @@ public class LanceRequete<E extends Donnee> {
 			if (data.getColumnName(colonne).substring(0, 2) == "id") {
 
 				LanceRequete<?> sousBase;
-				// switch (nom) {
-				//
-				// case "Utilisateur":
-				// sousBase = new LanceRequete<Utilisateur>(Utilisateur.class);
-				// break;
-				// case "Article":
-				// sousBase = new LanceRequete<Article>(Article.class);
-				// break;
-				// case "Colis":
-				// sousBase = new LanceRequete<Colis>(Colis.class);
-				// break;
-				// case "GrpColis":
-				// sousBase = new LanceRequete<GrpColis>(GrpColis.class);
-				// break;
-				// case "GrpAvion":
-				// sousBase = new LanceRequete<GrpAvions>(GrpAvions.class);
-				// break;
-				// case "Configuration":
-				// sousBase = new
-				// LanceRequete<Configuration>(Configuration.class);
-				// break;
-				// case "Mission":
-				// sousBase = new LanceRequete<Mission>(Mission.class);
-				// break;
-				//
-				// default:
-				// System.out.print("La classe " + nom + "n'est pas implémentée
-				// dans LanceRequete, appelle François");
-				// sousBase = null;
-				// break;
-				// }
+				
+				 switch (nom) {
+				
+				 case "Utilisateur":
+					 sousBase = new LanceRequete<Utilisateur>(Utilisateur.class);
+					 break;
+				 case "Article":
+					 sousBase = new LanceRequete<Article>(Article.class);
+					 break;
+				 case "Colis":
+					 sousBase = new LanceRequete<Colis>(Colis.class);
+					 break;
+				 case "GrpColis":
+					 sousBase = new LanceRequete<GrpColis>(GrpColis.class);
+					 break;
+				 case "GrpAvion":
+					 sousBase = new LanceRequete<GrpAvions>(GrpAvions.class);
+					 break;
+				 case "Configuration":
+					 sousBase = new
+					 LanceRequete<Configuration>(Configuration.class);
+					 break;
+				 case "Mission":
+					 sousBase = new LanceRequete<Mission>(Mission.class);
+					 break;
+				
+				 default:
+					 System.out.print("La classe " + nom + "n'est pas implémentée dans LanceRequete, appelle François");
+					 sousBase = null;
+					 break;
+				 }
 
-				// return sousBase.selectFromId(rs.getInt(colonne));
+				 return sousBase.selectFromId(rs.getInt(colonne));
 
+				
+				LanceRequete<?> sousBase = null;
+				switch(nom){
+				
+				case "Utilisateur":
+					sousBase = new LanceRequete<Utilisateur>(Utilisateur.class);
+					break;
+				case "Article":
+					sousBase = new LanceRequete<Article>(Article.class);
+					break;
+				case "Colis":
+					sousBase = new LanceRequete<Colis>(Colis.class);
+					break;
+				case "GrpColis":
+					sousBase = new LanceRequete<GrpColis>(GrpColis.class);
+					break;
+				case "GrpAvion":
+					sousBase = new LanceRequete<GrpAvions>(GrpAvions.class);
+					break;
+				case "Configuration":
+					sousBase = new LanceRequete<Configuration>(Configuration.class);
+					break;
+				case "Mission":
+					sousBase = new LanceRequete<Mission>(Mission.class);
+					break;
+				
+				default:
+					System.out.print("La classe " + nom + "n'est pas implémentée dans LanceRequete, appelle François");
+					break;
+				}
+				
+				
+				return sousBase.selectFromId(rs.getInt(colonne));
+			
 			}
 			deconnexion();
 
