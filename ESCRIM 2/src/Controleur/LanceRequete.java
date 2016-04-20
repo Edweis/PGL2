@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import metier.*;
+import metier.Article;
 import partieMission.*;
 import partieMission.configs.Configuration;
 import utilisateur.Donnee;
@@ -181,7 +182,7 @@ public class LanceRequete<E extends Donnee> {
 			ResultSetMetaData data = (ResultSetMetaData) connexion.getMetaData();
 			if (data.getColumnName(colonne).substring(0, 2) == "id") {
 				
-				LanceRequete<?> sousBase;
+				LanceRequete<?> sousBase = null;
 				switch(nom){
 				
 				case "Utilisateur":
@@ -207,7 +208,7 @@ public class LanceRequete<E extends Donnee> {
 					break;
 				
 				default:
-					System.out.print("La classe " + nom + "n'est pas implémentée dans LanceRequete, appelle François"));
+					System.out.print("La classe " + nom + "n'est pas implémentée dans LanceRequete, appelle François");
 					break;
 				}
 				
