@@ -14,7 +14,6 @@ import Controleur.Controleur_Acceuil;
 
 public class I_acceuil {
 
-	private JFrame frame;
 	Utilisateur utilisateur;
 
 
@@ -29,14 +28,11 @@ public class I_acceuil {
 	 */
 	private void initialize() {
 		
-		frame = new JFrame();
-		frame.setBounds(100, 100, 941, 563);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		Vue.getInstance().vider();
 		
 		JButton btnGestionMission = new JButton("GESTION MISSION");
 		btnGestionMission.setBounds(362, 124, 160, 50);
-		frame.getContentPane().add(btnGestionMission);
+		Vue.getInstance().getContentPane().add(btnGestionMission);
 		
 		JButton btnNGestionConfiguration = new JButton("GESTION CONFIGURATION");
 		btnNGestionConfiguration.addActionListener(new ActionListener() {
@@ -44,31 +40,31 @@ public class I_acceuil {
 			}
 		});
 		btnNGestionConfiguration.setBounds(362, 198, 160, 50);
-		frame.getContentPane().add(btnNGestionConfiguration);
+		Vue.getInstance().getContentPane().add(btnNGestionConfiguration);
 		
 		JButton btnGestionColis = new JButton("GESTION COLIS");
 		btnGestionColis.setBounds(362, 259, 160, 50);
-		frame.getContentPane().add(btnGestionColis);
+		Vue.getInstance().getContentPane().add(btnGestionColis);
 		
 		JButton btnGestionArticle = new JButton("GESTION ARTICLE");
 		btnGestionArticle.setBounds(362, 334, 160, 44);
-		frame.getContentPane().add(btnGestionArticle);
+		Vue.getInstance().getContentPane().add(btnGestionArticle);
 		
 		JButton btnGestionAvion = new JButton("GESTION AVION");
 		btnGestionAvion.setBounds(362, 405, 160, 32);
-		frame.getContentPane().add(btnGestionAvion);
+		Vue.getInstance().getContentPane().add(btnGestionAvion);
 		
 		
 		JLabel lblHello = new JLabel("Hello");
 		lblHello.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		lblHello.setBounds(293, 30, 115, 50);
-		frame.getContentPane().add(lblHello);
+		Vue.getInstance().getContentPane().add(lblHello);
 		
 		String uti = utilisateur.getNom();
 		JLabel lbl = new JLabel(uti);
 		lbl.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		lbl.setBounds(373, 30, 115, 50);
-		frame.getContentPane().add(lbl);
+		Vue.getInstance().getContentPane().add(lbl);
 		
 		Controleur_Acceuil  e = new Controleur_Acceuil (utilisateur,this);
 		btnGestionMission.addActionListener(e);
@@ -77,11 +73,7 @@ public class I_acceuil {
 		btnGestionArticle.addActionListener(e);
 		btnGestionAvion.addActionListener(e);
 		
-		frame.pack();
-		frame.setVisible(true);
+		Vue.getInstance().finitions();
 	}
 	
-	public void closeWindow(){
-		frame.setVisible(false);
-	}
 }

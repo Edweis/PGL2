@@ -21,7 +21,7 @@ public class Controleur_Article implements ActionListener {
 	AfficheurGrp afficheur;
 	Article selection;
 	I_Article vue;
-	public Controleur_Article(Utilisateur utilisateur, AfficheurGrp afficheur, I_Article vue) {
+	public Controleur_Article(Utilisateur utilisateur, I_Article vue) {
 		this.utilisateur = utilisateur;
 		this.afficheur = afficheur;
 		this.vue = vue;
@@ -40,7 +40,7 @@ public class Controleur_Article implements ActionListener {
 		
 			break;
 		case "CREER NOUVEAU":
-			
+			vue.creerNouveau();
 			break;
 		case "RETOUR":
 			I_acceuil ouvrir = new I_acceuil(utilisateur);
@@ -71,8 +71,12 @@ public class Controleur_Article implements ActionListener {
 				e.printStackTrace();
 			}
 			break;
-		
-
+		case "Valider":
+			
+			break;
+		case "Annuler":
+			vue.fermerCreerNouveau();
+			break;
 	}
 
 	}

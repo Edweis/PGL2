@@ -21,6 +21,7 @@ public class Colis implements Groupement, Donnee {
 	private String secteur;
 	private String affectataire;
 	private String designation;
+	private String details;
 	private String precision;
 	private GrpStock grpstock;
 
@@ -37,6 +38,7 @@ public class Colis implements Groupement, Donnee {
 		this.secteur = secteur;
 		this.affectataire = affectataire;
 		this.designation = designation;
+		this.details = precision;
 		this.precision = precision;
 		this.grpstock=grpstock;
 		
@@ -49,7 +51,7 @@ public class Colis implements Groupement, Donnee {
 	public void setInfos(String affectaire, String designation, String precision) {
 		this.affectataire = affectaire;
 		this.designation = designation;
-		this.precision = precision;
+		this.details = precision;
 	}
 
 	// Implemented methods

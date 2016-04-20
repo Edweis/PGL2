@@ -1,19 +1,7 @@
 package application;
-
 import java.awt.GridLayout;
-<<<<<<< HEAD
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-
-/*import java.awt.GridLayout;
-=======
->>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
-import java.awt.event.KeyEvent;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -22,23 +10,19 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import Controleur.LanceRequete;
+import metier.Article;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
-<<<<<<< HEAD
-/*import view.AfficheurGrp;*/
 import view.I_acceuil;
-=======
->>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 
 public class Main {
 
 	public static void main(String[] args) throws Throwable {
-		
-		exempleAfficheurGrp();
+		Utilisateur utilisateur = new Utilisateur("", "", "", true, true, "");
+		I_acceuil test = new I_acceuil(utilisateur);
 		//exLanceRequete();
-	
+		//exempleAfficheurGrp();
 	}
-
 	public static void exempleAfficheurGrp() {
 		JFrame fenetre = new JFrame("Salut !");
 		fenetre.setLayout(new GridLayout(2, 0));
@@ -86,26 +70,38 @@ public class Main {
 		fenetre.add(tabbedPane);
 		
 		
-		
-		
-		
+
 		
 		
 		fenetre.pack();
 		fenetre.setVisible(true);
 	}
 
-<<<<<<< HEAD
-=======
 	public static void exLanceRequete() throws Throwable{
 		
-		LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class);
+		LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class.getName());
+			Utilisateur u1 = bddUser.selectFromId(1);
+			Utilisateur u2 = bddUser.selectFromId(2);
+			Utilisateur u3 = bddUser.selectFromId(3);
+			
+			Utilisateur u4 = new Utilisateur(
+					"Porte", 
+					"Table", 
+					"poignée",
+					true, 
+					false,
+					"Barre de fer"
+				);
+			
+			ArrayList<Utilisateur> al = bddUser.selectWhere("droit_lecture = 1");
 		
-		Utilisateur u1 = bddUser.selectFromId(1);
-		Utilisateur u2 = bddUser.selectFromId(2);
-		Utilisateur u3 = bddUser.selectFromId(3);
-		
-		
+		LanceRequete<Article> bddArticle = new LanceRequete<Article>(Article.class.getName());
+			Article a1 = bddArticle.selectFromId(1);
+			Article a2 = new Article(
+					"Pastis",
+					"Alcool",
+					1);
+			bddArticle.remove(a2);
+			
 	}
->>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 }
