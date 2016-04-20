@@ -8,6 +8,7 @@ public class Stock implements Groupement, Donnee{
 	private String date;
 	private int quantite;
 	private final Object[] param;
+
 	public Stock(String date, int quantite){
 		this.date = date;
 		this.quantite = quantite;
