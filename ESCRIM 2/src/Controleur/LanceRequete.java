@@ -30,6 +30,8 @@ public class LanceRequete<E extends Donnee> {
 	private String classParamShort;
 
 	private String table;
+	private String [] nomColonnes;
+	private int nbColonnes;
 
 	Connection connexion;
 
@@ -38,8 +40,9 @@ public class LanceRequete<E extends Donnee> {
 	 * articles il faut faire Bdd<Article> = new Bdd<Article>(Article.class);
 	 * 
 	 * @param cls
+	 * @throws Throwable 
 	 */
-	public LanceRequete(String cls) {
+	public LanceRequete(String cls) throws Throwable {
 
 		Map<String, String> assoc = new HashMap<>();
 
@@ -63,6 +66,24 @@ public class LanceRequete<E extends Donnee> {
 		}
 
 		classParamShort = cls;
+		
+		generateColumnNames();
+	}
+
+	private void generateColumnNames() throws Throwable {
+		connexion();
+			Statement stmt = connexion.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `" + table + "`");
+			ResultSetMetaData rsmd = rs.getMetaData();
+			rs.next();
+			nomColonnes = new String[rsmd.getColumnCount()];
+			
+			for (int i = 0; i < rsmd.getColumnCount(); i++) {
+				nomColonnes[i] = rsmd.getColumnName(i+1);
+			}
+			
+			nbColonnes = nomColonnes.length;
+		deconnexion();
 	}
 
 	private void connexion() throws SQLException {
@@ -120,15 +141,9 @@ public class LanceRequete<E extends Donnee> {
 	}
 
 	public E selectFromId(int id) throws Throwable {
-		connexion();
-		Statement stmt = connexion.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM `" + table + "`");
-		ResultSetMetaData rsmd = rs.getMetaData();
-		rs.next();
-		String nomCol = rsmd.getColumnName(1);
-		deconnexion();
+		
 
-		return selectWhere(nomCol + " = " + id).get(0);
+		return selectWhere(nomColonnes[0] + " = " + id).get(0);
 	}
 
 	public void add(E element) throws Throwable {
@@ -136,6 +151,7 @@ public class LanceRequete<E extends Donnee> {
 
 		String req = "INSERT INTO `" + table + "` VALUES ( NULL, ";
 
+		
 		for (Object o : element.getParameters()) {
 			try {
 				Boolean b = (Boolean) o;
@@ -164,20 +180,11 @@ public class LanceRequete<E extends Donnee> {
 
 		connexion();
 
-		// On chope le nom des colonnes
-		ResultSetMetaData data = (ResultSetMetaData) connexion.getMetaData();
-
-		int nbCol = data.getColumnCount();
-		String[] nomCol = new String[nbCol];
-		for (int i = 0; i < nbCol; i++) {
-			nomCol[i] = data.getColumnName(i);
-		}
-
 		// on prépare la requete
 		Object[] param = element.getParameters();
-		String req = "DELETE FROM " + table + " WHERE ";
-		for (int i = 0; i < nbCol; i++) {
-			req = req + nomCol[i] + " = " + param[i] + ", ";
+		String req = "DELETE FROM `" + table + "` WHERE ";
+		for (int i = 0; i < param.length; i++) {
+			req = req +"`"+ nomColonnes[i+1] + "` = " + param[i] + ", ";//on esquive l'ID !
 		}
 		req = req.substring(0, req.length() - 2);
 
@@ -221,26 +228,26 @@ public class LanceRequete<E extends Donnee> {
 				 switch (nom) {
 				
 				 case "Utilisateur":
-					 sousBase = new LanceRequete<Utilisateur>(Utilisateur.class);
+					 sousBase = new LanceRequete<Utilisateur>("Utilisateur");
 					 break;
 				 case "Article":
-					 sousBase = new LanceRequete<Article>(Article.class);
+					 sousBase = new LanceRequete<Article>("Article");
 					 break;
 				 case "Colis":
-					 sousBase = new LanceRequete<Colis>(Colis.class);
+					 sousBase = new LanceRequete<Colis>("Colis");
 					 break;
 				 case "GrpColis":
-					 sousBase = new LanceRequete<GrpColis>(GrpColis.class);
+					 sousBase = new LanceRequete<GrpColis>("GrpColis");
 					 break;
 				 case "GrpAvion":
-					 sousBase = new LanceRequete<GrpAvions>(GrpAvions.class);
+					 sousBase = new LanceRequete<GrpAvions>("GrpAvions");
 					 break;
 				 case "Configuration":
 					 sousBase = new
-					 LanceRequete<Configuration>(Configuration.class);
+					 LanceRequete<Configuration>("Configuration");
 					 break;
 				 case "Mission":
-					 sousBase = new LanceRequete<Mission>(Mission.class);
+					 sousBase = new LanceRequete<Mission>("Mission");
 					 break;
 				
 				 default:
@@ -252,38 +259,6 @@ public class LanceRequete<E extends Donnee> {
 				 return sousBase.selectFromId(rs.getInt(colonne));
 
 				
-				LanceRequete<?> sousBase = null;
-				switch(nom){
-				
-				case "Utilisateur":
-					sousBase = new LanceRequete<Utilisateur>(Utilisateur.class);
-					break;
-				case "Article":
-					sousBase = new LanceRequete<Article>(Article.class);
-					break;
-				case "Colis":
-					sousBase = new LanceRequete<Colis>(Colis.class);
-					break;
-				case "GrpColis":
-					sousBase = new LanceRequete<GrpColis>(GrpColis.class);
-					break;
-				case "GrpAvion":
-					sousBase = new LanceRequete<GrpAvions>(GrpAvions.class);
-					break;
-				case "Configuration":
-					sousBase = new LanceRequete<Configuration>(Configuration.class);
-					break;
-				case "Mission":
-					sousBase = new LanceRequete<Mission>(Mission.class);
-					break;
-				
-				default:
-					System.out.print("La classe " + nom + "n'est pas implémentée dans LanceRequete, appelle François");
-					break;
-				}
-				
-				
-				return sousBase.selectFromId(rs.getInt(colonne));
 			
 			}
 			deconnexion();
@@ -294,8 +269,5 @@ public class LanceRequete<E extends Donnee> {
 
 	}
 
-	// private <T extends Donnee> LanceRequete<T> classFacotory(Class<T> type) {
-	// return new LanceRequete<T>(type);
-	// }
 
 }

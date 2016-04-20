@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import Controleur.LanceRequete;
+import metier.Article;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
 import view.I_acceuil;
@@ -21,8 +22,7 @@ public class Main {
 		I_acceuil test = new I_acceuil(utilisateur);
 		//exLanceRequete();
 		//exempleAfficheurGrp();
-		}
-
+	}
 	public static void exempleAfficheurGrp() {
 		JFrame fenetre = new JFrame("Salut !");
 		fenetre.setLayout(new GridLayout(2, 0));
@@ -80,19 +80,28 @@ public class Main {
 	public static void exLanceRequete() throws Throwable{
 		
 		LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class.getName());
-		Utilisateur u1 = bddUser.selectFromId(1);
-		Utilisateur u2 = bddUser.selectFromId(2);
-		Utilisateur u3 = bddUser.selectFromId(3);
+			Utilisateur u1 = bddUser.selectFromId(1);
+			Utilisateur u2 = bddUser.selectFromId(2);
+			Utilisateur u3 = bddUser.selectFromId(3);
+			
+			Utilisateur u4 = new Utilisateur(
+					"Porte", 
+					"Table", 
+					"poignée",
+					true, 
+					false,
+					"Barre de fer"
+				);
+			
+			ArrayList<Utilisateur> al = bddUser.selectWhere("droit_lecture = 1");
 		
-		Utilisateur u4 = new Utilisateur(
-				"Porte", 
-				"Table", 
-				"poignée",
-				true, 
-				false,
-				"Barre de fer"
-			);
-		bddUser.add(u4);
-		
+		LanceRequete<Article> bddArticle = new LanceRequete<Article>(Article.class.getName());
+			Article a1 = bddArticle.selectFromId(1);
+			Article a2 = new Article(
+					"Pastis",
+					"Alcool",
+					1);
+			bddArticle.remove(a2);
+			
 	}
 }

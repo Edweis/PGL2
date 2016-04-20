@@ -40,7 +40,7 @@ public class I_Article {
 
 	public I_Article(Utilisateur utilisateur) throws Throwable {
 		this.utilisateur = utilisateur;
-		this.afficheur = new AfficheurGrp<Article>();
+		this.afficheur = new AfficheurGrp<Article>("test");
 		this.controleur = new Controleur_Article(utilisateur, this);
 		initialize();
 	}
@@ -61,21 +61,6 @@ public class I_Article {
 		lblArticleExistant.setBounds(44, 21, 377, 102);
 		Vue.getInstance().getContentPane().add(lblArticleExistant);
 
-		// ArrayList<Article> articles = bdd.selectWhere("");
-		// int val = ((Number) dernierID.getObject(1)).intValue();
-		//
-		// ArrayList<Article> art = new ArrayList<>();
-		// for (int i=1;i<val;i++){
-		// String requete="SELECT * FROM article WHERE id_article=="+i;
-		// ResultSet Art = Bdd_utilisateur.lecture(requete);
-		// String nomArt = Art.getString("nom");
-		// String typeArt = Art.getString("type");
-		// float poidsArt = Art.getFloat("poids");
-		// Article unArticle = new Article(nomArt,typeArt,poidsArt);
-		// art.set(i,unArticle);
-		// }
-
-		// afficheur.MajGrpColis(articles);
 		Article art1 = new Article("test1", "Galloy", 0);
 		Article art2 = new Article("test1", "Gay", 0);
 		
@@ -84,7 +69,7 @@ public class I_Article {
 		test.add(art2);
 		
 		afficheur.MajGrpColis(test);
-		
+		afficheur.setBounds(50,100,500,500);
 		Vue.getInstance().getContentPane().add(afficheur);
 
 		JButton btnVoirCaracteristique = new JButton("VOIR CARACTERISTIQUE");
@@ -175,9 +160,6 @@ public class I_Article {
 		frame.setVisible(true);
 	}
 	
-	public void voirCaracteristiques(){
-		
-	}
 
 	public String getNom() {
 		return nom.getText();
