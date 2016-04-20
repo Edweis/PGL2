@@ -1,18 +1,6 @@
 package application;
 
 import java.awt.GridLayout;
-<<<<<<< HEAD
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-
-/*import java.awt.GridLayout;
-=======
->>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -24,19 +12,14 @@ import javax.swing.JTabbedPane;
 import Controleur.LanceRequete;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
-<<<<<<< HEAD
-/*import view.AfficheurGrp;*/
 import view.I_acceuil;
-=======
->>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 
 public class Main {
 
 	public static void main(String[] args) throws Throwable {
-		
-		exempleAfficheurGrp();
+		Utilisateur utilisateur = new Utilisateur("", "", "", true, true, "");
+		I_acceuil test = new I_acceuil(utilisateur);
 		//exLanceRequete();
-	
 	}
 
 	public static void exempleAfficheurGrp() {
@@ -95,8 +78,6 @@ public class Main {
 		fenetre.setVisible(true);
 	}
 
-<<<<<<< HEAD
-=======
 	public static void exLanceRequete() throws Throwable{
 		
 		LanceRequete<Utilisateur> bddUser = new LanceRequete<Utilisateur>(Utilisateur.class);
@@ -107,5 +88,4 @@ public class Main {
 		
 		
 	}
->>>>>>> branch 'master' of https://github.com/Edweis/PGL2.git
 }
