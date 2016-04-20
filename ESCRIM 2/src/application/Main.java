@@ -1,6 +1,7 @@
 package application;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -12,11 +13,14 @@ import Controleur.LanceRequete;
 import metier.Article;
 import utilisateur.Utilisateur;
 import view.AfficheurGrp;
+import view.I_acceuil;
 
 public class Main {
 
 	public static void main(String[] args) throws Throwable {
-		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		Utilisateur utilisateur = new Utilisateur("", "", "", true, true, "");
+		I_acceuil test = new I_acceuil(utilisateur);
+		//exLanceRequete();
 		//exempleAfficheurGrp();
 		
 		Object a = (Object) "Salut";
