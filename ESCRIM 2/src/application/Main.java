@@ -18,8 +18,8 @@ import view.I_acceuil;
 public class Main {
 
 	public static void main(String[] args) throws Throwable {
-		Utilisateur utilisateur = new Utilisateur("", "", "", true, true, "");
-		I_acceuil test = new I_acceuil(utilisateur);
+		//Utilisateur utilisateur = new Utilisateur("", "", "", true, true, "");
+		//I_acceuil test = new I_acceuil(utilisateur);
 		//exLanceRequete();
 		//exempleAfficheurGrp();
 		
@@ -110,6 +110,7 @@ public class Main {
 					"Pastis",
 					"Alcool",
 					1);
+			bddArticle.add(a2);
 			bddArticle.remove(a2);
 			
 	}

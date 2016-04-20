@@ -184,13 +184,13 @@ public class LanceRequete<E extends Donnee> {
 		Object[] param = element.getParameters();
 		String req = "DELETE FROM `" + table + "` WHERE ";
 		for (int i = 0; i < param.length; i++) {
-			req = req +"`"+ nomColonnes[i+1] + "` = " + param[i] + ", ";//on esquive l'ID !
+			req = req +"`"+ nomColonnes[i+1] + "` = '" + param[i] + "' AND ";//on esquive l'ID !
 		}
-		req = req.substring(0, req.length() - 2);
+		req = req.substring(0, req.length() - 5);
 
 		// On envoi
 		Statement stmt = connexion.createStatement();
-		ResultSet rs = stmt.executeQuery(req);
+		stmt.executeUpdate(req);
 
 		deconnexion();
 	}
