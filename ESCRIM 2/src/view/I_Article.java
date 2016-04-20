@@ -22,8 +22,12 @@ import java.awt.event.ActionEvent;
 
 public class I_Article {
 
-	Utilisateur utilisateur;
-	Controleur_Article controleur;
+	private Utilisateur utilisateur;
+	private Controleur_Article controleur;
+	private JFrame creerNouveauFrame;
+	private JTextField nom;
+	private JTextField type;
+	private JTextField poids;
 
 	public void run() throws Throwable {
 		try {
@@ -116,11 +120,11 @@ public class I_Article {
 
 	public void creerNouveau() {
 
-		JFrame frame = new JFrame();
-		frame.setLayout(null);
-		JTextField nom = new JTextField();
-		JTextField type = new JTextField();
-		JTextField poids = new JTextField();
+		creerNouveauFrame = new JFrame();
+		creerNouveauFrame.setLayout(null);
+		nom = new JTextField();
+		type = new JTextField();
+		poids = new JTextField();
 
 		JLabel nomlbl = new JLabel("Nom:");
 		nomlbl.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -138,28 +142,43 @@ public class I_Article {
 		poidslbl.setBounds(104, 205, 86, 20);
 
 		JButton valider = new JButton("Valider");
-		valider.setBounds(204, 235, 120, 23);
+		valider.setBounds(230, 235, 120, 23);
 		JButton annuler = new JButton("Annuler");
-		annuler.setBounds(104, 235, 120, 23);
-
+		annuler.setBounds(70, 235, 120, 23);
+		
 		valider.addActionListener(controleur);
 		annuler.addActionListener(controleur);
 
-		frame.getContentPane().add(nom);
-		frame.getContentPane().add(nomlbl);
-		frame.getContentPane().add(type);
-		frame.getContentPane().add(typelbl);
-		frame.getContentPane().add(poids);
-		frame.getContentPane().add(poidslbl);
-		frame.getContentPane().add(valider);
-		frame.getContentPane().add(annuler);
+		creerNouveauFrame.getContentPane().add(nom);
+		creerNouveauFrame.getContentPane().add(nomlbl);
+		creerNouveauFrame.getContentPane().add(type);
+		creerNouveauFrame.getContentPane().add(typelbl);
+		creerNouveauFrame.getContentPane().add(poids);
+		creerNouveauFrame.getContentPane().add(poidslbl);
+		creerNouveauFrame.getContentPane().add(valider);
+		creerNouveauFrame.getContentPane().add(annuler);
 
 
 		nom.setColumns(10);
 		type.setColumns(10);
 		poids.setColumns(10);
-		frame.pack();
-		frame.setSize(500, 500);
-		frame.setVisible(true);
+		creerNouveauFrame.pack();
+		creerNouveauFrame.setSize(500, 500);
+		creerNouveauFrame.setVisible(true);
+	}
+
+	public String getNom() {
+		return nom.getText();
+	}
+
+	public String getType() {
+		return type.getText();
+	}
+
+	public float getPoids() {
+		return Float.parseFloat(poids.getText());
+	}
+	public void fermerCreerNouveau(){
+		this.creerNouveauFrame.setVisible(false);;
 	}
 }
