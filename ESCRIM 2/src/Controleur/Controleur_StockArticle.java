@@ -18,7 +18,6 @@ import view.I_acceuil;
 public class Controleur_StockArticle implements ActionListener{
 
 	Utilisateur utilisateur;
-	Article selection;
 	I_StockArticle vue;
 	public Controleur_StockArticle(Utilisateur utilisateur, I_StockArticle vue) {
 		this.utilisateur = utilisateur;

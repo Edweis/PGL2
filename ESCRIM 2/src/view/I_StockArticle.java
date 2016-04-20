@@ -51,7 +51,7 @@ public class I_StockArticle {
 
 		// LanceRequete<Article> bdd = new LanceRequete<Article>(Article.class);
 
-		JLabel lblArticleExistant = new JLabel("ARTICLES EXISTANTS");
+		JLabel lblArticleExistant = new JLabel("Stock de l'article " + selection.getNom());
 		lblArticleExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblArticleExistant.setBounds(44, 21, 377, 102);
 		Vue.getInstance().getContentPane().add(lblArticleExistant);

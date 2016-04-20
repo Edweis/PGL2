@@ -134,7 +134,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 	public ArrayList<E> ExporterSelection() {
 		ArrayList<E> res = new ArrayList<E>();
 
-		for (int i : maJTable.getSelectedColumns()) {
+		for (int i : maJTable.getSelectedRows()) {
 			res.add(elements.get(i));
 		}
 
