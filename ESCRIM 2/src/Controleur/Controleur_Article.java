@@ -34,7 +34,6 @@ public class Controleur_Article implements ActionListener {
 		String str = "0";
 		JButton btn =(JButton) e1.getSource();
 		str = btn.getText();
-		System.out.println(str);
 		switch (str) {
 
 		case "VOIR CARACTERISTIQUE":

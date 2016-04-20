@@ -22,16 +22,7 @@ public class Main {
 		//I_acceuil test = new I_acceuil(utilisateur);
 		//exLanceRequete();
 		//exempleAfficheurGrp();
-		
-		Object a = (Object) "Salut";
-		//System.out.println(a.getClass().getSimpleName());
-		
-		
-		exLanceRequete();
-	
-		
 	}
-
 	public static void exempleAfficheurGrp() {
 		JFrame fenetre = new JFrame("Salut !");
 		fenetre.setLayout(new GridLayout(2, 0));

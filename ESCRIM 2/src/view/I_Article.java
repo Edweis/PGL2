@@ -24,10 +24,11 @@ public class I_Article {
 
 	private Utilisateur utilisateur;
 	private Controleur_Article controleur;
-	private JFrame creerNouveauFrame;
+	private JFrame frame;
 	private JTextField nom;
 	private JTextField type;
 	private JTextField poids;
+	private AfficheurGrp<Article> afficheur;
 
 	public void run() throws Throwable {
 		try {
@@ -39,6 +40,7 @@ public class I_Article {
 
 	public I_Article(Utilisateur utilisateur) throws Throwable {
 		this.utilisateur = utilisateur;
+		this.afficheur = new AfficheurGrp<Article>("test");
 		this.controleur = new Controleur_Article(utilisateur, this);
 		initialize();
 	}
@@ -59,22 +61,15 @@ public class I_Article {
 		lblArticleExistant.setBounds(44, 21, 377, 102);
 		Vue.getInstance().getContentPane().add(lblArticleExistant);
 
-		// ArrayList<Article> articles = bdd.selectWhere("");
-		// int val = ((Number) dernierID.getObject(1)).intValue();
-		//
-		// ArrayList<Article> art = new ArrayList<>();
-		// for (int i=1;i<val;i++){
-		// String requete="SELECT * FROM article WHERE id_article=="+i;
-		// ResultSet Art = Bdd_utilisateur.lecture(requete);
-		// String nomArt = Art.getString("nom");
-		// String typeArt = Art.getString("type");
-		// float poidsArt = Art.getFloat("poids");
-		// Article unArticle = new Article(nomArt,typeArt,poidsArt);
-		// art.set(i,unArticle);
-		// }
-
-		AfficheurGrp<Article> afficheur = new AfficheurGrp<Article>();
-		// afficheur.MajGrpColis(articles);
+		Article art1 = new Article("test1", "Galloy", 0);
+		Article art2 = new Article("test1", "Gay", 0);
+		
+		ArrayList<Article> test = new ArrayList<Article>();
+		test.add(art1);
+		test.add(art2);
+		
+		afficheur.MajGrpColis(test);
+		afficheur.setBounds(50,100,500,500);
 		Vue.getInstance().getContentPane().add(afficheur);
 
 		JButton btnVoirCaracteristique = new JButton("VOIR CARACTERISTIQUE");
@@ -107,7 +102,6 @@ public class I_Article {
 		btnGererStock.setBounds(602, 380, 250, 50);
 		Vue.getInstance().getContentPane().add(btnGererStock);
 
-		
 		btnVoirCaracteristique.addActionListener(controleur);
 		btnCreerNouvelle.addActionListener(controleur);
 		btnRetour.addActionListener(controleur);
@@ -120,8 +114,8 @@ public class I_Article {
 
 	public void creerNouveau() {
 
-		creerNouveauFrame = new JFrame();
-		creerNouveauFrame.setLayout(null);
+		frame = new JFrame();
+		frame.setLayout(null);
 		nom = new JTextField();
 		type = new JTextField();
 		poids = new JTextField();
@@ -145,27 +139,27 @@ public class I_Article {
 		valider.setBounds(230, 235, 120, 23);
 		JButton annuler = new JButton("Annuler");
 		annuler.setBounds(70, 235, 120, 23);
-		
+
 		valider.addActionListener(controleur);
 		annuler.addActionListener(controleur);
 
-		creerNouveauFrame.getContentPane().add(nom);
-		creerNouveauFrame.getContentPane().add(nomlbl);
-		creerNouveauFrame.getContentPane().add(type);
-		creerNouveauFrame.getContentPane().add(typelbl);
-		creerNouveauFrame.getContentPane().add(poids);
-		creerNouveauFrame.getContentPane().add(poidslbl);
-		creerNouveauFrame.getContentPane().add(valider);
-		creerNouveauFrame.getContentPane().add(annuler);
-
+		frame.getContentPane().add(nom);
+		frame.getContentPane().add(nomlbl);
+		frame.getContentPane().add(type);
+		frame.getContentPane().add(typelbl);
+		frame.getContentPane().add(poids);
+		frame.getContentPane().add(poidslbl);
+		frame.getContentPane().add(valider);
+		frame.getContentPane().add(annuler);
 
 		nom.setColumns(10);
 		type.setColumns(10);
 		poids.setColumns(10);
-		creerNouveauFrame.pack();
-		creerNouveauFrame.setSize(500, 500);
-		creerNouveauFrame.setVisible(true);
+		frame.pack();
+		frame.setSize(500, 500);
+		frame.setVisible(true);
 	}
+	
 
 	public String getNom() {
 		return nom.getText();
@@ -178,7 +172,9 @@ public class I_Article {
 	public float getPoids() {
 		return Float.parseFloat(poids.getText());
 	}
-	public void fermerCreerNouveau(){
-		this.creerNouveauFrame.setVisible(false);;
+
+	public void fermerCreerNouveau() {
+		this.frame.setVisible(false);
+		;
 	}
 }
