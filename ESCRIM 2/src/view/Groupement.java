@@ -13,7 +13,13 @@ public interface Groupement {
 	 * @return
 	 */
 	public String plusDetails();
+	/*
+	 * Retourne les nom des en têtes à afficher dans l'AfficheurGrp
+	 */
 	public String [] getNomColonnes();
+	/*
+	 * Retourne les valeurs associées aux en têtes 
+	 */
 	public String [] getValues();
 }
 
