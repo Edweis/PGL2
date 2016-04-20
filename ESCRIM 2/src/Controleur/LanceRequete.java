@@ -3,6 +3,7 @@ package Controleur;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Type;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -21,11 +22,12 @@ import utilisateur.Utilisateur;
 
 public class LanceRequete<E extends Donnee> {
 
-	private String url = "jdbc:mysql://localhost/escrim";
+	private String url = "jdbc:mysql://localhost/test";
 	private String user = "root";
 	private String pwd = "";
 
-	private Class classe;
+	private String classParam;
+	private String classParamShort;
 
 	private String table;
 
@@ -37,7 +39,7 @@ public class LanceRequete<E extends Donnee> {
 	 * 
 	 * @param cls
 	 */
-	public LanceRequete(Class<E> cls) {
+	public LanceRequete(String cls) {
 
 		Map<String, String> assoc = new HashMap<>();
 
@@ -50,14 +52,17 @@ public class LanceRequete<E extends Donnee> {
 		assoc.put("Dimension", "dimension");
 		// ...
 
-		if (assoc.containsKey(cls.getName())) {
-			table = assoc.get(cls.getName());
+		classParam = cls;
+		cls = cls.split("\\.")[cls.split("\\.").length - 1];
+
+		if (assoc.containsKey(cls)) {
+			table = assoc.get(cls);
 		} else {
 			table = null;
 			System.out.println("erreur dans Bdd");
 		}
 
-		classe = cls;
+		classParamShort = cls;
 	}
 
 	private void connexion() throws SQLException {
@@ -69,7 +74,7 @@ public class LanceRequete<E extends Donnee> {
 	}
 
 	public ArrayList<E> selectWhere(String requete) throws Throwable {
-		Constructor<E> c = classe.getConstructors()[0];
+		Constructor<?> c = Class.forName(classParam).getConstructors()[0];
 		int nbParam = c.getParameterCount();
 		Type[] typeParam = c.getGenericParameterTypes();
 
@@ -79,25 +84,34 @@ public class LanceRequete<E extends Donnee> {
 		// --------------Debut de la connexion
 		connexion();
 
-		requete = "SELECT * FROM " + table + "WHERE " + requete;
+		requete = "SELECT * FROM `" + table + "` WHERE " + requete;
 		Statement stmt = connexion.createStatement();
 		ResultSet rs = stmt.executeQuery(requete);
+		rs.next();
 
-		if (rs.getMetaData().getColumnCount() != nbParam) {
+		if (rs.getMetaData().getColumnCount() != nbParam + 1) {
 			System.out.println("Requete incorrecte");
 			return null;
 		}
 
-		while (rs.next()) {
+		do {
 			param = new Object[nbParam];
 
 			for (int i = 0; i < nbParam; i++) {
-				param[i] = getColumnContent(rs, i, typeParam[i]);
+				param[i] = getColumnContent(rs, i + 2, typeParam[i]);// +1 for
+																		// the
+																		// index,
+																		// +1
+																		// for
+																		// the
+																		// id_*
 			}
 
-			E monObjet = c.newInstance(param);
+			@SuppressWarnings("unchecked")
+			Constructor<E> cc = (Constructor<E>) c;
+			E monObjet = cc.newInstance(param);
 			res.add(monObjet);
-		}
+		} while (rs.next());
 
 		deconnexion();
 		// ---------------Fin de connexion
@@ -106,23 +120,43 @@ public class LanceRequete<E extends Donnee> {
 	}
 
 	public E selectFromId(int id) throws Throwable {
-		return selectWhere("id = " + id).get(0);
+		connexion();
+		Statement stmt = connexion.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM `" + table + "`");
+		ResultSetMetaData rsmd = rs.getMetaData();
+		rs.next();
+		String nomCol = rsmd.getColumnName(1);
+		deconnexion();
+
+		return selectWhere(nomCol + " = " + id).get(0);
 	}
 
 	public void add(E element) throws Throwable {
 		// préparation de la requete
 
-		String req = "INSERT INTO " + table + " VALUES(";
+		String req = "INSERT INTO `" + table + "` VALUES ( NULL, ";
 
 		for (Object o : element.getParameters()) {
-			req = req + o + ",";
+			try {
+				Boolean b = (Boolean) o;
+				if (b) {
+					o = "1";
+				} else {
+					o = "0";
+				}
+			} catch (Exception e) {
+			}
+
+			req = req + "\'" + o + "\'" + ", ";
 		}
-		req = req.substring(0, req.length() - 1) + ")";
+		req = req.substring(0, req.length() - 2) + ")";
+
+		System.out.println(req);
 
 		// envoi de la requete
 		connexion();
 		Statement stmt = connexion.createStatement();
-		ResultSet rs = stmt.executeQuery(req);
+		stmt.executeUpdate(req);
 		deconnexion();
 	}
 
@@ -160,7 +194,7 @@ public class LanceRequete<E extends Donnee> {
 
 	private Object getColumnContent(ResultSet rs, int colonne, Type type) throws Throwable {
 
-		String[] noms = type.getTypeName().split(".");
+		String[] noms = type.getTypeName().split("\\.");
 		String nom = noms[noms.length - 1];
 
 		switch (nom) {
@@ -168,10 +202,10 @@ public class LanceRequete<E extends Donnee> {
 			return rs.getString(colonne);
 		case "int":
 			return rs.getInt(colonne);
-		case "long":
-			return rs.getLong(colonne);
-		case "boolean":
-			return rs.getBoolean(colonne);
+		case "float":
+			return rs.getFloat(colonne);
+		case "Boolean":
+			return (rs.getInt(colonne) != 0);
 		default:
 			/**
 			 * On regarde si ce n'est pas une classe, dans ce cas on regarde si
@@ -181,6 +215,42 @@ public class LanceRequete<E extends Donnee> {
 			connexion();
 			ResultSetMetaData data = (ResultSetMetaData) connexion.getMetaData();
 			if (data.getColumnName(colonne).substring(0, 2) == "id") {
+
+				LanceRequete<?> sousBase;
+				
+				 switch (nom) {
+				
+				 case "Utilisateur":
+					 sousBase = new LanceRequete<Utilisateur>(Utilisateur.class);
+					 break;
+				 case "Article":
+					 sousBase = new LanceRequete<Article>(Article.class);
+					 break;
+				 case "Colis":
+					 sousBase = new LanceRequete<Colis>(Colis.class);
+					 break;
+				 case "GrpColis":
+					 sousBase = new LanceRequete<GrpColis>(GrpColis.class);
+					 break;
+				 case "GrpAvion":
+					 sousBase = new LanceRequete<GrpAvions>(GrpAvions.class);
+					 break;
+				 case "Configuration":
+					 sousBase = new
+					 LanceRequete<Configuration>(Configuration.class);
+					 break;
+				 case "Mission":
+					 sousBase = new LanceRequete<Mission>(Mission.class);
+					 break;
+				
+				 default:
+					 System.out.print("La classe " + nom + "n'est pas implémentée dans LanceRequete, appelle François");
+					 sousBase = null;
+					 break;
+				 }
+
+				 return sousBase.selectFromId(rs.getInt(colonne));
+
 				
 				LanceRequete<?> sousBase = null;
 				switch(nom){
@@ -224,8 +294,8 @@ public class LanceRequete<E extends Donnee> {
 
 	}
 
-	private <T extends Donnee> LanceRequete<T> classFacotory(Class<T> type) {
-		return new LanceRequete<T>(type);
-	}
+	// private <T extends Donnee> LanceRequete<T> classFacotory(Class<T> type) {
+	// return new LanceRequete<T>(type);
+	// }
 
 }
