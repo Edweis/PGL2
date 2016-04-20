@@ -35,7 +35,7 @@ public class Article implements Groupement, Donnee {
 
 	@Override
 	public String plusDetails() {
-		return null;
+		return "Nom: " + nom + "\nType: " + type + "\nPoids: " + Float.toString(poids);
 	}
 
 	@Override
