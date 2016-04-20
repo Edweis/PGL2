@@ -3,18 +3,17 @@ package partieMission.configs;
 import utilisateur.Donnee;
 import view.Groupement;
 
-import java.util.ArrayList;
-
 import metier.Colis;
+import partieMission.GrpColis;
 
 public class Configuration implements Groupement, Donnee {
 
 	private String nom;
 	private String observation;
-	private ArrayList<Colis> groupeColis;
+	private GrpColis groupeColis;
 	private final Object[] param;
 
-	public Configuration(String nom, String observation, ArrayList<Colis> groupeColis) {
+	public Configuration(String nom, String observation, GrpColis groupeColis) {
 		this.nom = nom;
 		this.observation = observation;
 		this.groupeColis = groupeColis;
