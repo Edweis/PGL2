@@ -21,13 +21,7 @@ public class Main {
 		I_acceuil test = new I_acceuil(utilisateur);
 		//exLanceRequete();
 		//exempleAfficheurGrp();
-		
-		
-		
-		exLanceRequete();
-	
-		
-	}
+		}
 
 	public static void exempleAfficheurGrp() {
 		JFrame fenetre = new JFrame("Salut !");
