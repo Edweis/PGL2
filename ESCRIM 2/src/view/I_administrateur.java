@@ -212,9 +212,8 @@ public class I_administrateur {
 		Object [] obj ={resultat.getString(2), resultat.getString(3), resultat.getString(4), resultat.getBoolean(5), resultat.getBoolean(6), resultat.getString(7)};
 		tableModel.addRow(obj);
 		}
-		//JScrollPane scrollPane = new JScrollPane(table);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
+		JScrollPane scrollPane = new JScrollPane(table);
+		
 		btnAjouterUtilisateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -230,8 +229,8 @@ public class I_administrateur {
 				}
 			}
 		});
-		table.setBounds(10, 11, 634, 112);
-		frame.getContentPane().add(table);
+		scrollPane.setBounds(10, 11, 634, 112);
+		frame.getContentPane().add(scrollPane);
 		
 		
 		
