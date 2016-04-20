@@ -49,14 +49,7 @@ public class Controleur_Article implements ActionListener {
 			
 			break;	
 		case "MODIFIER":
-			I_PopupModifArticle ouvrir2 = null;
-			try {
-				ouvrir2 = new I_PopupModifArticle(utilisateur,selection);
-			} catch (SQLException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-			ouvrir2.run();
+			vue.modifier();
 			break;
 		case "SUPPRIMER":
 			try {
@@ -75,7 +68,7 @@ public class Controleur_Article implements ActionListener {
 			
 			break;
 		case "Annuler":
-			vue.fermerCreerNouveau();
+			vue.fermerFrame();
 			break;
 	}
 
