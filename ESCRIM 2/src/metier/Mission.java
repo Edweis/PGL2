@@ -1,8 +1,8 @@
-package partieMission;
+package metier;
+
 
 import java.util.Date;
 
-import utilisateur.Donnee;
 import view.Groupement;
 
 public class Mission implements Groupement, Donnee {

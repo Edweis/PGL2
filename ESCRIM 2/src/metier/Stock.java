@@ -1,6 +1,5 @@
 package metier;
 
-import utilisateur.Donnee;
 import view.Groupement;
 
 public class Stock implements Groupement, Donnee{
@@ -31,11 +30,11 @@ public class Stock implements Groupement, Donnee{
 	}
 	@Override
 	public String plusDetails() {
-		return "Quantitée: " + Integer.toString(quantite) + " | Date: " + date;
+		return "Quantitï¿½e: " + Integer.toString(quantite) + " | Date: " + date;
 	}
 	@Override
 	public String[] getNomColonnes() {
-		return new String[] {"date","quantitée"};
+		return new String[] {"date","quantitï¿½e"};
 	}
 	@Override
 	public String[] getValues() {

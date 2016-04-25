@@ -1,9 +1,8 @@
-package partieMission;
+package metier;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import utilisateur.Donnee;
 
 public class GrpAvions implements Iterable<Avion>, Donnee {
 	private ArrayList<Avion> ensAvion;

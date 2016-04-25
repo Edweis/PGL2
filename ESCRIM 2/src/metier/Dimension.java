@@ -1,7 +1,5 @@
 package metier;
 
-import utilisateur.Donnee;
-
 public class Dimension implements Donnee {
 	private float hauteur;
 	private float largeur;

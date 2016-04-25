@@ -2,11 +2,7 @@ package application;
 
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
-import java.lang.reflect.Constructor;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,8 +11,8 @@ import javax.swing.JTabbedPane;
 
 import Controleur.LanceRequete;
 import metier.Article;
-import partieMission.Stock;
-import utilisateur.Utilisateur;
+import metier.Stock;
+import metier.utilisateur.Utilisateur;
 import view.AfficheurGrp;
 
 public class Main {

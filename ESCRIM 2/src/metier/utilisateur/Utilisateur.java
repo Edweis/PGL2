@@ -1,5 +1,7 @@
-package utilisateur;
+package metier.utilisateur;
 
+
+import metier.Donnee;
 import view.Groupement;
 
 public class Utilisateur implements Groupement, Donnee {

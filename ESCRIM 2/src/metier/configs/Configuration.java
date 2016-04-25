@@ -1,10 +1,9 @@
 package partieMission.configs;
 
-import utilisateur.Donnee;
-import view.Groupement;
-
 import metier.Colis;
-import partieMission.GrpColis;
+import metier.Donnee;
+import metier.GrpColis;
+import view.Groupement;
 
 public class Configuration implements Groupement, Donnee {
 

@@ -1,10 +1,7 @@
 package metier;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
-import partieMission.GrpStock;
-import utilisateur.Donnee;
 import view.Groupement;
 
 public class Colis implements Groupement, Donnee {

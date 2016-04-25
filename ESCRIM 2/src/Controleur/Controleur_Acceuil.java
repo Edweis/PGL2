@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 
-import utilisateur.Utilisateur;
+import metier.utilisateur.Utilisateur;
 import view.I_Article;
 import view.I_Avion;
 import view.I_Colis;

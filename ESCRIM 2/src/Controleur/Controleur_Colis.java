@@ -7,12 +7,10 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 
-import metier.Article;
 import metier.Colis;
-import utilisateur.Bdd_utilisateur;
-import utilisateur.Utilisateur;
+import metier.utilisateur.Bdd_utilisateur;
+import metier.utilisateur.Utilisateur;
 import view.AfficheurGrp;
-import view.I_Article;
 import view.I_Colis;
 import view.I_acceuil;
 

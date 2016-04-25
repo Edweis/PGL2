@@ -1,6 +1,6 @@
-package partieMission;
+package metier;
 
-import utilisateur.Donnee;
+
 import view.Groupement;
 
 public class Avion implements Donnee, Groupement {
@@ -59,6 +59,18 @@ public class Avion implements Donnee, Groupement {
 
 	@Override
 	public String plusDetails() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] getNomColonnes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] getValues() {
 		// TODO Auto-generated method stub
 		return null;
 	}

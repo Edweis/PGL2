@@ -1,16 +1,14 @@
 package view;
 
-import utilisateur.*;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Controleur.Controleur_Acceuil;
+import metier.utilisateur.Utilisateur;
 
 public class I_acceuil {
 

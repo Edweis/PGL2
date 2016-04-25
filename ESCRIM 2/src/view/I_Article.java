@@ -1,27 +1,17 @@
 package view;
 
-import utilisateur.*;
-import java.awt.EventQueue;
-import metier.Article;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import java.awt.Font;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.swing.JList;
-import javax.swing.JTextField;
-
-import Controleur.Controleur_Acceuil;
-import Controleur.Controleur_Article;
-import Controleur.Controleur_ModifArticle;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import Controleur.Controleur_Article;
+import metier.Article;
+import metier.utilisateur.Utilisateur;
 
 public class I_Article {
 
@@ -111,7 +101,7 @@ public class I_Article {
 	}
 
 	public void creerNouveau() {
-		JLabel label = new JLabel("Créer Nouveau");
+		JLabel label = new JLabel("Crï¿½er Nouveau");
 		nom = new JTextField();
 		poids = new JTextField();
 		edition(label);

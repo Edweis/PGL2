@@ -1,10 +1,8 @@
-package partieMission;
+package metier;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import metier.Colis;
-import utilisateur.Donnee;
 
 public class GrpColis implements Donnee, Iterable<Colis>{
 	ArrayList<Colis> ensColis;

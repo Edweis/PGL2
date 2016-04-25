@@ -1,6 +1,6 @@
-package partieMission.configs;
+package metier.configs;
 
-import partieMission.GrpColis;
+import metier.GrpColis;
 
 public abstract class ConfigurationColis extends GrpColis {
 	String nomConfig;

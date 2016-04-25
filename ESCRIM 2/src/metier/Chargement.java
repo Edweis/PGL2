@@ -1,9 +1,10 @@
-package partieMission;
+package metier;
+
 
 public class Chargement {
 	private GrpAvions ensAvions;
 	private GrpColis ensColis;
-	//variable associant les boites aux avions à  une position précise
+	//variable associant les boites aux avions ï¿½ une position prï¿½cise
 	
 	public Chargement(GrpAvions avions, GrpColis colis) {
 		ensAvions = avions;

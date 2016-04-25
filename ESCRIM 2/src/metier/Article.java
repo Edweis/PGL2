@@ -1,9 +1,5 @@
 package metier;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import utilisateur.*;
 import view.Groupement;
 
 public class Article implements Groupement, Donnee {

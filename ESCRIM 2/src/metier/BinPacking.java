@@ -1,4 +1,5 @@
-package partieMission;
+package metier;
+
 
 public class BinPacking {
 	Chargement chargementCible;

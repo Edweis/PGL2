@@ -12,11 +12,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import metier.*;
-import partieMission.*;
-import partieMission.configs.Configuration;
-import utilisateur.Donnee;
-import utilisateur.Utilisateur;
+import metier.Article;
+import metier.Colis;
+import metier.Donnee;
+import metier.GrpAvions;
+import metier.GrpColis;
+import metier.Mission;
+import metier.configs.Configuration;
+import metier.utilisateur.Utilisateur;
 
 public class LanceRequete<E extends Donnee> {
 

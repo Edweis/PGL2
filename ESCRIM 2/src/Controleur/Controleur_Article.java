@@ -1,16 +1,11 @@
 package Controleur;
-import utilisateur.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 
 import metier.Article;
-import utilisateur.Bdd_utilisateur;
-import utilisateur.Utilisateur;
-import view.AfficheurGrp;
+import metier.utilisateur.Utilisateur;
 import view.I_Article;
 import view.I_StockArticle;
 import view.I_acceuil;

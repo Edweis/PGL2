@@ -1,4 +1,5 @@
-package partieMission.configs;
+package metier.configs;
+
 
 public abstract class ConfigClimat extends ConfigurationColis {
 

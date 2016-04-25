@@ -9,11 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import Controleur.Controleur_Article;
 import Controleur.Controleur_StockArticle;
 import metier.Article;
 import metier.Stock;
-import utilisateur.Utilisateur;
+import metier.utilisateur.Utilisateur;
 
 public class I_StockArticle {
 	private Utilisateur utilisateur;
@@ -96,7 +95,7 @@ public class I_StockArticle {
 	}
 
 	public void creerNouveau() {
-		JLabel label = new JLabel("Créer Nouveau");
+		JLabel label = new JLabel("Crï¿½er Nouveau");
 		date = new JTextField();
 		quantite = new JTextField();
 		edition(label);
@@ -128,7 +127,7 @@ public class I_StockArticle {
 		lbldate.setBounds(82, 127, 115, 26);
 		frame.getContentPane().add(lbldate);
 		
-		JLabel lblquantite = new JLabel("Nouvelle quantitée");
+		JLabel lblquantite = new JLabel("Nouvelle quantitï¿½e");
 		lblquantite.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblquantite.setBounds(82, 203, 115, 26);
 		frame.getContentPane().add(lblquantite);

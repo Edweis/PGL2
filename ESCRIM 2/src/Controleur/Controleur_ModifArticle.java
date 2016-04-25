@@ -1,20 +1,14 @@
 package Controleur;
-import utilisateur.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 import metier.Article;
-import utilisateur.Bdd_utilisateur;
-import utilisateur.Utilisateur;
-import view.AfficheurGrp;
-import view.I_Article;
-import view.I_acceuil;
+import metier.utilisateur.Utilisateur;
 
 public class Controleur_ModifArticle implements ActionListener {
 

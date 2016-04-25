@@ -1,32 +1,22 @@
 package view;
 
 import java.awt.EventQueue;
-import java.awt.Image;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-
-import java.awt.BorderLayout;
-import javax.swing.JTextField;
-
-
-import utilisateur.Admin;
-import utilisateur.Bdd_utilisateur;
-import utilisateur.Utilisateur;
-
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.awt.event.ActionEvent;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import java.awt.Font;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import metier.utilisateur.Admin;
+import metier.utilisateur.Bdd_utilisateur;
+import metier.utilisateur.Utilisateur;
 
 public class I_connexionn {
 
@@ -132,7 +122,7 @@ public class I_connexionn {
 					I_acceuil iaccuil=new I_acceuil(utilisateur);
 					//iaccuil.run();
 				}else{
-					System.out.println("enfoiré");
+					System.out.println("enfoirï¿½");
 				}
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block

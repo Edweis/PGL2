@@ -3,17 +3,16 @@ package view;
 
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JTextPane;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class I_ColisMana {
 
@@ -88,7 +87,7 @@ public class I_ColisMana {
 		lblSecteur.setBounds(246, 11, 37, 14);
 		frame.getContentPane().add(lblSecteur);
 		
-		JLabel lblDsignation = new JLabel("Désignation");
+		JLabel lblDsignation = new JLabel("Dï¿½signation");
 		lblDsignation.setBounds(320, 11, 66, 14);
 		frame.getContentPane().add(lblDsignation);
 		

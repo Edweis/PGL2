@@ -1,27 +1,21 @@
 package view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JTable;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import utilisateur.Admin;
-import utilisateur.Bdd_utilisateur;
-import utilisateur.Utilisateur;
-
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import metier.utilisateur.Admin;
+import metier.utilisateur.Bdd_utilisateur;
+import metier.utilisateur.Utilisateur;
 
 public class I_administrateur {
 

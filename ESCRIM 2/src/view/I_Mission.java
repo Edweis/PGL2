@@ -1,35 +1,13 @@
 package view;
-import utilisateur.*;
-import java.awt.EventQueue;
-import metier.Article;
-import metier.Colis;
-import metier.Dimension;
-import partieMission.Avion;
-import partieMission.GrpAvions;
-import partieMission.GrpColis;
-import partieMission.Mission;
-
-
-import javax.swing.JFrame;
-
-import utilisateur.Utilisateur;
-import javax.swing.JLabel;
 import java.awt.Font;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-import javax.swing.JList;
-
-import Controleur.Controleur_Acceuil;
-import Controleur.Controleur_Article;
-import Controleur.Controleur_Colis;
-import Controleur.Controleur_Configuration;
-import Controleur.Controleur_Mission;
 
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+
+import Controleur.Controleur_Mission;
+import metier.Mission;
+import metier.utilisateur.Utilisateur;
 
 public class I_Mission {
 

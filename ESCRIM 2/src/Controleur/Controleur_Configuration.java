@@ -2,19 +2,11 @@ package Controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 
-import metier.Article;
-import metier.Colis;
-import partieMission.Avion;
-import partieMission.configs.Configuration;
-import utilisateur.Bdd_utilisateur;
-import utilisateur.Utilisateur;
-import view.AfficheurGrp;
-import view.I_Article;
+import metier.configs.Configuration;
+import metier.utilisateur.Utilisateur;
 import view.I_Config;
 import view.I_StockArticle;
 import view.I_acceuil;
@@ -22,7 +14,7 @@ import view.I_acceuil;
 public class Controleur_Configuration implements ActionListener {
 
 	Utilisateur utilisateur;
-	Config selection;
+	Configuration selection;
 	I_Config vue;
 
 	public Controleur_Configuration(Utilisateur utilisateur, I_Config vue) {

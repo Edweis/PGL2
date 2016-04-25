@@ -1,34 +1,19 @@
 package view;
-import utilisateur.*;
-import java.awt.EventQueue;
-import metier.Article;
-import metier.Colis;
-import metier.Dimension;
-import partieMission.Avion;
-import partieMission.configs.Configuration;
-
-import javax.swing.JFrame;
-
-import utilisateur.Utilisateur;
-import javax.swing.JLabel;
+import java.awt.Component;
 import java.awt.Font;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.swing.JList;
-import javax.swing.JTextField;
-
-import Controleur.Controleur_Acceuil;
-import Controleur.Controleur_Article;
-import Controleur.Controleur_Colis;
-import Controleur.Controleur_Configuration;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import Controleur.Controleur_Configuration;
+import metier.Article;
+import metier.GrpColis;
+import metier.configs.Configuration;
+import metier.utilisateur.Utilisateur;
 
 public class I_Config {
 
@@ -39,6 +24,7 @@ public class I_Config {
 	private JTextField nom;
 	private JTextField observations;
 	private AfficheurGrp<Configuration> afficheur;
+	
 
 	public void run() throws Throwable {
 		try {
@@ -73,14 +59,14 @@ public class I_Config {
 
 		GrpColis test = new GrpColis();
 		
-		Configuration art1 = new Configuration("test1","observation");
-		Configuration art2 = new Configuration("test2", "Gay");
+		Configuration art1 = new Configuration("test1","observation", null);
+		Configuration art2 = new Configuration("test2", "Gay", null);
 		
-		ArrayList<Configuration> test = new ArrayList<Configuration>();
-		test.add(art1);
-		test.add(art2);
+		ArrayList<Configuration> test2 = new ArrayList<Configuration>();
+		test2.add(art1);
+		test2.add(art2);
 		
-		afficheur.MajGrpColis(test);
+		afficheur.MajGrpColis(test2);
 		afficheur.setBounds(50,100,500,500);
 		Vue.getInstance().getContentPane().add(afficheur);
 
@@ -120,7 +106,7 @@ public class I_Config {
 	}
 
 	public void creerNouveau() {
-		JLabel label = new JLabel("Créer Nouveau");
+		JLabel label = new JLabel("Crï¿½er Nouveau");
 		nom = new JTextField();
 		poids = new JTextField();
 		edition(label);

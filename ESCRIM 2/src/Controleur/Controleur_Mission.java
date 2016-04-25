@@ -7,13 +7,9 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 
-import metier.Article;
-import metier.Colis;
-import partieMission.Avion;
-import partieMission.Mission;
-import partieMission.configs.Configuration;
-import utilisateur.Bdd_utilisateur;
-import utilisateur.Utilisateur;
+import metier.Mission;
+import metier.utilisateur.Bdd_utilisateur;
+import metier.utilisateur.Utilisateur;
 import view.AfficheurGrp;
 import view.I_Mission;
 import view.I_acceuil;

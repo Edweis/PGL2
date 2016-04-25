@@ -1,6 +1,5 @@
-package utilisateur;
+package metier;
 
-import java.sql.ResultSet;
 
 public interface Donnee {
 	/*

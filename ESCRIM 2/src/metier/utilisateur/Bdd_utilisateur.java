@@ -1,4 +1,5 @@
-package utilisateur;
+package metier.utilisateur;
+
 
 import java.sql.*;
 
