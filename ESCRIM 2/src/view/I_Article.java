@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import Controleur.Controleur_Article;
+import Controleur.LanceRequete;
 import metier.Article;
 import metier.utilisateur.Utilisateur;
 
@@ -19,9 +20,11 @@ public class I_Article {
 	private Controleur_Article controleur;
 	private JFrame frame;
 	private JTextField nom;
-	private JTextField type;
+	private JComboBox<String> type;
 	private JTextField poids;
 	private AfficheurGrp<Article> afficheur;
+	private LanceRequete<Article> bdd = new LanceRequete<Article>(Article.class.getName());
+
 
 	public void run() throws Throwable {
 		try {
@@ -53,15 +56,8 @@ public class I_Article {
 		lblArticleExistant.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblArticleExistant.setBounds(44, 21, 377, 102);
 		Vue.getInstance().getContentPane().add(lblArticleExistant);
-
-		Article art1 = new Article("test1", "Galloy", 0);
-		Article art2 = new Article("test1", "Gay", 0);
 		
-		ArrayList<Article> test = new ArrayList<Article>();
-		test.add(art1);
-		test.add(art2);
-		
-		afficheur.MajGrpColis(test);
+		afficheur.MajGrpColis(this.bdd.selectWhere("1"));
 		afficheur.setBounds(50,100,500,500);
 		Vue.getInstance().getContentPane().add(afficheur);
 
@@ -153,11 +149,11 @@ public class I_Article {
 		frame.getContentPane().add(poids);
 		poids.setColumns(10);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBounds(234, 203, 120, 26);	
-		comboBox.addItem("Medicament");
-		comboBox.addItem("Materiel");
-		frame.getContentPane().add(comboBox);
+		type = new JComboBox<String>();
+		type.setBounds(234, 203, 120, 26);	
+		type.addItem("Medicament");
+		type.addItem("Materiel");
+		frame.getContentPane().add(type);
 		
 		JButton btnValider = new JButton("Valider");
 		btnValider.setBounds(70, 350, 127, 41);
@@ -181,7 +177,7 @@ public class I_Article {
 	}
 
 	public String getType() {
-		return type.getText();
+		return type.getSelectedItem().toString();
 	}
 
 	public float getPoids() {

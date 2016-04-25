@@ -15,9 +15,11 @@ public class Controleur_Article implements ActionListener {
 	Utilisateur utilisateur;
 	Article selection;
 	I_Article vue;
-	public Controleur_Article(Utilisateur utilisateur, I_Article vue) {
+	LanceRequete<Article> bdd;
+	public Controleur_Article(Utilisateur utilisateur, I_Article vue) throws Throwable {
 		this.utilisateur = utilisateur;
 		this.vue = vue;
+		this.bdd = new LanceRequete<Article>(Article.class.getName());
 //		selection = (Article) afficheur.ExporterSelection().get(0);
 	}
 
@@ -64,7 +66,19 @@ public class Controleur_Article implements ActionListener {
 //			}
 			break;
 		case "Valider":
-			
+			Article nouveau = new Article(this.vue.getNom(),this.vue.getType(),this.vue.getPoids());
+			try {
+				bdd.add(nouveau);
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				vue.fermerFrame();
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case "Annuler":
 			vue.fermerFrame();
