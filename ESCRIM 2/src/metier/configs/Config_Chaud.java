@@ -1,4 +1,5 @@
-package partieMission.configs;
+package metier.configs;
+
 
 public  class Config_Chaud extends ConfigClimat{
 

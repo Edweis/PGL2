@@ -1,4 +1,5 @@
-package partieMission.configs;
+package metier.configs;
+
 
 import metier.Colis;
 import metier.Donnee;
