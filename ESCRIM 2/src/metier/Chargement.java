@@ -1,6 +1,8 @@
 package metier;
 
-
+/*
+ * Associe une position pour chaque boite à chaque conteneur de chaque avion
+ */
 public class Chargement {
 	private GrpAvions ensAvions;
 	private GrpColis ensColis;

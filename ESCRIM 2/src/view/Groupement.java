@@ -2,8 +2,6 @@ package view;
 
 /**
  * Permet d'afficher l'objet dans AfficheurGrp
- * @author piou
- *
  */
 public interface Groupement {
 	

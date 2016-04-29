@@ -21,6 +21,9 @@ public class Main {
 		exLanceRequete();
 	}
 
+	/*
+	 * Exemple d'utilisation de l'afficheur de groupe
+	 */
 	public static void exempleAfficheurGrp() {
 		JFrame fenetre = new JFrame("Salut !");
 		fenetre.setLayout(new GridLayout(2, 0));
@@ -68,6 +71,9 @@ public class Main {
 		fenetre.setVisible(true);
 	}
 
+	/*
+	 * Exeple de lance requete 
+	 */
 	public static void exLanceRequete() throws Throwable {
 
 		/*

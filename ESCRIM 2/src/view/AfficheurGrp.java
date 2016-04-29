@@ -16,7 +16,11 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-
+/*
+ * JPanel permettant d'afficheur des objets qui implantent Groupement.
+ * Il y a un titre, un bouton selectionner tout et une liste.
+ * Cette classe permet de n'utiliser QUE des objets
+ */
 public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSelectionListener, ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -42,6 +46,9 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 		init();
 	}
 
+	/*
+	 * Permet d'afficher un texte au dessus de la liste
+	 */
 	public AfficheurGrp(String texteInitial) {
 		init();
 		setText(texteInitial);
@@ -49,7 +56,7 @@ public class AfficheurGrp<E extends Groupement> extends JPanel implements ListSe
 
 	/**
 	 * Initilise les variables
-//	 */ 
+	 */ 
 	private void init() {
 
 		btnActiveOnSelect = new ArrayList<JButton>();

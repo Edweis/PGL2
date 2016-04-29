@@ -1,5 +1,8 @@
 package metier;
 
+/*
+ * Nous avons crée une classe Dimension car il n'y a que deux types de boites
+ */
 public class Dimension implements Donnee {
 	private float hauteur;
 	private float largeur;
